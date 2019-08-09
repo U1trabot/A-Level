@@ -1,0 +1,9 @@
+- Store of word numbers next to normal numbers - two lists, list1[0] = ten, list2[0]=10
+- questions removed when answered correctly- list of correct questions, use ifs to compare
+- store responses to questions - csv or txt storage
+- report on score - add 1 for every correct answer, print answer at end
+- check how many sessions - every session add 1 then check if = 3
+- every 3, display mean score -grab previous scores from csv/txt, calc mean and display
+- use pythonQT for GUI
+- username system for each students score
+- build program before GUI
