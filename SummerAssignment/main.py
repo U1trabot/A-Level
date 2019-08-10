@@ -1,6 +1,6 @@
 #Number Wording Quiz
 #Adam Baker
-import random, tools, time #Imports Modules And Tools.py
+import random, tools, time, os #Imports Modules And Tools.py
 
 wins = 0 #Creates Variable for how many questions they got right
 
@@ -57,7 +57,7 @@ for x in range (1,11): #Generates 10 Questions And Tells Them What Number They A
     questGen()
 print("You got "+str(wins)+" right!")
 file = open("scores.pak","a")
-file.write(str(wins)+",")
+file.write(str(wins)+'\n')
 file.close()
 file = open("tests.pak","a")
 file.close()
@@ -67,7 +67,21 @@ for line in file:
     print(line)
     score = int(line)
 score = score +1
-file.close()
-file = open("tests.pak","w")
+if score == (3):
+    print("You have completed 3 tests!")
+    time.sleep(1)
+    print("Here is your average score!")
+    file = open("scores.pak","r")
+    total = 0
+    for line in file:
+        total = total + int(line)
+    mean = total/3
+    print ("You got an average of "+str(mean))
+    score = 0
+    input()
+    file.close()
+    os.remove("tests.pak")
+    os.remove("scores.pak")
+file = open("tests.pak","w+")
 file.write(str(score))
 file.close()
