@@ -30,11 +30,11 @@ def questGen(): #Defines the system for generating and asking a question
     global correct
     global incorrect
     global wins
-    if len(incorrect) == (0):
+    if len(incorrect) == (0): #Checks if there are any questions that where answered incorrectly
         digits = random.randint(0,9999) #picks a random number smaller than 10,000 and larger than -1
     elif len(incorrect) > (0):
-        digits = int(random.choice(incorrect))
-        incorrect.remove(str(digits))
+        digits = int(random.choice(incorrect)) #Will get the user a question they got wrong before until they get it right
+        incorrect.remove(str(digits)) #Removes given question from the file/list
         os.remove(username+'/'+'ia.pak')
         file = open(username+'/'+"ia.pak","a")
         for item in incorrect:

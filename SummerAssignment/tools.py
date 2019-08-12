@@ -24,7 +24,7 @@ def convert(number):
         elif strNumber[0] == ("9"):
             output.append("nine thousand")
         if strNumber[1] != ('0'):
-            output.append(",")
+            output.append(",") #If more numbers are to come, a comma is added
         if strNumber[1] == ("1"):
             output.append("one hundred")
         elif strNumber[1] == ("2"):
@@ -43,10 +43,10 @@ def convert(number):
             output.append("eight hundred")
         elif strNumber[1] == ("9"):
             output.append("nine hundred")
-        if strNumber[2] != ('0') or strNumber[3] != ('0'):
+        if strNumber[2] != ('0') or strNumber[3] != ('0'): #If more numbers are to come, an 'and' is added
             output.append("and")
         if strNumber[2] == ("1"):
-            tenNeeded = True
+            tenNeeded = True #Tells the system a ten will be needed
         elif strNumber[2] == ("2"):
             output.append("twenty")
         elif strNumber[2] == ("3"):
@@ -64,12 +64,12 @@ def convert(number):
         elif strNumber[2] == ("9"):
             output.append("ninety")
         if strNumber[3] == ("1"):
-            if tenNeeded:
+            if tenNeeded: #Changes to eleven if a ten is needed
                 output.append("eleven")
             else:
                 output.append("one")
         elif strNumber[3] == ("2"):
-            if tenNeeded:
+            if tenNeeded: #Changes to twelve if a ten is needed ect.
                 output.append("twelve")
             else:
                 output.append("two")
@@ -110,9 +110,9 @@ def convert(number):
                 output.append("nine")
         elif strNumber[3] == ("0"):
             if tenNeeded:
-                output.append("ten")
+                output.append("ten") #Adds a ten if a ten is needed
     elif length == (3): #If the number is 3 digits long, it will start at the hundreds and go down
-        if strNumber[0] == ("1"):
+        if strNumber[0] == ("1"): #Will check every digit for a number then put relevant word in the output list
             output.append("one hundred")
         elif strNumber[0] == ("2"):
             output.append("two hundred")
@@ -130,7 +130,7 @@ def convert(number):
             output.append("eight hundred")
         elif strNumber[0] == ("9"):
             output.append("nine hundred")
-        if strNumber[1] != ('0') or strNumber[2] != ('0'):
+        if strNumber[1] != ('0') or strNumber[2] != ('0'): #If more numbers are to come, an 'and' is added
             output.append("and")
         if strNumber[1] == ("1"):
             tenNeeded = True
@@ -199,7 +199,7 @@ def convert(number):
             if tenNeeded:
                 output.append("ten")
     elif length == (2): #If the number is 2 digits long, it will start at the tens and go down
-        if strNumber[0] == ("1"):
+        if strNumber[0] == ("1"): #Will check every digit for a number then put relevant word in the output list
             tenNeeded = True
         elif strNumber[0] == ("2"):
             output.append("twenty")
@@ -266,7 +266,7 @@ def convert(number):
             if tenNeeded:
                 output.append("ten")
     elif length == (1): #If the number is 1 digit long, it will start at the digits and go down
-        if strNumber[0] == ("1"):
+        if strNumber[0] == ("1"): #Will check every digit for a number then put relevant word in the output list
             if tenNeeded:
                 output.append("eleven")
             else:
@@ -315,13 +315,13 @@ def convert(number):
             if tenNeeded:
                 output.append("ten")
             else:
-                output.append("zero")
+                output.append("zero") #Adds a zero if 0 is the only digit
     words = ""
     run = 0
-    for item in output:
+    for item in output: #System to add spaces if needed
         if run == 0:
             words = item
         elif run > 0:
             words = (words+' '+item)
         run = run + 1
-    return words
+    return words #Returns the number as words
