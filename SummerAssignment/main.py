@@ -3,12 +3,13 @@
 import random, tools, time, os #Imports Modules And Tools.py
 
 wins = 0 #Creates Variable for how many questions they got right
-
-file = open("data.pak" ,"a") #Creates data.pak file if it doesn't already exist
+username = input("What is your name? E.g JohnSmith ")
+os.mkdir(username)
+file = open(username+'/'+"data.pak" ,"a") #Creates data.pak file if it doesn't already exist
 file.close()
 
 correct = list() #Grabs all data from data.pak and puts it in list variable
-file = open("data.pak", "r")
+file = open(username+'/'+"data.pak", "r")
 for line in file:
     correct.append(line)
 file.close()
@@ -28,7 +29,7 @@ def questGen(): #Defines the system for generating and asking a question
     if question == digits:
         print("You got it right!")
         wins = wins + 1 #adds a score to the variable
-        file = open("data.pak", "a") #Saves Question To data.pak as it was answered correctly
+        file = open(username+'/'+"data.pak", "a") #Saves Question To data.pak as it was answered correctly
         file.write(str(digits)+",")
         file.close()
     elif question != digits:
@@ -56,15 +57,15 @@ for x in range (1,11): #Generates 10 Questions And Tells Them What Number They A
     time.sleep(0.2)
     questGen()
 print("You got "+str(wins)+" right!")
-file = open("scores.pak","a")
+file = open(username+'/'+"scores.pak","a")
 file.write(str(wins)+'\n')
 file.close()
-file = open("StudentScores.txt","a")
+file = open(username+'/'+"StudentScores.txt","a")
 file.write(str(wins)+'\n')
 file.close()
-file = open("tests.pak","a")
+file = open(username+'/'+"tests.pak","a")
 file.close()
-file = open("tests.pak","r")
+file = open(username+'/'+"tests.pak","r")
 score = 0
 for line in file:
     print(line)
@@ -74,7 +75,7 @@ if score == (3):
     print("You have completed 3 tests!")
     time.sleep(1)
     print("Here is your average score!")
-    file = open("scores.pak","r")
+    file = open(username+'/'+"scores.pak","r")
     total = 0
     for line in file:
         total = total + int(line)
@@ -83,8 +84,8 @@ if score == (3):
     score = 0
     input()
     file.close()
-    os.remove("tests.pak")
-    os.remove("scores.pak")
-file = open("tests.pak","w+")
+    os.remove(username+'/'+"tests.pak")
+    os.remove(username+'/'+"scores.pak")
+file = open(username+'/'+"tests.pak","w+")
 file.write(str(score))
 file.close()
