@@ -4,22 +4,44 @@ import random, tools, time, os #Imports Modules And Tools.py
 
 wins = 0 #Creates Variable for how many questions they got right
 username = input("What is your name? E.g JohnSmith ")
-os.mkdir(username)
-file = open(username+'/'+"data.pak" ,"a") #Creates data.pak file if it doesn't already exist
+try:
+    os.mkdir(username)
+except:
+    print ("Welcome Back")
+file = open(username+'/'+"ca.pak" ,"a") #Creates ca.pak file if it doesn't already exist
 file.close()
 
-correct = list() #Grabs all data from data.pak and puts it in list variable
-file = open(username+'/'+"data.pak", "r")
-for line in file:
-    correct.append(line)
+correct = list() #Grabs all data from ca.pak and puts it in list variable
+file = open(username+'/'+"ca.pak", "r")
+line = file.readline()
+correct = line.split(',')
 file.close()
-
+correct.remove('')
+try:
+    incorrect = list() #Grabs all data from ia.pak and puts it in list variable
+    file = open(username+'/'+"ia.pak", "r")
+    line = file.readline()
+    incorrect = line.split(',')
+    incorrect.remove('')
+except:
+    print()
+file.close()
 def questGen(): #Defines the system for generating and asking a question
     global correct
+    global incorrect
     global wins
-    digits = random.randint(0,9999) #picks a random number smaller than 10,000 and larger than -1
+    if len(incorrect) == (0):
+        digits = random.randint(0,9999) #picks a random number smaller than 10,000 and larger than -1
+    elif len(incorrect) > (0):
+        digits = int(random.choice(incorrect))
+        incorrect.remove(str(digits))
+        os.remove(username+'/'+'ia.pak')
+        file = open(username+'/'+"ia.pak","a")
+        for item in incorrect:
+                file.write(item+',')
+        file.close
     for item in correct: #Checks if number has been correct before
-        if item == digits:
+        if int(item) == digits:
             questGen() #Gets a new number
         else:
             break #Continues the question generation
@@ -29,11 +51,14 @@ def questGen(): #Defines the system for generating and asking a question
     if question == digits:
         print("You got it right!")
         wins = wins + 1 #adds a score to the variable
-        file = open(username+'/'+"data.pak", "a") #Saves Question To data.pak as it was answered correctly
-        file.write(str(digits)+",")
+        file = open(username+'/'+"ca.pak", "a") #Saves Question To ca.pak as it was answered correctly
+        file.write(str(digits)+',')
         file.close()
     elif question != digits:
         print("You got it wrong!") #User got it wrong so question can still be asked, no score is added
+        file = open(username+'/'+"ia.pak", "a") #Saves Question To ia.pak as it was answered incorrectly
+        file.write(str(digits)+',')
+        file.close()
     print()
 def repeat(): #system for testing the program, should never actually get used
     print()
