@@ -98,9 +98,9 @@ def convert(number):
                 output.append("seven")
         elif strNumber[3] == ("8"):
             if tenNeeded:
-                output.append("seventeen")
+                output.append("eighteen")
             else:
-                output.append("seven")
+                output.append("eight")
         elif strNumber[3] == ("9"):
             if tenNeeded:
                 output.append("nineteen")
@@ -181,7 +181,7 @@ def convert(number):
                 output.append("seven")
         elif strNumber[2] == ("8"):
             if tenNeeded:
-                output.append("eightteen")
+                output.append("eighteen")
             else:
                 output.append("eight")
         elif strNumber[2] == ("9"):
@@ -245,7 +245,7 @@ def convert(number):
                 output.append("seven")
         elif strNumber[1] == ("8"):
             if tenNeeded:
-                output.append("eightteen")
+                output.append("eighteen")
             else:
                 output.append("eight")
         elif strNumber[1] == ("9"):
