@@ -23,7 +23,8 @@ def convert(number):
             output.append("eight thousand")
         elif strNumber[0] == ("9"):
             output.append("nine thousand")
-        output.append(",")
+        if strNumber[1] != ('0'):
+            output.append(",")
         if strNumber[1] == ("1"):
             output.append("one hundred")
         elif strNumber[1] == ("2"):
@@ -42,7 +43,8 @@ def convert(number):
             output.append("eight hundred")
         elif strNumber[1] == ("9"):
             output.append("nine hundred")
-        output.append("and")
+        if strNumber[2] != ('0') or strNumber[3] != ('0'):
+            output.append("and")
         if strNumber[2] == ("1"):
             tenNeeded = True
         elif strNumber[2] == ("2"):
@@ -106,6 +108,9 @@ def convert(number):
                 output.append("nineteen")
             else:
                 output.append("nine")
+        elif strNumber[3] == ("0"):
+            if tenNeeded:
+                output.append("ten")
     elif length == (3): #If the number is 3 digits long, it will start at the hundreds and go down
         if strNumber[0] == ("1"):
             output.append("one hundred")
@@ -125,7 +130,8 @@ def convert(number):
             output.append("eight hundred")
         elif strNumber[0] == ("9"):
             output.append("nine hundred")
-        output.append("and")
+        if strNumber[1] != ('0') or strNumber[2] != ('0'):
+            output.append("and")
         if strNumber[1] == ("1"):
             tenNeeded = True
         elif strNumber[1] == ("2"):
@@ -189,6 +195,9 @@ def convert(number):
                 output.append("nineteen")
             else:
                 output.append("nine")
+        elif strNumber[2] == ("0"):
+            if tenNeeded:
+                output.append("ten")
     elif length == (2): #If the number is 2 digits long, it will start at the tens and go down
         if strNumber[0] == ("1"):
             tenNeeded = True
@@ -253,6 +262,9 @@ def convert(number):
                 output.append("nineteen")
             else:
                 output.append("nine")
+        elif strNumber[1] == ("0"):
+            if tenNeeded:
+                output.append("ten")
     elif length == (1): #If the number is 1 digit long, it will start at the digits and go down
         if strNumber[0] == ("1"):
             if tenNeeded:
@@ -299,6 +311,11 @@ def convert(number):
                 output.append("nineteen")
             else:
                 output.append("nine")
+        elif strNumber[0] == ("0"):
+            if tenNeeded:
+                output.append("ten")
+            else:
+                output.append("zero")
     words = ""
     run = 0
     for item in output:
