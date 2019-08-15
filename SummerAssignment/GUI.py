@@ -1,14 +1,8 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'C:\Users\ultra\Documents\GitHub\A-Level\SummerAssignment\Main.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.0
-#
-# WARNING! All changes made in this file will be lost!
-
+#Number Wording Quiz (GUI Version)
+#Adam Baker
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import random, tools, os, time
+import random, tools, os
 
 
 class Ui_MainWindow(object):
@@ -28,7 +22,7 @@ class Ui_MainWindow(object):
         self.Tests = QtWidgets.QWidget()
         self.Tests.setObjectName("Tests")
         self.ScoreNumber = QtWidgets.QLabel(self.Tests)
-        self.ScoreNumber.setGeometry(QtCore.QRect(440, 20, 62, 31))
+        self.ScoreNumber.setGeometry(QtCore.QRect(440, 20, 65, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(20)
@@ -71,6 +65,7 @@ class Ui_MainWindow(object):
         self.pushButton.setAutoDefault(True)
         self.pushButton_3 = QtWidgets.QPushButton(self.Tests)
         self.pushButton_3.setGeometry(QtCore.QRect(40, 130, 281, 41))
+        self.pushButton_3.setAutoDefault(True)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(236, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -242,6 +237,7 @@ class Ui_MainWindow(object):
         font.setPointSize(14)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.lineEdit_2 = QtWidgets.QLineEdit(self.Login)
         self.lineEdit_2.setGeometry(QtCore.QRect(90, 120, 171, 41))
         font = QtGui.QFont()
@@ -249,6 +245,7 @@ class Ui_MainWindow(object):
         font.setPointSize(16)
         self.lineEdit_2.setFont(font)
         self.lineEdit_2.setObjectName("lineEdit_2")
+        self.lineEdit_2.returnPressed.connect(self.loginSubmit)
         self.label = QtWidgets.QLabel(self.Login)
         self.label.setGeometry(QtCore.QRect(40, 40, 421, 71))
         self.label.setText("")
@@ -267,6 +264,7 @@ class Ui_MainWindow(object):
         self.pushButton_2.clicked.connect(self.loginSubmit)
         self.pushButton_3.clicked.connect(self.loginForce)
         self.pushButton.clicked.connect(self.answer)
+        self.pushButton.setEnabled(False)
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Number Test"))
@@ -290,10 +288,11 @@ class Ui_MainWindow(object):
         username = self.lineEdit_2.text()
         self.lineEdit_2.clear()
         self.pushButton_3.hide()
+        self.pushButton.setEnabled(True)
         try:
             os.mkdir(username)
         except:
-            print ()
+            pass
         file = open(username+'/'+"ca.pak" ,"a") #Creates ca.pak file if it doesn't already exist
         file.close()
 
@@ -310,11 +309,10 @@ class Ui_MainWindow(object):
             incorrect = line.split(',')
             incorrect.remove('')
         except:
-            print()
+            pass
         file.close()
         self.questGen()
     def questGen(self):
-        time.sleep(0.2)
         global username
         global wins
         global digits
@@ -355,7 +353,6 @@ class Ui_MainWindow(object):
         except:
             input = 0
         self.lineEdit.clear()
-        print(digits)
         if input == digits:
             palette = QtGui.QPalette()
             brush = QtGui.QBrush(QtGui.QColor(0, 255, 0))
@@ -394,6 +391,7 @@ class Ui_MainWindow(object):
         else:
             self.questionLabel.setText('10 Questions Completed')
             self.pushButton_3.setText('Test Completed')
+            self.pushButton.setEnabled(False)
             self.pushButton_3.show()
             file = open(username+'/'+"scores.pak","a")
             file.write(str(wins)+'\n')
@@ -406,7 +404,6 @@ class Ui_MainWindow(object):
             file = open(username+'/'+"tests.pak","r")
             score = 0
             for line in file:
-                print(line)
                 score = int(line)
             score = score +1
             if score == (3):
