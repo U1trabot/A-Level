@@ -6,7 +6,7 @@ import random, tools, os
 
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow): #Sets The GUI Up And Sets How It Looks
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(531, 269)
         icon = QtGui.QIcon()
@@ -44,7 +44,7 @@ class Ui_MainWindow(object):
         self.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEdit.setText("")
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.returnPressed.connect(self.answer)
+        self.lineEdit.returnPressed.connect(self.answer) #Makes Enter Key Submit Answers
         self.questionLabel = QtWidgets.QLabel(self.Tests)
         self.questionLabel.setGeometry(QtCore.QRect(30, 0, 281, 121))
         font = QtGui.QFont()
@@ -53,14 +53,14 @@ class Ui_MainWindow(object):
         self.questionLabel.setFont(font)
         self.questionLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.questionLabel.setObjectName("questionLabel")
-        self.questionLabel.setWordWrap(True)
+        self.questionLabel.setWordWrap(True) #Allows Text To Down When It Reaches The Edge Of It's Box
         self.pushButton = QtWidgets.QPushButton(self.Tests)
         self.pushButton.setGeometry(QtCore.QRect(350, 130, 121, 41))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(16)
         self.pushButton.setFont(font)
-        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor)) #Makes Button Change Cursor On Hover
         self.pushButton.setObjectName("pushButton")
         self.pushButton.setAutoDefault(True)
         self.pushButton_3 = QtWidgets.QPushButton(self.Tests)
@@ -237,7 +237,7 @@ class Ui_MainWindow(object):
         font.setPointSize(14)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor)) #Makes Button Change Cursor On Hover
         self.lineEdit_2 = QtWidgets.QLineEdit(self.Login)
         self.lineEdit_2.setGeometry(QtCore.QRect(90, 120, 171, 41))
         font = QtGui.QFont()
@@ -245,7 +245,7 @@ class Ui_MainWindow(object):
         font.setPointSize(16)
         self.lineEdit_2.setFont(font)
         self.lineEdit_2.setObjectName("lineEdit_2")
-        self.lineEdit_2.returnPressed.connect(self.loginSubmit)
+        self.lineEdit_2.returnPressed.connect(self.loginSubmit) #Makes Enter Submit Login
         self.label = QtWidgets.QLabel(self.Login)
         self.label.setGeometry(QtCore.QRect(40, 40, 421, 71))
         self.label.setText("")
@@ -261,11 +261,11 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.pushButton_2.clicked.connect(self.loginSubmit)
+        self.pushButton_2.clicked.connect(self.loginSubmit) #Makes the buttons call functions
         self.pushButton_3.clicked.connect(self.loginForce)
         self.pushButton.clicked.connect(self.answer)
         self.pushButton.setEnabled(False)
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, MainWindow): #Makes The Text Translatable, Sets The Defaut Text
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Number Test"))
         self.ScoreNumber.setText(_translate("MainWindow", "0"))
@@ -276,7 +276,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Tests), _translate("MainWindow", "Tests"))
         self.pushButton_2.setText(_translate("MainWindow", "Submit"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Login), _translate("MainWindow", "Login"))
-    def loginSubmit(self):
+    def loginSubmit(self): #Handles The Login And Starts The Program
         global username
         global wins
         global correct
@@ -288,7 +288,7 @@ class Ui_MainWindow(object):
         username = self.lineEdit_2.text()
         self.lineEdit_2.clear()
         self.pushButton_3.hide()
-        self.pushButton.setEnabled(True)
+        self.pushButton.setEnabled(True) #Allows The User To Submit Answers Now That They Are Logged In
         try:
             os.mkdir(username)
         except:
@@ -388,7 +388,7 @@ class Ui_MainWindow(object):
         repeat = repeat + 1
         if repeat < 10:
             self.questGen()
-        else:
+        else: #System For Ending The Test
             self.questionLabel.setText('10 Questions Completed')
             self.pushButton_3.setText('Test Completed')
             self.pushButton.setEnabled(False)
@@ -406,7 +406,7 @@ class Ui_MainWindow(object):
             for line in file:
                 score = int(line)
             score = score +1
-            if score == (3):
+            if score == (3): #System For Getting The Average After 3 Tests
                 self.questionLabel.setText("You have completed 3 tests, here is your average score!")
                 file = open(username+'/'+"scores.pak","r")
                 total = 0
@@ -422,7 +422,7 @@ class Ui_MainWindow(object):
             file.write(str(score))
             file.close()
 
-if __name__ == "__main__":
+if __name__ == "__main__": #System for opening the GUI
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
