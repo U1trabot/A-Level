@@ -164,6 +164,8 @@ class Ui_MainWindow(object):
             self.label.setText("X Wins")
         elif pb5 == "O" and pb6 == "O" and pb7 == "O":
             self.label.setText("O Wins")
+        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+            self.label.setText("Draw")
     def turn3(self):
         global turns
         global pb2
@@ -219,6 +221,8 @@ class Ui_MainWindow(object):
             self.label.setText("X Wins")
         elif pb5 == "O" and pb6 == "O" and pb7 == "O":
             self.label.setText("O Wins")
+        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+            self.label.setText("Draw")
     def turn4(self):
         global turns
         global pb2
@@ -274,6 +278,8 @@ class Ui_MainWindow(object):
             self.label.setText("X Wins")
         elif pb5 == "O" and pb6 == "O" and pb7 == "O":
             self.label.setText("O Wins")
+        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+            self.label.setText("Draw")
     def turn5(self):
         global turns
         global pb2
@@ -329,6 +335,8 @@ class Ui_MainWindow(object):
             self.label.setText("X Wins")
         elif pb5 == "O" and pb6 == "O" and pb7 == "O":
             self.label.setText("O Wins")
+        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+            self.label.setText("Draw")
     def turn6(self):
         global turns
         global pb2
@@ -384,6 +392,8 @@ class Ui_MainWindow(object):
             self.label.setText("X Wins")
         elif pb5 == "O" and pb6 == "O" and pb7 == "O":
             self.label.setText("O Wins")
+        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+            self.label.setText("Draw")
     def turn7(self):
         global turns
         global pb2
@@ -439,6 +449,8 @@ class Ui_MainWindow(object):
             self.label.setText("X Wins")
         elif pb5 == "O" and pb6 == "O" and pb7 == "O":
             self.label.setText("O Wins")
+        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+            self.label.setText("Draw")
     def turn8(self):
         global turns
         global pb2
@@ -494,6 +506,8 @@ class Ui_MainWindow(object):
             self.label.setText("X Wins")
         elif pb5 == "O" and pb6 == "O" and pb7 == "O":
             self.label.setText("O Wins")
+        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+            self.label.setText("Draw")
     def turn9(self):
         global turns
         global pb2
@@ -549,6 +563,8 @@ class Ui_MainWindow(object):
             self.label.setText("X Wins")
         elif pb5 == "O" and pb6 == "O" and pb7 == "O":
             self.label.setText("O Wins")
+        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+            self.label.setText("Draw")
     def turn10(self):
         global turns
         global pb2
@@ -604,6 +620,8 @@ class Ui_MainWindow(object):
             self.label.setText("X Wins")
         elif pb5 == "O" and pb6 == "O" and pb7 == "O":
             self.label.setText("O Wins")
+        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+            self.label.setText("Draw")
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
