@@ -1,5 +1,6 @@
 #Adam Baker
 #Card Game
+import random
 
 class Card:
     #__init__ command creates the object attributes for the Card (suit, val)
@@ -21,9 +22,16 @@ class Deck:
     def show(self):
         for c in self.cards:
             c.showCard()
+    def shuffle(self):
+        for i in range(len(self.cards)-1,0,-1):
+            r = random.randint(0,1)
+            self.cards[i], self.cards[r] = self.cards[r], self.cards[i]
 class Player:
 
     def __init__(self):
         pass
 deck = Deck()
+
+print("======")
+deck.shuffle()
 deck.show()
