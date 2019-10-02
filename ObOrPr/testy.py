@@ -1,4 +1,4 @@
-class PotionSeller:
+class Terminal:
   def response(self, speech):
       if speech == "Hello, Potion Seller, I am going into battle and I want your strongest potions.":
           return "My potions are too strong for you, traveler."
@@ -20,7 +20,9 @@ class PotionSeller:
           return "Good. You're not welcome here! My potions are only for the strongest and you're clearly are not of the strongest you're clearly the weakest."
       elif speech == "You've had your say, Potion Seller but I'll have mine. You're a rascal, you're a rascal with no respect for knights. No respect for anything...except your potions!":
           return "Why respect knights...when my potions can do anything that you can..."
+      elif speech == "peen":
+          return "the fuck"
       return "Command Not Recognised"
-seller = PotionSeller()
+seller = Terminal()
 while True:
     print(seller.response(input()))

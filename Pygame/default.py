@@ -1,8 +1,8 @@
 import pygame
 pygame.init()
 
-screenWidth = (852)
-screenHeight = (480)
+screenWidth = (800)
+screenHeight = (600)
 
 win = pygame.display.set_mode((screenWidth,screenHeight))
 pygame.display.set_caption("Test")
@@ -19,7 +19,7 @@ class player(object):
         self.y = y
         self.width = width
         self.height = height
-        self.velocity = 5
+        self.velocity = 10
         self.isJump = False
         self.left = False
         self.right = False
@@ -51,7 +51,7 @@ class projectile(object):
         self.radius = radius
         self.colour = colour
         self.facing = facing
-        self.velocity = 8*facing
+        self.velocity = 12*facing
     def draw(self,win):
         pygame.draw.circle(win, self.colour, (self.x,self.y), self.radius)
 def redrawGameWindow():
@@ -63,7 +63,7 @@ def redrawGameWindow():
     pygame.display.update()
 
 run = True
-block = player(300,410,64,64)
+block = player(300,530,64,64)
 bullets = []
 while run:
     clock.tick(27)
@@ -82,7 +82,7 @@ while run:
             facing = -1
         else:
             facing = 1
-        if len(bullets) < 50:
+        if len(bullets) < 5000:
             bullets.append(projectile(round(block.x + block.width //2),round(block.y +block.height//2), 6, (255,0,0), facing))
     if keys[pygame.K_LEFT] and block.x > block.velocity:
         block.x -= block.velocity
