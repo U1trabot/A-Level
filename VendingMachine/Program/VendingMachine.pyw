@@ -15,6 +15,16 @@ class Ui_MainWindow(object):
         self.price = float()
         self.money = (0.0)
         self.paying = False
+        self.oneStock = (9)
+        self.twoStock = (9)
+        self.threeStock = (9)
+        self.fourStock = (9)
+        self.fiveStock = (9)
+        self.sixStock = (9)
+        self.sevenStock = (9)
+        self.eightStock = (9)
+        self.nineStock = (9)
+        self.restocking = (0)
         MainWindow.setObjectName("MainWindow")
         MainWindow.setFixedSize(502, 600)
         icon = QtGui.QIcon()
@@ -1455,118 +1465,239 @@ class Ui_MainWindow(object):
         self.num = ""
         self.NumberDisplay.display(0)
     def SubmitClicked(self):
-        self.id = int(self.NumberDisplay.value())
-        if self.id >= 1 and self.id <= 9:
-            self.payment()
+        if self.restocking == (1):
+            self.id = int(self.NumberDisplay.value())
+            self.restock()
+        elif self.restocking == (2):
+            self.stockAdd = int(self.NumberDisplay.value())
+            self.restockAdd()
+        else:
+            self.id = int(self.NumberDisplay.value())
+            if self.id >= 1 and self.id <= 9 or self.id == (4321):
+                self.payment()
     def payment(self):
         if self.id == (1):
-            self.price = (0.5)
-            self.paying = True
-            self.Name.setText("Insert £"+str(self.price))
-            if self.money >= self.price:
-                self.money = (0.0)
-                self.paying = False
-                self.Name.setText("Collect Your Food")
-                icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap("crisps1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.Food.setIcon(icon)
-                self.Food.setIconSize(QtCore.QSize(100, 500))
+            if self.oneStock > (0):
+                self.price = (0.5)
+                self.paying = True
+                self.Name.setText("Insert £"+str(self.price))
+                if self.money >= self.price:
+                    self.money = (0.0)
+                    self.paying = False
+                    self.Name.setText("Collect Your Food")
+                    self.oneStock -= 1
+                    if self.oneStock == (0):
+                        self.label.setPixmap(QtGui.QPixmap(""))
+                    icon = QtGui.QIcon()
+                    icon.addPixmap(QtGui.QPixmap("crisps1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    self.Food.setIcon(icon)
+                    self.Food.setIconSize(QtCore.QSize(100, 500))
+            else:
+                self.Name.setText("Out Of Stock")
+                self.num = ""
+                self.NumberDisplay.display(0)
         elif self.id == (2):
-            self.price = (0.5)
-            self.paying = True
-            self.Name.setText("Insert £"+str(self.price))
-            if self.money >= self.price:
-                self.money = (0.0)
-                self.paying = False
-                self.Name.setText("Collect Your Food")
-                icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap("crisps2.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.Food.setIcon(icon)
-                self.Food.setIconSize(QtCore.QSize(100, 500))
+            if self.twoStock > (0):
+                self.price = (0.5)
+                self.paying = True
+                self.Name.setText("Insert £"+str(self.price))
+                if self.money >= self.price:
+                    self.money = (0.0)
+                    self.paying = False
+                    self.Name.setText("Collect Your Food")
+                    self.twoStock -= 1
+                    if self.twoStock == (0):
+                        self.label_2.setPixmap(QtGui.QPixmap(""))
+                    icon = QtGui.QIcon()
+                    icon.addPixmap(QtGui.QPixmap("crisps2.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    self.Food.setIcon(icon)
+                    self.Food.setIconSize(QtCore.QSize(100, 500))
+            else:
+                self.Name.setText("Out Of Stock")
+                self.num = ""
+                self.NumberDisplay.display(0)
         elif self.id == (3):
-            self.price = (0.5)
-            self.paying = True
-            self.Name.setText("Insert £"+str(self.price))
-            if self.money >= self.price:
-                self.money = (0.0)
-                self.paying = False
-                self.Name.setText("Collect Your Food")
-                icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap("crisps3.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.Food.setIcon(icon)
-                self.Food.setIconSize(QtCore.QSize(100, 500))
+            if self.threeStock > (0):
+                self.price = (0.5)
+                self.paying = True
+                self.Name.setText("Insert £"+str(self.price))
+                if self.money >= self.price:
+                    self.money = (0.0)
+                    self.paying = False
+                    self.Name.setText("Collect Your Food")
+                    self.threeStock -= 1
+                    if self.threeStock == (0):
+                        self.label_3.setPixmap(QtGui.QPixmap(""))
+                    icon = QtGui.QIcon()
+                    icon.addPixmap(QtGui.QPixmap("crisps3.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    self.Food.setIcon(icon)
+                    self.Food.setIconSize(QtCore.QSize(100, 500))
+            else:
+                self.Name.setText("Out Of Stock")
+                self.num = ""
+                self.NumberDisplay.display(0)
         elif self.id == (4):
-            self.price = (0.5)
-            self.paying = True
-            self.Name.setText("Insert £"+str(self.price))
-            if self.money >= self.price:
-                self.money = (0.0)
-                self.paying = False
-                self.Name.setText("Collect Your Food")
-                icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap("crisps4.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.Food.setIcon(icon)
-                self.Food.setIconSize(QtCore.QSize(100, 500))
+            if self.fourStock > (0):
+                self.price = (0.5)
+                self.paying = True
+                self.Name.setText("Insert £"+str(self.price))
+                if self.money >= self.price:
+                    self.money = (0.0)
+                    self.paying = False
+                    self.Name.setText("Collect Your Food")
+                    self.fourStock -= 1
+                    if self.fourStock == (0):
+                        self.label_4.setPixmap(QtGui.QPixmap(""))
+                    icon = QtGui.QIcon()
+                    icon.addPixmap(QtGui.QPixmap("crisps4.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    self.Food.setIcon(icon)
+                    self.Food.setIconSize(QtCore.QSize(100, 500))
+            else:
+                self.Name.setText("Out Of Stock")
+                self.num = ""
+                self.NumberDisplay.display(0)
         elif self.id == (5):
-            self.price = (0.75)
-            self.paying = True
-            self.Name.setText("Insert £"+str(self.price))
-            if self.money >= self.price:
-                self.money = (0.0)
-                self.paying = False
-                self.Name.setText("Collect Your Food")
-                icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap("chocolate1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.Food.setIcon(icon)
-                self.Food.setIconSize(QtCore.QSize(100, 500))
+            if self.fiveStock > (0):
+                self.price = (0.75)
+                self.paying = True
+                self.Name.setText("Insert £"+str(self.price))
+                if self.money >= self.price:
+                    self.money = (0.0)
+                    self.paying = False
+                    self.Name.setText("Collect Your Food")
+                    self.fiveStock -= 1
+                    if self.fiveStock == (0):
+                        self.label_5.setPixmap(QtGui.QPixmap(""))
+                    icon = QtGui.QIcon()
+                    icon.addPixmap(QtGui.QPixmap("chocolate1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    self.Food.setIcon(icon)
+                    self.Food.setIconSize(QtCore.QSize(100, 500))
+            else:
+                self.Name.setText("Out Of Stock")
+                self.num = ""
+                self.NumberDisplay.display(0)
         elif self.id == (6):
-            self.price = (0.75)
-            self.paying = True
-            self.Name.setText("Insert £"+str(self.price))
-            if self.money >= self.price:
-                self.money = (0.0)
-                self.paying = False
-                self.Name.setText("Collect Your Food")
-                icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap("chocolate2.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.Food.setIcon(icon)
-                self.Food.setIconSize(QtCore.QSize(100, 500))
+            if self.sixStock > (0):
+                self.price = (0.75)
+                self.paying = True
+                self.Name.setText("Insert £"+str(self.price))
+                if self.money >= self.price:
+                    self.money = (0.0)
+                    self.paying = False
+                    self.Name.setText("Collect Your Food")
+                    self.sixStock -= 1
+                    if self.sixStock == (0):
+                        self.label_6.setPixmap(QtGui.QPixmap(""))
+                    icon = QtGui.QIcon()
+                    icon.addPixmap(QtGui.QPixmap("chocolate2.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    self.Food.setIcon(icon)
+                    self.Food.setIconSize(QtCore.QSize(100, 500))
+            else:
+                self.Name.setText("Out Of Stock")
+                self.num = ""
+                self.NumberDisplay.display(0)
         elif self.id == (7):
-            self.price = (1.0)
-            self.paying = True
-            self.Name.setText("Insert £"+str(self.price))
-            if self.money >= self.price:
-                self.money = (0.0)
-                self.paying = False
-                self.Name.setText("Collect Your Food")
-                icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap("chocolate3.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.Food.setIcon(icon)
-                self.Food.setIconSize(QtCore.QSize(100, 500))
+            if self.sevenStock > (0):
+                self.price = (1.0)
+                self.paying = True
+                self.Name.setText("Insert £"+str(self.price))
+                if self.money >= self.price:
+                    self.money = (0.0)
+                    self.paying = False
+                    self.Name.setText("Collect Your Food")
+                    self.sevenStock -= 1
+                    if self.sevenStock == (0):
+                        self.label_7.setPixmap(QtGui.QPixmap(""))
+                    icon = QtGui.QIcon()
+                    icon.addPixmap(QtGui.QPixmap("chocolate3.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    self.Food.setIcon(icon)
+                    self.Food.setIconSize(QtCore.QSize(100, 500))
+            else:
+                self.Name.setText("Out Of Stock")
+                self.num = ""
+                self.NumberDisplay.display(0)
         elif self.id == (8):
-            self.price = (1.99)
-            self.paying = True
-            self.Name.setText("Insert £"+str(self.price))
-            if self.money >= self.price:
-                self.money = (0.0)
-                self.paying = False
-                self.Name.setText("Collect Your Food")
-                icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap("crackers1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.Food.setIcon(icon)
-                self.Food.setIconSize(QtCore.QSize(100, 500))
+            if self.eightStock > (0):
+                self.price = (1.99)
+                self.paying = True
+                self.Name.setText("Insert £"+str(self.price))
+                if self.money >= self.price:
+                    self.money = (0.0)
+                    self.paying = False
+                    self.Name.setText("Collect Your Food")
+                    self.eightStock -= 1
+                    if self.eightStock == (0):
+                        self.label_8.setPixmap(QtGui.QPixmap(""))
+                    icon = QtGui.QIcon()
+                    icon.addPixmap(QtGui.QPixmap("crackers1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    self.Food.setIcon(icon)
+                    self.Food.setIconSize(QtCore.QSize(100, 500))
+            else:
+                self.Name.setText("Out Of Stock")
+                self.num = ""
+                self.NumberDisplay.display(0)
         elif self.id == (9):
-            self.price = (0.2)
-            self.paying = True
-            self.Name.setText("Insert £"+str(self.price))
-            if self.money >= self.price:
-                self.money = (0.0)
-                self.paying = False
-                self.Name.setText("Collect Your Food")
-                icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap("crackers2.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.Food.setIcon(icon)
-                self.Food.setIconSize(QtCore.QSize(100, 500))
+            if self.nineStock > (0):
+                self.price = (0.2)
+                self.paying = True
+                self.Name.setText("Insert £"+str(self.price))
+                if self.money >= self.price:
+                    self.money = (0.0)
+                    self.paying = False
+                    self.Name.setText("Collect Your Food")
+                    self.nienStock -= 1
+                    if self.nineStock == (0):
+                        self.label_9.setPixmap(QtGui.QPixmap(""))
+                    icon = QtGui.QIcon()
+                    icon.addPixmap(QtGui.QPixmap("crackers2.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    self.Food.setIcon(icon)
+                    self.Food.setIconSize(QtCore.QSize(100, 500))
+            else:
+                self.Name.setText("Out Of Stock")
+                self.num = ""
+                self.NumberDisplay.display(0)
+        elif self.id == (4321):
+            self.Name.setText("Restock Mode")
+            self.restocking = (1)
+            self.NumberDisplay.display(0)
+            self.num = ""
+    def restock(self):
+            self.Name.setText("Stock Input")
+            self.restocking = (2)
+            self.NumberDisplay.display(0)
+            self.num = ""
+    def restockAdd(self):
+            self.restocking = (0)
+            self.NumberDisplay.display(0)
+            self.num = ""
+            if self.id == (1):
+                self.oneStock += self.stockAdd
+                self.label.setPixmap(QtGui.QPixmap("crisps1.png"))
+            elif self.id == (2):
+                self.twoStock += self.stockAdd
+                self.label_2.setPixmap(QtGui.QPixmap("crisps2.png"))
+            elif self.id == (3):
+                self.threeStock += self.stockAdd
+                self.label_3.setPixmap(QtGui.QPixmap("crisps3.png"))
+            elif self.id == (4):
+                self.fourStock += self.stockAdd
+                self.label_4.setPixmap(QtGui.QPixmap("crisps4.png"))
+            elif self.id == (5):
+                self.fiveStock += self.stockAdd
+                self.label_5.setPixmap(QtGui.QPixmap("chocolate1.png"))
+            elif self.id == (6):
+                self.sixStock += self.stockAdd
+                self.label_6.setPixmap(QtGui.QPixmap("chocolate2.png"))
+            elif self.id == (7):
+                self.sevenStock += self.stockAdd
+                self.label_7.setPixmap(QtGui.QPixmap("chocolate3.png"))
+            elif self.id == (8):
+                self.eightStock += self.stockAdd
+                self.label_8.setPixmap(QtGui.QPixmap("crackers1.png"))
+            elif self.id == (9):
+                self.nineStock += self.stockAdd
+                self.label_9.setPixmap(QtGui.QPixmap("crackers2.png"))
+            self.Name.setText("Input Code")
     def pound(self):
         if self.paying:
             self.money += (1.00)
