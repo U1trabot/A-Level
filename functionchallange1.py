@@ -1,0 +1,1 @@
+print ("Good morning " + input("What is your name? ") + "!")
