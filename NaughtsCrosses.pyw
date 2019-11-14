@@ -8,16 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-pb2 = ""
-pb3 = ""
-pb4 = ""
-pb5 = ""
-pb6 = ""
-pb7 = ""
-pb8 = ""
-pb9 = ""
-pb10 = ""
+pb =[["",'A1'],["",'A2'],["",'A3'],["",'B1'],["",'B2'],["",'B3'],["",'C1'],["",'C2'],["",'C3']]
 
 turns = "X"
 
@@ -111,516 +102,444 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "X - Turn"))
     def turn2(self):
         global turns
-        global pb2
-        global pb3
-        global pb4
-        global pb5
-        global pb6
-        global pb7
-        global pb8
-        global pb9
-        global pb10
+        global pb
         if turns == "X":
             self.pushButton_2.setText(turns)
             self.pushButton_2.setDisabled(True)
-            pb2 = "X"
+            (pb[0])[0] = "X"
             turns = "O"
             self.label.setText("O - Turn")
         elif turns == "O":
             self.pushButton_2.setText(turns)
             self.pushButton_2.setDisabled(True)
-            pb2 = "O"
+            (pb[0])[0] = "O"
             turns = "X"
             self.label.setText("X - Turn")
-        if pb2 == "X" and pb3 == ("X") and pb4 == ("X"):
+        if (pb[0])[0] == "X" and (pb[1])[0] == ("X") and (pb[2])[0] == ("X"):
             self.label.setText("X wins")
-        elif pb2 == "O" and pb3 == ("O") and pb4 == ("O"):
+        elif (pb[0])[0] == "O" and (pb[1])[0] == ("O") and (pb[2])[0] == ("O"):
             self.label.setText("O wins")
-        elif pb2 == "X" and pb5 == "X" and pb8 == "X":
+        elif (pb[0])[0] == "X" and (pb[3])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb5 == "O" and pb8 == "O":
+        elif (pb[0])[0] == "O" and (pb[3])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb8 == "X" and pb9 == "X" and pb10 == "X":
+        elif (pb[6])[0] == "X" and (pb[7])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb8 == "O" and pb9 == "O" and pb10 == "O":
+        elif (pb[6])[0] == "O" and (pb[7])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb10 == "X" and pb7 == "X" and pb4 == "X":
+        elif (pb[8])[0] == "X" and (pb[5])[0] == "X" and (pb[2])[0] == "X":
             self.label.setText("X Wins")
-        elif pb10 == "O" and pb7 == "O" and pb4 == "O":
+        elif (pb[8])[0] == "O" and (pb[5])[0] == "O" and (pb[2])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 == "X" and pb6 == "X" and pb10 == "X":
+        elif (pb[0])[0] == "X" and (pb[4])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb6 == "O" and pb10 == "O":
+        elif (pb[0])[0] == "O" and (pb[4])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb4 == "X" and pb6 == "X" and pb8 == "X":
+        elif (pb[2])[0] == "X" and (pb[4])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb4 == "O" and pb6 == "O" and pb8 == "O":
+        elif (pb[2])[0] == "O" and (pb[4])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb3 == "X" and pb6 == "X" and pb9 == "X":
+        elif (pb[1])[0] == "X" and (pb[4])[0] == "X" and (pb[7])[0] == "X":
             self.label.setText("X Wins")
-        elif pb3 == "O" and pb6 == "O" and pb9 == "O":
+        elif (pb[1])[0] == "O" and (pb[4])[0] == "O" and (pb[7])[0] == "O":
             self.label.setText("O Wins")
-        elif pb5 == "X" and pb6 == "X" and pb7 == "X":
+        elif (pb[3])[0] == "X" and (pb[4])[0] == "X" and (pb[5])[0] == "X":
             self.label.setText("X Wins")
-        elif pb5 == "O" and pb6 == "O" and pb7 == "O":
+        elif (pb[3])[0] == "O" and (pb[4])[0] == "O" and (pb[5])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+        elif (pb[0])[0] != "" and (pb[1])[0] != "" and (pb[2])[0] != "" and (pb[3])[0] != "" and (pb[4])[0] != "" and (pb[5])[0] != "" and (pb[6])[0] != "" and (pb[7])[0] != "" and (pb[8])[0] != "":
             self.label.setText("Draw")
     def turn3(self):
         global turns
-        global pb2
-        global pb3
-        global pb4
-        global pb5
-        global pb6
-        global pb7
-        global pb8
-        global pb9
-        global pb10
+        global pb
         if turns == "X":
             self.pushButton_3.setText(turns)
             self.pushButton_3.setDisabled(True)
-            pb3 = "X"
+            (pb[1])[0] = "X"
             turns = "O"
             self.label.setText("O - Turn")
         elif turns == "O":
             self.pushButton_3.setText(turns)
             self.pushButton_3.setDisabled(True)
-            pb3 = "O"
+            (pb[1])[0] = "O"
             turns = "X"
             self.label.setText("X - Turn")
-        if pb2 == "X" and pb3 == ("X") and pb4 == ("X"):
+        if (pb[0])[0] == "X" and (pb[1])[0] == ("X") and (pb[2])[0] == ("X"):
             self.label.setText("X wins")
-        elif pb2 == "O" and pb3 == ("O") and pb4 == ("O"):
+        elif (pb[0])[0] == "O" and (pb[1])[0] == ("O") and (pb[2])[0] == ("O"):
             self.label.setText("O wins")
-        elif pb2 == "X" and pb5 == "X" and pb8 == "X":
+        elif (pb[0])[0] == "X" and (pb[3])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb5 == "O" and pb8 == "O":
+        elif (pb[0])[0] == "O" and (pb[3])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb8 == "X" and pb9 == "X" and pb10 == "X":
+        elif (pb[6])[0] == "X" and (pb[7])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb8 == "O" and pb9 == "O" and pb10 == "O":
+        elif (pb[6])[0] == "O" and (pb[7])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb10 == "X" and pb7 == "X" and pb4 == "X":
+        elif (pb[8])[0] == "X" and (pb[5])[0] == "X" and (pb[2])[0] == "X":
             self.label.setText("X Wins")
-        elif pb10 == "O" and pb7 == "O" and pb4 == "O":
+        elif (pb[8])[0] == "O" and (pb[5])[0] == "O" and (pb[2])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 == "X" and pb6 == "X" and pb10 == "X":
+        elif (pb[0])[0] == "X" and (pb[4])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb6 == "O" and pb10 == "O":
+        elif (pb[0])[0] == "O" and (pb[4])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb4 == "X" and pb6 == "X" and pb8 == "X":
+        elif (pb[2])[0] == "X" and (pb[4])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb4 == "O" and pb6 == "O" and pb8 == "O":
+        elif (pb[2])[0] == "O" and (pb[4])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb3 == "X" and pb6 == "X" and pb9 == "X":
+        elif (pb[1])[0] == "X" and (pb[4])[0] == "X" and (pb[7])[0] == "X":
             self.label.setText("X Wins")
-        elif pb3 == "O" and pb6 == "O" and pb9 == "O":
+        elif (pb[1])[0] == "O" and (pb[4])[0] == "O" and (pb[7])[0] == "O":
             self.label.setText("O Wins")
-        elif pb5 == "X" and pb6 == "X" and pb7 == "X":
+        elif (pb[3])[0] == "X" and (pb[4])[0] == "X" and (pb[5])[0] == "X":
             self.label.setText("X Wins")
-        elif pb5 == "O" and pb6 == "O" and pb7 == "O":
+        elif (pb[3])[0] == "O" and (pb[4])[0] == "O" and (pb[5])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+        elif (pb[0])[0] != "" and (pb[1])[0] != "" and (pb[2])[0] != "" and (pb[3])[0] != "" and (pb[4])[0] != "" and (pb[5])[0] != "" and (pb[6])[0] != "" and (pb[7])[0] != "" and (pb[8])[0] != "":
             self.label.setText("Draw")
     def turn4(self):
         global turns
-        global pb2
-        global pb3
-        global pb4
-        global pb5
-        global pb6
-        global pb7
-        global pb8
-        global pb9
-        global pb10
+        global pb
         if turns == "X":
             self.pushButton_4.setText(turns)
             self.pushButton_4.setDisabled(True)
-            pb4 = "X"
+            (pb[2])[0] = "X"
             turns = "O"
             self.label.setText("O - Turn")
         elif turns == "O":
             self.pushButton_4.setText(turns)
             self.pushButton_4.setDisabled(True)
-            pb4 = "O"
+            (pb[2])[0] = "O"
             turns = "X"
             self.label.setText("X - Turn")
-        if pb2 == "X" and pb3 == ("X") and pb4 == ("X"):
+        if (pb[0])[0] == "X" and (pb[1])[0] == ("X") and (pb[2])[0] == ("X"):
             self.label.setText("X wins")
-        elif pb2 == "O" and pb3 == ("O") and pb4 == ("O"):
+        elif (pb[0])[0] == "O" and (pb[1])[0] == ("O") and (pb[2])[0] == ("O"):
             self.label.setText("O wins")
-        elif pb2 == "X" and pb5 == "X" and pb8 == "X":
+        elif (pb[0])[0] == "X" and (pb[3])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb5 == "O" and pb8 == "O":
+        elif (pb[0])[0] == "O" and (pb[3])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb8 == "X" and pb9 == "X" and pb10 == "X":
+        elif (pb[6])[0] == "X" and (pb[7])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb8 == "O" and pb9 == "O" and pb10 == "O":
+        elif (pb[6])[0] == "O" and (pb[7])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb10 == "X" and pb7 == "X" and pb4 == "X":
+        elif (pb[8])[0] == "X" and (pb[5])[0] == "X" and (pb[2])[0] == "X":
             self.label.setText("X Wins")
-        elif pb10 == "O" and pb7 == "O" and pb4 == "O":
+        elif (pb[8])[0] == "O" and (pb[5])[0] == "O" and (pb[2])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 == "X" and pb6 == "X" and pb10 == "X":
+        elif (pb[0])[0] == "X" and (pb[4])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb6 == "O" and pb10 == "O":
+        elif (pb[0])[0] == "O" and (pb[4])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb4 == "X" and pb6 == "X" and pb8 == "X":
+        elif (pb[2])[0] == "X" and (pb[4])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb4 == "O" and pb6 == "O" and pb8 == "O":
+        elif (pb[2])[0] == "O" and (pb[4])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb3 == "X" and pb6 == "X" and pb9 == "X":
+        elif (pb[1])[0] == "X" and (pb[4])[0] == "X" and (pb[7])[0] == "X":
             self.label.setText("X Wins")
-        elif pb3 == "O" and pb6 == "O" and pb9 == "O":
+        elif (pb[1])[0] == "O" and (pb[4])[0] == "O" and (pb[7])[0] == "O":
             self.label.setText("O Wins")
-        elif pb5 == "X" and pb6 == "X" and pb7 == "X":
+        elif (pb[3])[0] == "X" and (pb[4])[0] == "X" and (pb[5])[0] == "X":
             self.label.setText("X Wins")
-        elif pb5 == "O" and pb6 == "O" and pb7 == "O":
+        elif (pb[3])[0] == "O" and (pb[4])[0] == "O" and (pb[5])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+        elif (pb[0])[0] != "" and (pb[1])[0] != "" and (pb[2])[0] != "" and (pb[3])[0] != "" and (pb[4])[0] != "" and (pb[5])[0] != "" and (pb[6])[0] != "" and (pb[7])[0] != "" and (pb[8])[0] != "":
             self.label.setText("Draw")
     def turn5(self):
         global turns
-        global pb2
-        global pb3
-        global pb4
-        global pb5
-        global pb6
-        global pb7
-        global pb8
-        global pb9
-        global pb10
+        global pb
         if turns == "X":
             self.pushButton_5.setText(turns)
             self.pushButton_5.setDisabled(True)
-            pb5 = "X"
+            (pb[3])[0] = "X"
             turns = "O"
             self.label.setText("O - Turn")
         elif turns == "O":
             self.pushButton_5.setText(turns)
             self.pushButton_5.setDisabled(True)
-            pb5 = "O"
+            (pb[3])[0] = "O"
             turns = "X"
             self.label.setText("X - Turn")
-        if pb2 == "X" and pb3 == ("X") and pb4 == ("X"):
+        if (pb[0])[0] == "X" and (pb[1])[0] == ("X") and (pb[2])[0] == ("X"):
             self.label.setText("X wins")
-        elif pb2 == "O" and pb3 == ("O") and pb4 == ("O"):
+        elif (pb[0])[0] == "O" and (pb[1])[0] == ("O") and (pb[2])[0] == ("O"):
             self.label.setText("O wins")
-        elif pb2 == "X" and pb5 == "X" and pb8 == "X":
+        elif (pb[0])[0] == "X" and (pb[3])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb5 == "O" and pb8 == "O":
+        elif (pb[0])[0] == "O" and (pb[3])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb8 == "X" and pb9 == "X" and pb10 == "X":
+        elif (pb[6])[0] == "X" and (pb[7])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb8 == "O" and pb9 == "O" and pb10 == "O":
+        elif (pb[6])[0] == "O" and (pb[7])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb10 == "X" and pb7 == "X" and pb4 == "X":
+        elif (pb[8])[0] == "X" and (pb[5])[0] == "X" and (pb[2])[0] == "X":
             self.label.setText("X Wins")
-        elif pb10 == "O" and pb7 == "O" and pb4 == "O":
+        elif (pb[8])[0] == "O" and (pb[5])[0] == "O" and (pb[2])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 == "X" and pb6 == "X" and pb10 == "X":
+        elif (pb[0])[0] == "X" and (pb[4])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb6 == "O" and pb10 == "O":
+        elif (pb[0])[0] == "O" and (pb[4])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb4 == "X" and pb6 == "X" and pb8 == "X":
+        elif (pb[2])[0] == "X" and (pb[4])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb4 == "O" and pb6 == "O" and pb8 == "O":
+        elif (pb[2])[0] == "O" and (pb[4])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb3 == "X" and pb6 == "X" and pb9 == "X":
+        elif (pb[1])[0] == "X" and (pb[4])[0] == "X" and (pb[7])[0] == "X":
             self.label.setText("X Wins")
-        elif pb3 == "O" and pb6 == "O" and pb9 == "O":
+        elif (pb[1])[0] == "O" and (pb[4])[0] == "O" and (pb[7])[0] == "O":
             self.label.setText("O Wins")
-        elif pb5 == "X" and pb6 == "X" and pb7 == "X":
+        elif (pb[3])[0] == "X" and (pb[4])[0] == "X" and (pb[5])[0] == "X":
             self.label.setText("X Wins")
-        elif pb5 == "O" and pb6 == "O" and pb7 == "O":
+        elif (pb[3])[0] == "O" and (pb[4])[0] == "O" and (pb[5])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+        elif (pb[0])[0] != "" and (pb[1])[0] != "" and (pb[2])[0] != "" and (pb[3])[0] != "" and (pb[4])[0] != "" and (pb[5])[0] != "" and (pb[6])[0] != "" and (pb[7])[0] != "" and (pb[8])[0] != "":
             self.label.setText("Draw")
     def turn6(self):
         global turns
-        global pb2
-        global pb3
-        global pb4
-        global pb5
-        global pb6
-        global pb7
-        global pb8
-        global pb9
-        global pb10
+        global pb
         if turns == "X":
             self.pushButton_6.setText(turns)
             self.pushButton_6.setDisabled(True)
-            pb6 = "X"
+            (pb[4])[0] = "X"
             turns = "O"
             self.label.setText("O - Turn")
         elif turns == "O":
             self.pushButton_6.setText(turns)
             self.pushButton_6.setDisabled(True)
-            pb6 = "O"
+            (pb[4])[0] = "O"
             turns = "X"
             self.label.setText("X - Turn")
-        if pb2 == "X" and pb3 == ("X") and pb4 == ("X"):
+        if (pb[0])[0] == "X" and (pb[1])[0] == ("X") and (pb[2])[0] == ("X"):
             self.label.setText("X wins")
-        elif pb2 == "O" and pb3 == ("O") and pb4 == ("O"):
+        elif (pb[0])[0] == "O" and (pb[1])[0] == ("O") and (pb[2])[0] == ("O"):
             self.label.setText("O wins")
-        elif pb2 == "X" and pb5 == "X" and pb8 == "X":
+        elif (pb[0])[0] == "X" and (pb[3])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb5 == "O" and pb8 == "O":
+        elif (pb[0])[0] == "O" and (pb[3])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb8 == "X" and pb9 == "X" and pb10 == "X":
+        elif (pb[6])[0] == "X" and (pb[7])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb8 == "O" and pb9 == "O" and pb10 == "O":
+        elif (pb[6])[0] == "O" and (pb[7])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb10 == "X" and pb7 == "X" and pb4 == "X":
+        elif (pb[8])[0] == "X" and (pb[5])[0] == "X" and (pb[2])[0] == "X":
             self.label.setText("X Wins")
-        elif pb10 == "O" and pb7 == "O" and pb4 == "O":
+        elif (pb[8])[0] == "O" and (pb[5])[0] == "O" and (pb[2])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 == "X" and pb6 == "X" and pb10 == "X":
+        elif (pb[0])[0] == "X" and (pb[4])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb6 == "O" and pb10 == "O":
+        elif (pb[0])[0] == "O" and (pb[4])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb4 == "X" and pb6 == "X" and pb8 == "X":
+        elif (pb[2])[0] == "X" and (pb[4])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb4 == "O" and pb6 == "O" and pb8 == "O":
+        elif (pb[2])[0] == "O" and (pb[4])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb3 == "X" and pb6 == "X" and pb9 == "X":
+        elif (pb[1])[0] == "X" and (pb[4])[0] == "X" and (pb[7])[0] == "X":
             self.label.setText("X Wins")
-        elif pb3 == "O" and pb6 == "O" and pb9 == "O":
+        elif (pb[1])[0] == "O" and (pb[4])[0] == "O" and (pb[7])[0] == "O":
             self.label.setText("O Wins")
-        elif pb5 == "X" and pb6 == "X" and pb7 == "X":
+        elif (pb[3])[0] == "X" and (pb[4])[0] == "X" and (pb[5])[0] == "X":
             self.label.setText("X Wins")
-        elif pb5 == "O" and pb6 == "O" and pb7 == "O":
+        elif (pb[3])[0] == "O" and (pb[4])[0] == "O" and (pb[5])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+        elif (pb[0])[0] != "" and (pb[1])[0] != "" and (pb[2])[0] != "" and (pb[3])[0] != "" and (pb[4])[0] != "" and (pb[5])[0] != "" and (pb[6])[0] != "" and (pb[7])[0] != "" and (pb[8])[0] != "":
             self.label.setText("Draw")
     def turn7(self):
         global turns
-        global pb2
-        global pb3
-        global pb4
-        global pb5
-        global pb6
-        global pb7
-        global pb8
-        global pb9
-        global pb10
+        global pb
         if turns == "X":
             self.pushButton_7.setText(turns)
             self.pushButton_7.setDisabled(True)
-            pb7 = "X"
+            (pb[5])[0] = "X"
             turns = "O"
             self.label.setText("O - Turn")
         elif turns == "O":
             self.pushButton_7.setText(turns)
             self.pushButton_7.setDisabled(True)
-            pb7 = "O"
+            (pb[5])[0] = "O"
             turns = "X"
             self.label.setText("X - Turn")
-        if pb2 == "X" and pb3 == ("X") and pb4 == ("X"):
+        if (pb[0])[0] == "X" and (pb[1])[0] == ("X") and (pb[2])[0] == ("X"):
             self.label.setText("X wins")
-        elif pb2 == "O" and pb3 == ("O") and pb4 == ("O"):
+        elif (pb[0])[0] == "O" and (pb[1])[0] == ("O") and (pb[2])[0] == ("O"):
             self.label.setText("O wins")
-        elif pb2 == "X" and pb5 == "X" and pb8 == "X":
+        elif (pb[0])[0] == "X" and (pb[3])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb5 == "O" and pb8 == "O":
+        elif (pb[0])[0] == "O" and (pb[3])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb8 == "X" and pb9 == "X" and pb10 == "X":
+        elif (pb[6])[0] == "X" and (pb[7])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb8 == "O" and pb9 == "O" and pb10 == "O":
+        elif (pb[6])[0] == "O" and (pb[7])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb10 == "X" and pb7 == "X" and pb4 == "X":
+        elif (pb[8])[0] == "X" and (pb[5])[0] == "X" and (pb[2])[0] == "X":
             self.label.setText("X Wins")
-        elif pb10 == "O" and pb7 == "O" and pb4 == "O":
+        elif (pb[8])[0] == "O" and (pb[5])[0] == "O" and (pb[2])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 == "X" and pb6 == "X" and pb10 == "X":
+        elif (pb[0])[0] == "X" and (pb[4])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb6 == "O" and pb10 == "O":
+        elif (pb[0])[0] == "O" and (pb[4])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb4 == "X" and pb6 == "X" and pb8 == "X":
+        elif (pb[2])[0] == "X" and (pb[4])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb4 == "O" and pb6 == "O" and pb8 == "O":
+        elif (pb[2])[0] == "O" and (pb[4])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb3 == "X" and pb6 == "X" and pb9 == "X":
+        elif (pb[1])[0] == "X" and (pb[4])[0] == "X" and (pb[7])[0] == "X":
             self.label.setText("X Wins")
-        elif pb3 == "O" and pb6 == "O" and pb9 == "O":
+        elif (pb[1])[0] == "O" and (pb[4])[0] == "O" and (pb[7])[0] == "O":
             self.label.setText("O Wins")
-        elif pb5 == "X" and pb6 == "X" and pb7 == "X":
+        elif (pb[3])[0] == "X" and (pb[4])[0] == "X" and (pb[5])[0] == "X":
             self.label.setText("X Wins")
-        elif pb5 == "O" and pb6 == "O" and pb7 == "O":
+        elif (pb[3])[0] == "O" and (pb[4])[0] == "O" and (pb[5])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+        elif (pb[0])[0] != "" and (pb[1])[0] != "" and (pb[2])[0] != "" and (pb[3])[0] != "" and (pb[4])[0] != "" and (pb[5])[0] != "" and (pb[6])[0] != "" and (pb[7])[0] != "" and (pb[8])[0] != "":
             self.label.setText("Draw")
     def turn8(self):
         global turns
-        global pb2
-        global pb3
-        global pb4
-        global pb5
-        global pb6
-        global pb7
-        global pb8
-        global pb9
-        global pb10
+        global pb
         if turns == "X":
             self.pushButton_8.setText(turns)
             self.pushButton_8.setDisabled(True)
-            pb8 = "X"
+            (pb[6])[0] = "X"
             turns = "O"
             self.label.setText("O - Turn")
         elif turns == "O":
             self.pushButton_8.setText(turns)
             self.pushButton_8.setDisabled(True)
-            pb8 = "O"
+            (pb[6])[0] = "O"
             turns = "X"
             self.label.setText("X - Turn")
-        if pb2 == "X" and pb3 == ("X") and pb4 == ("X"):
+        if (pb[0])[0] == "X" and (pb[1])[0] == ("X") and (pb[2])[0] == ("X"):
             self.label.setText("X wins")
-        elif pb2 == "O" and pb3 == ("O") and pb4 == ("O"):
+        elif (pb[0])[0] == "O" and (pb[1])[0] == ("O") and (pb[2])[0] == ("O"):
             self.label.setText("O wins")
-        elif pb2 == "X" and pb5 == "X" and pb8 == "X":
+        elif (pb[0])[0] == "X" and (pb[3])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb5 == "O" and pb8 == "O":
+        elif (pb[0])[0] == "O" and (pb[3])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb8 == "X" and pb9 == "X" and pb10 == "X":
+        elif (pb[6])[0] == "X" and (pb[7])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb8 == "O" and pb9 == "O" and pb10 == "O":
+        elif (pb[6])[0] == "O" and (pb[7])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb10 == "X" and pb7 == "X" and pb4 == "X":
+        elif (pb[8])[0] == "X" and (pb[5])[0] == "X" and (pb[2])[0] == "X":
             self.label.setText("X Wins")
-        elif pb10 == "O" and pb7 == "O" and pb4 == "O":
+        elif (pb[8])[0] == "O" and (pb[5])[0] == "O" and (pb[2])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 == "X" and pb6 == "X" and pb10 == "X":
+        elif (pb[0])[0] == "X" and (pb[4])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb6 == "O" and pb10 == "O":
+        elif (pb[0])[0] == "O" and (pb[4])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb4 == "X" and pb6 == "X" and pb8 == "X":
+        elif (pb[2])[0] == "X" and (pb[4])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb4 == "O" and pb6 == "O" and pb8 == "O":
+        elif (pb[2])[0] == "O" and (pb[4])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb3 == "X" and pb6 == "X" and pb9 == "X":
+        elif (pb[1])[0] == "X" and (pb[4])[0] == "X" and (pb[7])[0] == "X":
             self.label.setText("X Wins")
-        elif pb3 == "O" and pb6 == "O" and pb9 == "O":
+        elif (pb[1])[0] == "O" and (pb[4])[0] == "O" and (pb[7])[0] == "O":
             self.label.setText("O Wins")
-        elif pb5 == "X" and pb6 == "X" and pb7 == "X":
+        elif (pb[3])[0] == "X" and (pb[4])[0] == "X" and (pb[5])[0] == "X":
             self.label.setText("X Wins")
-        elif pb5 == "O" and pb6 == "O" and pb7 == "O":
+        elif (pb[3])[0] == "O" and (pb[4])[0] == "O" and (pb[5])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+        elif (pb[0])[0] != "" and (pb[1])[0] != "" and (pb[2])[0] != "" and (pb[3])[0] != "" and (pb[4])[0] != "" and (pb[5])[0] != "" and (pb[6])[0] != "" and (pb[7])[0] != "" and (pb[8])[0] != "":
             self.label.setText("Draw")
     def turn9(self):
         global turns
-        global pb2
-        global pb3
-        global pb4
-        global pb5
-        global pb6
-        global pb7
-        global pb8
-        global pb9
-        global pb10
+        global pb
         if turns == "X":
             self.pushButton_9.setText(turns)
             self.pushButton_9.setDisabled(True)
-            pb9 = "X"
+            (pb[7])[0] = "X"
             turns = "O"
             self.label.setText("O - Turn")
         elif turns == "O":
             self.pushButton_9.setText(turns)
             self.pushButton_9.setDisabled(True)
-            pb9 = "O"
+            (pb[7])[0] = "O"
             turns = "X"
             self.label.setText("X - Turn")
-        if pb2 == "X" and pb3 == ("X") and pb4 == ("X"):
+        if (pb[0])[0] == "X" and (pb[1])[0] == ("X") and (pb[2])[0] == ("X"):
             self.label.setText("X wins")
-        elif pb2 == "O" and pb3 == ("O") and pb4 == ("O"):
+        elif (pb[0])[0] == "O" and (pb[1])[0] == ("O") and (pb[2])[0] == ("O"):
             self.label.setText("O wins")
-        elif pb2 == "X" and pb5 == "X" and pb8 == "X":
+        elif (pb[0])[0] == "X" and (pb[3])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb5 == "O" and pb8 == "O":
+        elif (pb[0])[0] == "O" and (pb[3])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb8 == "X" and pb9 == "X" and pb10 == "X":
+        elif (pb[6])[0] == "X" and (pb[7])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb8 == "O" and pb9 == "O" and pb10 == "O":
+        elif (pb[6])[0] == "O" and (pb[7])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb10 == "X" and pb7 == "X" and pb4 == "X":
+        elif (pb[8])[0] == "X" and (pb[5])[0] == "X" and (pb[2])[0] == "X":
             self.label.setText("X Wins")
-        elif pb10 == "O" and pb7 == "O" and pb4 == "O":
+        elif (pb[8])[0] == "O" and (pb[5])[0] == "O" and (pb[2])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 == "X" and pb6 == "X" and pb10 == "X":
+        elif (pb[0])[0] == "X" and (pb[4])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb6 == "O" and pb10 == "O":
+        elif (pb[0])[0] == "O" and (pb[4])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb4 == "X" and pb6 == "X" and pb8 == "X":
+        elif (pb[2])[0] == "X" and (pb[4])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb4 == "O" and pb6 == "O" and pb8 == "O":
+        elif (pb[2])[0] == "O" and (pb[4])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb3 == "X" and pb6 == "X" and pb9 == "X":
+        elif (pb[1])[0] == "X" and (pb[4])[0] == "X" and (pb[7])[0] == "X":
             self.label.setText("X Wins")
-        elif pb3 == "O" and pb6 == "O" and pb9 == "O":
+        elif (pb[1])[0] == "O" and (pb[4])[0] == "O" and (pb[7])[0] == "O":
             self.label.setText("O Wins")
-        elif pb5 == "X" and pb6 == "X" and pb7 == "X":
+        elif (pb[3])[0] == "X" and (pb[4])[0] == "X" and (pb[5])[0] == "X":
             self.label.setText("X Wins")
-        elif pb5 == "O" and pb6 == "O" and pb7 == "O":
+        elif (pb[3])[0] == "O" and (pb[4])[0] == "O" and (pb[5])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+        elif (pb[0])[0] != "" and (pb[1])[0] != "" and (pb[2])[0] != "" and (pb[3])[0] != "" and (pb[4])[0] != "" and (pb[5])[0] != "" and (pb[6])[0] != "" and (pb[7])[0] != "" and (pb[8])[0] != "":
             self.label.setText("Draw")
     def turn10(self):
         global turns
-        global pb2
-        global pb3
-        global pb4
-        global pb5
-        global pb6
-        global pb7
-        global pb8
-        global pb9
-        global pb10
+        global pb
         if turns == "X":
             self.pushButton_10.setText(turns)
             self.pushButton_10.setDisabled(True)
-            pb10 = "X"
+            (pb[8])[0] = "X"
             turns = "O"
             self.label.setText("O - Turn")
         elif turns == "O":
             self.pushButton_10.setText(turns)
             self.pushButton_10.setDisabled(True)
-            pb10 = "O"
+            (pb[8])[0] = "O"
             turns = "X"
             self.label.setText("X - Turn")
-        if pb2 == "X" and pb3 == ("X") and pb4 == ("X"):
+        if (pb[0])[0] == "X" and (pb[1])[0] == ("X") and (pb[2])[0] == ("X"):
             self.label.setText("X wins")
-        elif pb2 == "O" and pb3 == ("O") and pb4 == ("O"):
+        elif (pb[0])[0] == "O" and (pb[1])[0] == ("O") and (pb[2])[0] == ("O"):
             self.label.setText("O wins")
-        elif pb2 == "X" and pb5 == "X" and pb8 == "X":
+        elif (pb[0])[0] == "X" and (pb[3])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb5 == "O" and pb8 == "O":
+        elif (pb[0])[0] == "O" and (pb[3])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb8 == "X" and pb9 == "X" and pb10 == "X":
+        elif (pb[6])[0] == "X" and (pb[7])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb8 == "O" and pb9 == "O" and pb10 == "O":
+        elif (pb[6])[0] == "O" and (pb[7])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb10 == "X" and pb7 == "X" and pb4 == "X":
+        elif (pb[8])[0] == "X" and (pb[5])[0] == "X" and (pb[2])[0] == "X":
             self.label.setText("X Wins")
-        elif pb10 == "O" and pb7 == "O" and pb4 == "O":
+        elif (pb[8])[0] == "O" and (pb[5])[0] == "O" and (pb[2])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 == "X" and pb6 == "X" and pb10 == "X":
+        elif (pb[0])[0] == "X" and (pb[4])[0] == "X" and (pb[8])[0] == "X":
             self.label.setText("X Wins")
-        elif pb2 == "O" and pb6 == "O" and pb10 == "O":
+        elif (pb[0])[0] == "O" and (pb[4])[0] == "O" and (pb[8])[0] == "O":
             self.label.setText("O Wins")
-        elif pb4 == "X" and pb6 == "X" and pb8 == "X":
+        elif (pb[2])[0] == "X" and (pb[4])[0] == "X" and (pb[6])[0] == "X":
             self.label.setText("X Wins")
-        elif pb4 == "O" and pb6 == "O" and pb8 == "O":
+        elif (pb[2])[0] == "O" and (pb[4])[0] == "O" and (pb[6])[0] == "O":
             self.label.setText("O Wins")
-        elif pb3 == "X" and pb6 == "X" and pb9 == "X":
+        elif (pb[1])[0] == "X" and (pb[4])[0] == "X" and (pb[7])[0] == "X":
             self.label.setText("X Wins")
-        elif pb3 == "O" and pb6 == "O" and pb9 == "O":
+        elif (pb[1])[0] == "O" and (pb[4])[0] == "O" and (pb[7])[0] == "O":
             self.label.setText("O Wins")
-        elif pb5 == "X" and pb6 == "X" and pb7 == "X":
+        elif (pb[3])[0] == "X" and (pb[4])[0] == "X" and (pb[5])[0] == "X":
             self.label.setText("X Wins")
-        elif pb5 == "O" and pb6 == "O" and pb7 == "O":
+        elif (pb[3])[0] == "O" and (pb[4])[0] == "O" and (pb[5])[0] == "O":
             self.label.setText("O Wins")
-        elif pb2 != "" and pb3 != "" and pb4 != "" and pb5 != "" and pb6 != "" and pb7 != "" and pb8 != "" and pb9 != "" and pb10 != "":
+        elif (pb[0])[0] != "" and (pb[1])[0] != "" and (pb[2])[0] != "" and (pb[3])[0] != "" and (pb[4])[0] != "" and (pb[5])[0] != "" and (pb[6])[0] != "" and (pb[7])[0] != "" and (pb[8])[0] != "":
             self.label.setText("Draw")
 if __name__ == "__main__":
     import sys
