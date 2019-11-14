@@ -3,7 +3,7 @@
 import turtle, random
 turtle.colormode(255)
 turtle.speed("fastest")
-for i in range(1,random.randint(20,1000),1):
+while True:
     turtle.right(random.randint(-180,180))
     turtle.forward(random.randint(0,40))
     choice = random.randint(1,2)
