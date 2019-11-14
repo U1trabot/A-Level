@@ -1645,7 +1645,7 @@ class Ui_MainWindow(object):
                     self.money = (0.0)
                     self.paying = False
                     self.Name.setText("Collect Your Food")
-                    self.nienStock -= 1
+                    self.nineStock -= 1
                     if self.nineStock == (0):
                         self.label_9.setPixmap(QtGui.QPixmap(""))
                     icon = QtGui.QIcon()
