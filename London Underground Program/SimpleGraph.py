@@ -1,38 +1,43 @@
-#Mega Array Of Doom
-import time
-class Graph:
-    def __init__(self):
-        self.stations = [
+nodes = [
+["A",
+    [
+    ["B",7],
+    ["D",9]
+    ]
+],
+["B" ,
+    [
+    ["A",7],
+    ["D",8],
+    ["E",3]
+    ]
+],
+["C" ,
+    [
+    ["D",2]
+    ]
+],
+["D",
+    [
+    ["A",9],
+    ["B",7],
+    ["C",2],
+    ["E",4]
+    ]
+],
+["E",
+    [
+    ["B",3],
+    ["D",4]
+    ]
+]
+]
+graph = [
             ["Marylebone",
                 ["Marlyenbone",0],
-                ["Baker Street",6],
-                ["Edgeware Road",9999],
-                ["Bond Street", 9999],
-                ["South Kensington", 9999],
-                ["Victoria", 9999],
-                ["Oxford Circus", 9999],
-                ["Westminster", 9999],
-                ["Piccadilly Circus", 9999],
-                ["Charing Cross", 9999],
-                ["Embankment", 9999],
-                ["Waterloo", 9999],
-                ["Blackfriars", 9999],
-                ["Cannon Street", 9999],
-                ["Monument", 9999],
-                ["London Bridge", 9999],
-                ["Bank", 9999],
-                ["Leicester Square", 9999],
-                ["Tottenham Court Road", 9999],
-                ["Green Park", 9999],
-                ["Moorgate", 9999],
-                ["Farringdon", 9999],
-                ["Liverpool Street", 9999],
-                ["King's Cross St. Pancras", 9999],
-                ["Holborn", 9999],
-                ["Euston",9999],
-                ["Warren Street", 9999]],
+                ["Baker Street",6]],
             ["Edgeware Road",
-                ["Baker Street",10]],
+                ["Baker Street",5]],
             ["Baker Street",
                 ["Marylebone",6],
                 ["Edgeware Road",10],
@@ -96,8 +101,7 @@ class Graph:
             ["Bank",
                 ["Monument",0],
                 ["Liverpool Street",10],
-                ["Holborn",31],
-                ["Waterloo", 33]],
+                ["Holborn",31]],
             ["Leicester Square",
                 ["Piccadilly Circus",6],
                 ["Charing Cross",7],
@@ -148,68 +152,21 @@ class Graph:
                 ["Moorgate", 9],
                 ["King's Cross St. Pancras", 36]]
             ]
-        self.passed = list()
-        self.visited = list()
-    def dijsktra(self):
-        while len(self.visited) < 26:
-            for station in self.stations[0]:
-                if station != self.stations[0][0]:
-                    time.sleep(0.1)
-                    print(station[1])
-                    time.sleep(0.05)
-                    print("Plotting path of",station[0])
-                    self.passed.append([station[0],station[1],self.stations[0][0]])
-            for location in self.stations:
-                if location[0] != self.stations[0][0]:
-                    for stop in location:
-                        if stop != location[0]:
-                            Found = False
-                            self.count = stop[1]
-                            address = stop[0]
-                            while not Found:
-                                for place in self.passed:
-                                    if place[0] == address and place[1] < 9999:
-                                        time.sleep(0.1)
-                                        print(self.count,"+",place[1])
-                                        time.sleep(0.05)
-                                        self.count += place[1]
-                                        print("=",self.count)
-                                        address = place[2]
-                                        if address == self.stations[0][0]:
-                                            Found = True
-                                else:
-                                    Found = True
-                            run = 0
-                            for place2 in self.passed:
-                                if place2[0] == stop[0]:
-                                    if self.count < place2[1] and place2[0] not in self.visited:
-                                        time.sleep(0.1)
-                                        print("Plotting path of",location[0])
-                                        self.passed[run][1] = self.count
-                                        self.passed[run][2] = location[0]
-                                    else:
-                                        pass
-                                run += 1
-                self.visited.append(location[0])
+visited = list()
+unvisited = list()
+table = list()
 
-tube = Graph()
-tube.dijsktra()
-print()
-print("________________________________________")
-for item in tube.passed:
-    time.sleep(0.1)
-    print(item[0],"|"+str(item[1])+"|",item[2])
-time.sleep(0.2)
-print("________________________________________")
-print()
-print("Process Finished")
-print()
-for item2 in tube.passed:
-    time.sleep(0.1)
-    if item2[1] == 9999:
-        print(item2[0],"has errored")
-input()
-
-
-
-
+for node in nodes:
+    for connection in node[1]:
+        passed = False
+        for node2 in table:
+            if connection[0] in node2:
+                passed = True
+            if node2[0] == connection[0]:
+                if connection[1] < node2[1]:
+                    node2= [connection[0],connection[1],node[0]]
+                passed = True
+        if not passed:
+            table.append([connection[0],connection[1],node[0]])
+for row in table:
+    print (row)
