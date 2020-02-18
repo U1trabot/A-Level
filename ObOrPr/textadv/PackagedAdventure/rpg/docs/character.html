@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module character</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>character</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cultra%5Cdocuments%5Cgithub%5Ca-level%5Coborpr%5Ctextadv%5Cpackagedadventure%5Crpg%5Ccharacter.py">c:\users\ultra\documents\github\a-level\oborpr\textadv\packagedadventure\rpg\character.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="character.html#Character">Character</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="character.html#Enemy">Enemy</a>
+</font></dt><dt><font face="helvetica, arial"><a href="character.html#Friend">Friend</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Character">class <strong>Character</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Character">Character</a>(char_name,&nbsp;char_description)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Character-__init__"><strong>__init__</strong></a>(self, char_name, char_description)</dt><dd><tt>Sets&nbsp;attributes&nbsp;for&nbsp;<a href="#Character">Character</a>&nbsp;class</tt></dd></dl>
+
+<dl><dt><a name="Character-describe"><strong>describe</strong></a>(self)</dt><dd><tt>Outputs&nbsp;the&nbsp;name&nbsp;and&nbsp;description&nbsp;of&nbsp;a&nbsp;character&nbsp;for&nbsp;use&nbsp;in&nbsp;a&nbsp;room</tt></dd></dl>
+
+<dl><dt><a name="Character-fight"><strong>fight</strong></a>(self, combat_item)</dt><dd><tt>Initaites&nbsp;a&nbsp;fight&nbsp;with&nbsp;the&nbsp;character,&nbsp;will&nbsp;always&nbsp;say&nbsp;doesn't&nbsp;want&nbsp;to&nbsp;fight&nbsp;you&nbsp;for&nbsp;a&nbsp;default&nbsp;character</tt></dd></dl>
+
+<dl><dt><a name="Character-hug"><strong>hug</strong></a>(self)</dt><dd><tt>Initiates&nbsp;a&nbsp;hug&nbsp;with&nbsp;a&nbsp;character,&nbsp;will&nbsp;tell&nbsp;player&nbsp;they&nbsp;cannot&nbsp;for&nbsp;a&nbsp;default&nbsp;character</tt></dd></dl>
+
+<dl><dt><a name="Character-set_conversation"><strong>set_conversation</strong></a>(self, conversation)</dt><dd><tt>Sets&nbsp;a&nbsp;character's&nbsp;conversation&nbsp;line</tt></dd></dl>
+
+<dl><dt><a name="Character-steal"><strong>steal</strong></a>(self)</dt><dd><tt>Initiates&nbsp;a&nbsp;steal&nbsp;from&nbsp;the&nbsp;character,&nbsp;will&nbsp;tell&nbsp;the&nbsp;player&nbsp;that&nbsp;they&nbsp;cannot&nbsp;steal&nbsp;from&nbsp;a&nbsp;default&nbsp;character</tt></dd></dl>
+
+<dl><dt><a name="Character-talk"><strong>talk</strong></a>(self)</dt><dd><tt>Outputs&nbsp;a&nbsp;conversation&nbsp;line&nbsp;if&nbsp;there&nbsp;is&nbsp;one,&nbsp;if&nbsp;not&nbsp;tells&nbsp;player&nbsp;that&nbsp;the&nbsp;character&nbsp;does&nbsp;not&nbsp;want&nbsp;to&nbsp;talk&nbsp;to&nbsp;them</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Enemy">class <strong>Enemy</strong></a>(<a href="character.html#Character">Character</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Enemy">Enemy</a>(char_name,&nbsp;char_description)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="character.html#Enemy">Enemy</a></dd>
+<dd><a href="character.html#Character">Character</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Enemy-__init__"><strong>__init__</strong></a>(self, char_name, char_description)</dt><dd><tt>Creates&nbsp;attributes&nbsp;for&nbsp;Enemey&nbsp;class</tt></dd></dl>
+
+<dl><dt><a name="Enemy-fight"><strong>fight</strong></a>(self, combat_item)</dt><dd><tt>Initiates&nbsp;a&nbsp;fight&nbsp;with&nbsp;enemy,&nbsp;uses&nbsp;combat&nbsp;item&nbsp;to&nbsp;tell&nbsp;if&nbsp;fight&nbsp;is&nbsp;one,&nbsp;player&nbsp;wins&nbsp;=&nbsp;True,&nbsp;player&nbsp;loses&nbsp;=&nbsp;False</tt></dd></dl>
+
+<dl><dt><a name="Enemy-get_defeated"><strong>get_defeated</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;enemies_defeated&nbsp;count</tt></dd></dl>
+
+<dl><dt><a name="Enemy-get_item"><strong>get_item</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;item&nbsp;attribute</tt></dd></dl>
+
+<dl><dt><a name="Enemy-get_weakness"><strong>get_weakness</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;weakness&nbsp;attribute</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_defeated"><strong>set_defeated</strong></a>(self, new_defeated)</dt><dd><tt>Sets&nbsp;the&nbsp;enemies_defeated&nbsp;count</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_item"><strong>set_item</strong></a>(self, new_item)</dt><dd><tt>Sets&nbsp;the&nbsp;item&nbsp;attribute</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_weakness"><strong>set_weakness</strong></a>(self, char_weakness)</dt><dd><tt>Sets&nbsp;the&nbsp;weakness&nbsp;attribute</tt></dd></dl>
+
+<dl><dt><a name="Enemy-steal"><strong>steal</strong></a>(self)</dt><dd><tt>Initaites&nbsp;a&nbsp;steal&nbsp;from&nbsp;an&nbsp;<a href="#Enemy">Enemy</a>,&nbsp;will&nbsp;only&nbsp;continue&nbsp;if&nbsp;<a href="#Enemy">Enemy</a>&nbsp;has&nbsp;an&nbsp;item</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>enemies_defeated</strong> = 0</dl>
+
+<hr>
+Methods inherited from <a href="character.html#Character">Character</a>:<br>
+<dl><dt><a name="Enemy-describe"><strong>describe</strong></a>(self)</dt><dd><tt>Outputs&nbsp;the&nbsp;name&nbsp;and&nbsp;description&nbsp;of&nbsp;a&nbsp;character&nbsp;for&nbsp;use&nbsp;in&nbsp;a&nbsp;room</tt></dd></dl>
+
+<dl><dt><a name="Enemy-hug"><strong>hug</strong></a>(self)</dt><dd><tt>Initiates&nbsp;a&nbsp;hug&nbsp;with&nbsp;a&nbsp;character,&nbsp;will&nbsp;tell&nbsp;player&nbsp;they&nbsp;cannot&nbsp;for&nbsp;a&nbsp;default&nbsp;character</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_conversation"><strong>set_conversation</strong></a>(self, conversation)</dt><dd><tt>Sets&nbsp;a&nbsp;character's&nbsp;conversation&nbsp;line</tt></dd></dl>
+
+<dl><dt><a name="Enemy-talk"><strong>talk</strong></a>(self)</dt><dd><tt>Outputs&nbsp;a&nbsp;conversation&nbsp;line&nbsp;if&nbsp;there&nbsp;is&nbsp;one,&nbsp;if&nbsp;not&nbsp;tells&nbsp;player&nbsp;that&nbsp;the&nbsp;character&nbsp;does&nbsp;not&nbsp;want&nbsp;to&nbsp;talk&nbsp;to&nbsp;them</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="character.html#Character">Character</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Friend">class <strong>Friend</strong></a>(<a href="character.html#Character">Character</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Friend">Friend</a>(char_name,&nbsp;char_description)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="character.html#Friend">Friend</a></dd>
+<dd><a href="character.html#Character">Character</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Friend-__init__"><strong>__init__</strong></a>(self, char_name, char_description)</dt><dd><tt>Creates&nbsp;attributes&nbsp;for&nbsp;<a href="#Friend">Friend</a>&nbsp;class</tt></dd></dl>
+
+<dl><dt><a name="Friend-get_feeling"><strong>get_feeling</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;feeling&nbsp;attribute</tt></dd></dl>
+
+<dl><dt><a name="Friend-hug"><strong>hug</strong></a>(self)</dt><dd><tt>Initaites&nbsp;a&nbsp;hug&nbsp;with&nbsp;the&nbsp;friend,&nbsp;will&nbsp;only&nbsp;work&nbsp;if&nbsp;feeling&nbsp;is&nbsp;above&nbsp;10</tt></dd></dl>
+
+<dl><dt><a name="Friend-set_feeling"><strong>set_feeling</strong></a>(self, feel)</dt><dd><tt>Sets&nbsp;the&nbsp;feeling&nbsp;attribute</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="character.html#Character">Character</a>:<br>
+<dl><dt><a name="Friend-describe"><strong>describe</strong></a>(self)</dt><dd><tt>Outputs&nbsp;the&nbsp;name&nbsp;and&nbsp;description&nbsp;of&nbsp;a&nbsp;character&nbsp;for&nbsp;use&nbsp;in&nbsp;a&nbsp;room</tt></dd></dl>
+
+<dl><dt><a name="Friend-fight"><strong>fight</strong></a>(self, combat_item)</dt><dd><tt>Initaites&nbsp;a&nbsp;fight&nbsp;with&nbsp;the&nbsp;character,&nbsp;will&nbsp;always&nbsp;say&nbsp;doesn't&nbsp;want&nbsp;to&nbsp;fight&nbsp;you&nbsp;for&nbsp;a&nbsp;default&nbsp;character</tt></dd></dl>
+
+<dl><dt><a name="Friend-set_conversation"><strong>set_conversation</strong></a>(self, conversation)</dt><dd><tt>Sets&nbsp;a&nbsp;character's&nbsp;conversation&nbsp;line</tt></dd></dl>
+
+<dl><dt><a name="Friend-steal"><strong>steal</strong></a>(self)</dt><dd><tt>Initiates&nbsp;a&nbsp;steal&nbsp;from&nbsp;the&nbsp;character,&nbsp;will&nbsp;tell&nbsp;the&nbsp;player&nbsp;that&nbsp;they&nbsp;cannot&nbsp;steal&nbsp;from&nbsp;a&nbsp;default&nbsp;character</tt></dd></dl>
+
+<dl><dt><a name="Friend-talk"><strong>talk</strong></a>(self)</dt><dd><tt>Outputs&nbsp;a&nbsp;conversation&nbsp;line&nbsp;if&nbsp;there&nbsp;is&nbsp;one,&nbsp;if&nbsp;not&nbsp;tells&nbsp;player&nbsp;that&nbsp;the&nbsp;character&nbsp;does&nbsp;not&nbsp;want&nbsp;to&nbsp;talk&nbsp;to&nbsp;them</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="character.html#Character">Character</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

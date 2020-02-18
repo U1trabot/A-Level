@@ -1,16 +1,14 @@
-from room import Room
-from item import Item
-from character import Enemy, Character, Friend
+import rpg
 
 inventory = []
 
-kitchen = Room("Kitchen")
+kitchen = rpg.Room("Kitchen")
 kitchen.set_description("A dark and dirty room, with grime and muck everywhere")
 
-dining_hall = Room("Dining Hall")
+dining_hall = rpg.Room("Dining Hall")
 dining_hall.set_description("A large room with a long central wooden table layed out with moldy food on cracked plates")
 
-ballroom = Room("Ballroom")
+ballroom = rpg.Room("Ballroom")
 ballroom.set_description("A large hall with a marbel floor, this hasn't been danced in for a millenia")
 
 kitchen.link_room(dining_hall, 'south')
@@ -18,19 +16,19 @@ dining_hall.link_room(kitchen, 'north')
 dining_hall.link_room(ballroom, 'west')
 ballroom.link_room(dining_hall, 'east')
 
-starter_weapon = Item("Wooden Sword","A basic sword made out of cheap wood","Sword")
+starter_weapon = rpg.Item("Wooden Sword","A basic sword made out of cheap wood","Sword")
 
-greg = Enemy("Greg", 'Just a normal dude')
+greg = rpg.Enemy("Greg", 'Just a normal dude')
 greg.set_conversation("Hi, My name is greg, i'm just a normal dude trying to make his way in the text adventure")
 greg.set_weakness("Nintendo Switch")
 greg.set_item(starter_weapon)
 
-greg_corpse = Character("Greg's Body", "The corpse of a perfectly innocent man that you just murdered")
+greg_corpse = rpg.Character("Greg's Body", "The corpse of a perfectly innocent man that you just murdered")
 greg_corpse.set_conversation("Nothing, because he's dead")
 
-switch = Item("Nintendo Switch", "An amazing portable video game console brought to you by Nintendo","Utility")
+switch = rpg.Item("Nintendo Switch", "An amazing portable video game console brought to you by Nintendo","Utility")
 
-blob = Friend("Blob", "Just a blob of slime, kind of cute though")
+blob = rpg.Friend("Blob", "Just a blob of slime, kind of cute though")
 blob.set_feeling(15)
 
 dining_hall.set_character(greg)
@@ -97,7 +95,7 @@ while not dead and not won:
             print(slot.get_name())
         print("-----------------------")
     print('\n')
-    if Enemy.enemies_defeated == 1:
+    if rpg.Enemy.enemies_defeated == 1:
         won = True
 if dead:
     print("Game Over")
