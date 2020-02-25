@@ -35,11 +35,22 @@ dining_hall.set_character(greg)
 ballroom.set_character(blob)
 ballroom.set_item(switch)
 
+gauntlet = rpg.Item("Infinity Gauntlet", "A golden gaunlet that has UNLIMITED POWER","Gaunlet")
+stormbreaker = rpg.Item("Stormbreaker","A large axe that is capable for aiming for the head","Two Handed")
+
+thanos = rpg.Enemy("Thanos", 'A large purple guy with a golden gauntlet on his left hand, his chin looks like a ball sack')
+thanos.set_conversation("You are not the only one cursed with knowledge")
+thanos.set_weakness("Infinity Gauntlet")
+thanos.set_item(gauntlet)
+
+kitchen.set_character(thanos)
+dining_hall.set_item(stormbreaker)
+
 print()
 current_room = kitchen
 dead = False
 won = False
-while not dead and not won:
+while not dead:
     current_room.get_details()
     inhabitant = current_room.get_character()
     if inhabitant is not None:
@@ -65,8 +76,6 @@ while not dead and not won:
             if owned:
                 if inhabitant.fight(weapon) == False:
                     dead = True
-                else:
-                    current_room.set_character(greg_corpse)
             else:
                 print("You do not have that item!")
         else:
