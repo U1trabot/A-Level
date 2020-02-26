@@ -84,6 +84,8 @@ while not dead:
             if owned:
                 if inhabitant.fight(weapon) == False:
                     dead = True
+                else:
+                    current_room.set_character(None)
             else:
                 type("You do not have that item!")
         else:
@@ -103,7 +105,7 @@ while not dead:
     elif command == "take":
         if item is not None:
             inventory.append(item)
-            type(("You take the"+" "+str(item)))
+            type(("You take the"+" "+item.get_name()))
             current_room.set_item(None)
         else:
             type("There is nothing here to take")
