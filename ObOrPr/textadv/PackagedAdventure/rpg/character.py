@@ -1,3 +1,14 @@
+import sys,time
+
+
+def type(string):
+    for char in string:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.02)
+    sys.stdout.write("\n")
+    sys.stdout.flush()
+
 class Character():
 
     # Create a character
@@ -10,8 +21,8 @@ class Character():
     # Describe this character
     def describe(self):
         """Outputs the name and description of a character for use in a room"""
-        print( self.name + " is here!" )
-        print( self.description )
+        type(( self.name + " is here!" ))
+        type( self.description )
 
     # Set what this character will say when talked to
     def set_conversation(self, conversation):
@@ -22,21 +33,21 @@ class Character():
     def talk(self):
         """Outputs a conversation line if there is one, if not tells player that the character does not want to talk to them"""
         if self.conversation is not None:
-            print("[" + self.name + " says]: " + self.conversation)
+            type(("[" + self.name + " says]: " + self.conversation))
         else:
-            print(self.name + " doesn't want to talk to you")
+            type((self.name + " doesn't want to talk to you"))
 
     # Fight with this character
     def fight(self, combat_item):
         """Initaites a fight with the character, will always say doesn't want to fight you for a default character"""
-        print(self.name + " doesn't want to fight with you")
+        type((self.name + " doesn't want to fight with you"))
         return True
     def steal(self):
         """Initiates a steal from the character, will tell the player that they cannot steal from a default character"""
-        print("You cannot steal from a neutral or friendly target")
+        type("You cannot steal from a neutral or friendly target")
     def hug(self):
         """Initiates a hug with a character, will tell player they cannot for a default character"""
-        print("You cannot hug a neutral or enemy target")
+        type("You cannot hug a neutral or enemy target")
 class Enemy(Character):
 
     enemies_defeated = 0
@@ -49,11 +60,11 @@ class Enemy(Character):
     def fight(self, combat_item):
         """Initiates a fight with enemy, uses combat item to tell if fight is one, player wins = True, player loses = False"""
         if self.weakness == combat_item:
-            print("You killed",self.name,"with the",combat_item)
+            type(("You killed"+" "+self.name+" "+"with the"+" "+combat_item))
             Enemy.enemies_defeated += 1
             return True
         else:
-            print("Your",combat_item,"does little against the might of",self.name)
+            type(("Your"+" "+combat_item+" "+"does little against the might of"+" "+self.name))
             return False
     def set_weakness(self,char_weakness):
         """Sets the weakness attribute"""
@@ -76,10 +87,10 @@ class Enemy(Character):
     def steal(self):
         """Initaites a steal from an Enemy, will only continue if Enemy has an item"""
         if self.item is not None:
-            print("You steal a",self.item.get_name(),"from",self.name)
+            type(("You steal a"+" "+self.item.get_name()+" "+"from"+" "+self.name))
             return True
         else:
-            print(self.name,"has nothing to steal")
+            type(self.name,"has nothing to steal")
             return False
 class Friend(Character):
     def __init__(self, char_name, char_description):
@@ -89,9 +100,9 @@ class Friend(Character):
     def hug(self):
         """Initaites a hug with the friend, will only work if feeling is above 10"""
         if self.feeling > 10:
-            print(self.name,"hugs you back")
+            type((self.name+" "+"hugs you back"))
         else:
-            print(self.name,"doesn't want to hug you")
+            type((self.name+" "+"doesn't want to hug you"))
     def set_feeling(self,feel):
         """Sets the feeling attribute"""
         self.feeling = feel

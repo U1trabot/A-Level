@@ -1,3 +1,14 @@
+import sys,time
+
+
+def type(string):
+    for char in string:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.02)
+    sys.stdout.write("\n")
+    sys.stdout.flush()
+
 class Room():
 
     def __init__(self, room_name):
@@ -33,22 +44,22 @@ class Room():
         return self.character
     def describe(self):
         """Outputs room description"""
-        print(self.description)
+        type(self.description)
     def link_room(self, room_to_link, direction):
         """Adds room to the direcionary of linked rooms"""
         self.linked_rooms[direction] = room_to_link
     def get_details(self):
         """Outputs details of the room for use within a game"""
-        print(self.name)
-        print("--------------------")
-        print(self.description)
+        type(self.name)
+        type("--------------------")
+        type(self.description)
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
-            print("The",room.get_name(),"is",direction)
+            type(("The"+" "+room.get_name()+" "+"is"+" "+direction))
     def move(self,direction):
         """Will return a connected room if direction matches"""
         if direction in self.linked_rooms:
             return self.linked_rooms[direction]
         else:
-            print("You cannot go that way")
+            type("You cannot go that way")
             return self

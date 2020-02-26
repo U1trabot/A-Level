@@ -1,3 +1,16 @@
+import sys,time
+
+
+def type(string):
+    for char in string:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.02)
+    sys.stdout.write("\n")
+    sys.stdout.flush()
+
+
+
 class Item():
     def __init__(self,name,description,type):
         """Creates attributes for Item class"""
@@ -24,11 +37,11 @@ class Item():
         self.type = type
     def get_details(self):
         """Outputs item details"""
-        print(self.name)
-        print("Type:",self.type)
-        print(self.description)
+        type(self.name)
+        type("Type:"+" "+self.type)
+        type(self.description)
     def show(self):
         """Outputs simplified item details for use in a room"""
-        print("There is a",self.name,"here")
-        print(self.description)
+        type(("There is a"+" "+self.name+" "+"here"))
+        type(self.description)
 

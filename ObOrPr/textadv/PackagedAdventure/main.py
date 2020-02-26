@@ -1,6 +1,14 @@
-import rpg
+import rpg, time, sys
 
 inventory = []
+
+def type(string):
+    for char in string:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.02)
+    sys.stdout.write("\n")
+    sys.stdout.flush()
 
 kitchen = rpg.Room("Kitchen")
 kitchen.set_description("A dark and dirty room, with grime and muck everywhere")
@@ -38,7 +46,7 @@ ballroom.set_item(switch)
 gauntlet = rpg.Item("Infinity Gauntlet", "A golden gaunlet that has UNLIMITED POWER","Gaunlet")
 stormbreaker = rpg.Item("Stormbreaker","A large axe that is capable for aiming for the head","Two Handed")
 
-thanos = rpg.Enemy("Thanos", 'A large purple guy with a golden gauntlet on his left hand, his chin looks like a ball sack')
+thanos = rpg.Enemy("Thanos", 'A large purple guy with a golden gauntlet on his left hand, his chin looks funny')
 thanos.set_conversation("You are not the only one cursed with knowledge")
 thanos.set_weakness("Infinity Gauntlet")
 thanos.set_item(gauntlet)
@@ -65,7 +73,7 @@ while not dead:
         if inhabitant is not None:
             inhabitant.talk()
         else:
-            print("There is no-one to talk with")
+            type("There is no-one to talk with")
     elif command == "fight":
         if inhabitant is not None:
             weapon = input("What will you fight with? ")
@@ -77,36 +85,37 @@ while not dead:
                 if inhabitant.fight(weapon) == False:
                     dead = True
             else:
-                print("You do not have that item!")
+                type("You do not have that item!")
         else:
-            print("There is no-one to fight with")
+            type("There is no-one to fight with")
     elif command == "steal":
         if inhabitant is not None:
              if inhabitant.steal():
                  inventory.append(inhabitant.get_item())
                  inhabitant.set_item(None)
         else:
-            print("There is no-one to steal from")
+            type("There is no-one to steal from")
     elif command == "hug":
         if inhabitant is not None:
             inhabitant.hug()
         else:
-            print("There is no-one here to hug")
+            type("There is no-one here to hug")
     elif command == "take":
         if item is not None:
             inventory.append(item)
+            type(("You take the"+" "+str(item)))
             current_room.set_item(None)
         else:
-            print("There is nothing here to take")
+            type("There is nothing here to take")
     elif command == "inv":
-        print("-------Inventory-------")
+        type("-------Inventory-------")
         for slot in inventory:
-            print(slot.get_name())
-        print("-----------------------")
-    print('\n')
+            type(slot.get_name())
+        type("-----------------------")
+    type('\n')
     if rpg.Enemy.enemies_defeated == 1:
         won = True
 if dead:
-    print("Game Over")
+    type("Game Over")
 if won:
-    print("You win")
+    type("You win")
