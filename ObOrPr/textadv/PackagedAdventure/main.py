@@ -57,8 +57,8 @@ dining_hall.set_item(stormbreaker)
 print()
 current_room = kitchen
 dead = False
-won = False
-while not dead:
+won = 0
+while not dead and won < 2:
     current_room.get_details()
     inhabitant = current_room.get_character()
     if inhabitant is not None:
@@ -86,6 +86,7 @@ while not dead:
                     dead = True
                 else:
                     current_room.set_character(None)
+                    won += 1
             else:
                 type("You do not have that item!")
         else:
@@ -119,5 +120,5 @@ while not dead:
         won = True
 if dead:
     type("Game Over")
-if won:
+if won == 2:
     type("You win")
