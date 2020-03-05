@@ -141,3 +141,183 @@ class Question:
             print("Incorrect")
             print("The answer was",hex)
             return False
+    def binToHexConv(self):
+        dec = random.randint(0,255)
+        num = dec
+        binary = []
+
+        for x in range(8):
+            power  = 2**(7-x)
+            if num - power >= 0:
+                num -= power
+                binary.append(1)
+            else:
+                binary.append(0)
+        binaryStr = "".join(map(str,binary))
+        print("Convert",binaryStr,"to hexadecimal")
+        answer = input(">>> ")
+        first = dec//16
+        second = dec - (16*first)
+        if first == (10):
+            first = "A"
+        elif first == (11):
+            first = "B"
+        elif first == (12):
+            first = "C"
+        elif first == (13):
+            first = "D"
+        elif first == (14):
+            first ="E"
+        elif first == (15):
+            first = "F"
+        if second == (10):
+            second = "A"
+        elif second == (11):
+            second = "B"
+        elif second == (12):
+            second = "C"
+        elif second == (13):
+            second = "D"
+        elif second == (14):
+            second ="E"
+        elif second == (15):
+            second = "F"
+        hex = str(first)+str(second)
+        if answer == hex:
+            print("Correct")
+            return True
+        else:
+            print("Incorrect")
+            print("The answer was",hex)
+            return False
+    def hexToBinConv(self):
+            dec = random.randint(0,255)
+            first = dec//16
+            second = dec - (16*first)
+            if first == (10):
+                first = "A"
+            elif first == (11):
+                first = "B"
+            elif first == (12):
+                first = "C"
+            elif first == (13):
+                first = "D"
+            elif first == (14):
+                first ="E"
+            elif first == (15):
+                first = "F"
+            if second == (10):
+                second = "A"
+            elif second == (11):
+                second = "B"
+            elif second == (12):
+                second = "C"
+            elif second == (13):
+                second = "D"
+            elif second == (14):
+                second ="E"
+            elif second == (15):
+                second = "F"
+            hex = str(first)+str(second)
+            print("Convert",hex,"to binary")
+            num = dec
+            binary = []
+            for x in range(8):
+                power  = 2**(7-x)
+                if num - power >= 0:
+                    num -= power
+                    binary.append(1)
+                else:
+                    binary.append(0)
+            binaryStr = "".join(map(str,binary))
+            answer = input(">>> ")
+            if answer == binaryStr:
+                print("Correct")
+                return True
+            else:
+                print("Incorrect")
+                print("The answer was",binaryStr)
+                return False
+    def hexToDecConv(self):
+        dec = random.randint(0,255)
+        first = dec//16
+        second = dec - (16*first)
+        if first == (10):
+            first = "A"
+        elif first == (11):
+            first = "B"
+        elif first == (12):
+            first = "C"
+        elif first == (13):
+            first = "D"
+        elif first == (14):
+            first ="E"
+        elif first == (15):
+            first = "F"
+        if second == (10):
+            second = "A"
+        elif second == (11):
+            second = "B"
+        elif second == (12):
+            second = "C"
+        elif second == (13):
+            second = "D"
+        elif second == (14):
+            second ="E"
+        elif second == (15):
+            second = "F"
+        hex = str(first)+str(second)
+        print("Convert",hex,"to decimal")
+        answer = input(">>> ")
+        if answer == str(dec):
+            print("Correct")
+            return True
+        else:
+            print("Incorrect")
+            print("The answer was",dec)
+            return False
+    def subtraction(self):
+        num1 = random.randint(0,255)
+        num2 = random.randint(0,255)
+        num = num1
+        binary1 = []
+
+        for x in range(8):
+            power  = 2**(7-x)
+            if num - power >= 0:
+                num -= power
+                binary1.append(1)
+            else:
+                binary1.append(0)
+        num = num2
+        binary2 = []
+        for x in range(8):
+            power = 2**(7-x)
+            if num - power >= 0:
+                num-= power
+                binary2.append(1)
+            else:
+                binary2.append(0)
+        binaryStr1 = "".join(map(str,binary1))
+        binaryStr2 = "".join(map(str,binary2))
+        print("Subtract",binaryStr1,"from",binaryStr2)
+        calc = num2 - num1
+        num = calc
+        binaryOut = []
+        for x in range (9):
+            power = 2**(8-x)
+            if x == 0:
+                power = -power
+            if num - power >= 0:
+                num -= power
+                binaryOut.append(1)
+            else:
+                binaryOut.append(0)
+        answer = input(">>> ")
+        binaryStrOut = "".join(map(str,binaryOut))
+        if answer == binaryStrOut:
+            print("Correct")
+            return True
+        else:
+            print("Incorrect")
+            print("The answer was",binaryStrOut)
