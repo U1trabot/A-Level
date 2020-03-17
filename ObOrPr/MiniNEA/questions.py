@@ -366,4 +366,3 @@ class Question:
             print("Incorrect")
             print("The answer was",number)
             return False
-Question().binToNeg()
