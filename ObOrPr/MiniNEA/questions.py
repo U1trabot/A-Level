@@ -323,7 +323,7 @@ class Question:
             print("The answer was",binaryStrOut)
     def negToBin(self):
         num = random.randint(-256,0)
-        print("Convert",num,"to binary")
+        print("Convert",num,"to a signed binary number")
         binaryOut = []
         for x in range (9):
             power = 2**(8-x)
@@ -366,3 +366,79 @@ class Question:
             print("Incorrect")
             print("The answer was",number)
             return False
+    def fixToBin(self):
+        number = round(random.uniform(0, 15.9375),4)
+        numberStr = str(number)
+        numberList = numberStr.split(".")
+        integers = int(numberList[0])
+        decimals = float("0."+numberList[1])
+        num = integers
+        binaryInt = []
+        for x in range(4):
+            power  = 2**(3-x)
+            if num - power >= 0:
+                num -= power
+                binaryInt.append(1)
+            else:
+                binaryInt.append(0)
+        binaryIntStr = "".join(map(str,binaryInt))
+        num = (decimals)
+        binaryDec = []
+
+        for x in range(4):
+            power  = (1/(2**(x+1)))
+            if num - power >= 0:
+                num -= power
+                binaryDec.append(1)
+            else:
+                binaryDec.append(0)
+        binaryDecStr = "".join(map(str,binaryDec))
+        binary = binaryIntStr+binaryDecStr
+        print("Convert",number,"to a fixed point, 8 bit, binary number (4bits.4bits)")
+        answer = input(">>> ")
+        if answer == binary:
+            print("Correct")
+            return True
+        else:
+            print("Incorrect")
+            print("The answer was",binary)
+            return False
+    def binToFixed(self):
+        number = 0.625*round(random.uniform(0, 15.9375)/0.0625)
+        print(number)
+        numberStr = str(number)
+        numberList = numberStr.split(".")
+        integers = int(numberList[0])
+        decimals = float("0."+numberList[1])
+        num = integers
+        binaryInt = []
+        for x in range(4):
+            power  = 2**(3-x)
+            if num - power >= 0:
+                num -= power
+                binaryInt.append(1)
+            else:
+                binaryInt.append(0)
+        binaryIntStr = "".join(map(str,binaryInt))
+        num = (decimals)
+        binaryDec = []
+
+        for x in range(4):
+            power  = (1/(2**(x+1)))
+            if num - power >= 0:
+                num -= power
+                binaryDec.append(1)
+            else:
+                binaryDec.append(0)
+        binaryDecStr = "".join(map(str,binaryDec))
+        binary = binaryIntStr+binaryDecStr
+        print("Convert the fixed point binary number:",binary,"to a decimal number")
+        answer = input(">>> ")
+        if answer == str(number):
+            print("Correct")
+            return True
+        else:
+            print("Incorrect")
+            print("The answer was",number)
+            return False
+Question().binToFixed()
