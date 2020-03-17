@@ -321,3 +321,49 @@ class Question:
         else:
             print("Incorrect")
             print("The answer was",binaryStrOut)
+    def negToBin(self):
+        num = random.randint(-256,0)
+        print("Convert",num,"to binary")
+        binaryOut = []
+        for x in range (9):
+            power = 2**(8-x)
+            if x == 0:
+                power = -power
+            if num - power >= 0:
+                num -= power
+                binaryOut.append(1)
+            else:
+                binaryOut.append(0)
+        answer = input(">>> ")
+        binaryStr = "".join(map(str,binaryOut))
+        if answer == binaryStr:
+            print("Correct")
+            return True
+        else:
+            print("Incorrect")
+            print("The answer was",binaryStr)
+            return False
+    def binToNeg(self):
+        number = random.randint(-256,0)
+        num = number
+        binaryOut = []
+        for x in range (9):
+            power = 2**(8-x)
+            if x == 0:
+                power = -power
+            if num - power >= 0:
+                num -= power
+                binaryOut.append(1)
+            else:
+                binaryOut.append(0)
+        binaryStr = "".join(map(str,binaryOut))
+        print("Convert",binaryStr,"to a negative decimal")
+        answer = input(">>> ")
+        if answer == str(number):
+            print("Correct")
+            return True
+        else:
+            print("Incorrect")
+            print("The answer was",number)
+            return False
+Question().binToNeg()
