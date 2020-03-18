@@ -441,4 +441,115 @@ class Question:
             print("Incorrect")
             print("The answer was",number)
             return False
-Question().binToFixed()
+    def floatToBin(self):
+        number = 0.625*round(random.uniform(0,128)/0.625)
+        if number < 1:
+            number = 0.625*round(number/0.0625)
+        elif number < 10:
+            number = 0.125*round(number/0.125)
+        elif number < 100:
+            number = 0.25*round(number/0.25)
+        else:
+            number = 0.5*round(number/0.5)
+        numberStr = str(number)
+        numberList = numberStr.split(".")
+        integers = int(numberList[0])
+        decimals = float("0."+numberList[1])
+        num = integers
+        binaryInt = []
+        for x in range(8):
+            power  = 2**(7-x)
+            if num - power >= 0:
+                num -= power
+                binaryInt.append(1)
+            elif (1) in binaryInt:
+                binaryInt.append(0)
+        binaryIntStr = "".join(map(str,binaryInt))
+        num = (decimals)
+        binaryDec = []
+
+        for x in range(8-len(binaryInt)):
+            power  = (1/(2**(x+1)))
+            if num - power >= 0:
+                num -= power
+                binaryDec.append(1)
+            else:
+                binaryDec.append(0)
+        binaryDecStr = "".join(map(str,binaryDec))
+        exponent = (len(binaryInt)-1)
+        num = exponent
+        binaryExp = []
+        for x in range(3):
+            power  = (2**(2-x))
+            if num - power >= 0:
+                num -= power
+                binaryExp.append(1)
+            else:
+                binaryExp.append(0)
+        binaryExpStr = "".join(map(str,binaryExp))
+        solution = binaryIntStr+binaryDecStr+" "+binaryExpStr
+        print("Convert the number",number,"to an 8 bit floating point binary number, with a 3 bit exponent. E.g. 45 = 10110100 101")
+        answer = input(">>> ")
+        if answer == solution:
+            print("Correct")
+            return True
+        else:
+            print("Incorrect")
+            print("The Answer was",solution)
+            return False
+    def binToFloat(self):
+        number = 0.625*round(random.uniform(0,128)/0.625)
+        if number < 1:
+            number = 0.625*round(number/0.0625)
+        elif number < 10:
+            number = 0.125*round(number/0.125)
+        elif number < 100:
+            number = 0.25*round(number/0.25)
+        else:
+            number = 0.5*round(number/0.5)
+        numberStr = str(number)
+        numberList = numberStr.split(".")
+        integers = int(numberList[0])
+        decimals = float("0."+numberList[1])
+        num = integers
+        binaryInt = []
+        for x in range(8):
+            power  = 2**(7-x)
+            if num - power >= 0:
+                num -= power
+                binaryInt.append(1)
+            elif (1) in binaryInt:
+                binaryInt.append(0)
+        binaryIntStr = "".join(map(str,binaryInt))
+        num = (decimals)
+        binaryDec = []
+
+        for x in range(8-len(binaryInt)):
+            power  = (1/(2**(x+1)))
+            if num - power >= 0:
+                num -= power
+                binaryDec.append(1)
+            else:
+                binaryDec.append(0)
+        binaryDecStr = "".join(map(str,binaryDec))
+        exponent = (len(binaryInt)-1)
+        num = exponent
+        binaryExp = []
+        for x in range(3):
+            power  = (2**(2-x))
+            if num - power >= 0:
+                num -= power
+                binaryExp.append(1)
+            else:
+                binaryExp.append(0)
+        binaryExpStr = "".join(map(str,binaryExp))
+        solution = binaryIntStr+binaryDecStr+" "+binaryExpStr
+        print("Convert the number",solution,"decimal number E.g. 10110100 101 = 45 ")
+        answer = input(">>> ")
+        if int(answer) == (number):
+            print("Correct")
+            return True
+        else:
+            print("Incorrect")
+            print("The Answer was",number)
+            return False
