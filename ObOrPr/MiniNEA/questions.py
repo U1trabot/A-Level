@@ -553,3 +553,92 @@ class Question:
             print("Incorrect")
             print("The Answer was",number)
             return False
+    def multipleChoice(self):
+        correct = [
+        "ASCII Uses 7 Bits",
+        "Unicode Uses Up To 48 Bits",
+        "Parity Checks Are Used To Check That Recieved Data Is Correct",
+        "In Majority Voting The Modal Bit Recieved Is Used",
+        "Checksums Use Unique Algorithms To Check If Data Recieved Is Correct",
+        "Checkdigits Are Specific Checksums That Product Only One Extra Digit",
+        "Lossy Compression Loses Data When Compressing Files",
+        "Lossless Compression Doesn't Lose Data When Compressing Files",
+        "Run length encoding removes repeated information and replaces it with one occurrence of the repeated information aswell as the number of times it is repeated",
+        "When a file is compressed with a dictionary-based method, a dictionary containing repeated data is appended to the file",
+        "Encryption is the process of scrambling data so that it cannot be understood if intercepted",
+        "Caesar ciphers encrypt information by replacing characters",
+        "The Vernam cipher is an example of a one-time pad cipher. "
+        ]
+        incorrect = [
+        "ASCII Uses 6 Bits",
+        "Unicode Uses Up To 64 Bits",
+        "Parity Checks Are Used To Check That Data Was Recieved",
+        "In Majority Voting The Least Modal Bit Recieved Is Used",
+        "Checksums Use Unique Algorithms To Check If Data Was Recieved",
+        "Checkdigits Are Specific Checksums That Product Only Six Extra Digits",
+        "Lossy Compression Doesn't Lose Data When Compressing Files",
+        "Lossless Compression Loses Data When Compressing Files",
+        "Run length encoding increases the size of a file",
+        "When a file is compressed with a dictionary-based method, a dictionary containing repeated data is removed from the file",
+        "Encryption is the process of unscrambling data so that it can be understood if intercepted",
+        "Caesar ciphers are a type of food made by Caesar",
+        "The Vernam cipher is a type of food made by Verman",
+        "Hexadecimal is a fancy shape invented by a mathematician",
+        "Binary is a base 4 number system",
+        "Hexadecimal is a base 32 number system",
+        "ASCII uses 12 bits",
+        "When adding 1 and 1 the result is 1",
+        "Compression makes files larger",
+        "When the Modal bit recieved is used that is called Minority voting",
+        "11 In Hexadecimal is F",
+        "Unicode uses 128 bits",
+        "Run length encoding is a form of Encryption",
+        "The caesar cipher is an example of one-time pad cipher",
+        "The Vernam cipher encrypts information by replacing characters",
+        "There are no errors when data is transmitted from computer to computer",
+        "Odd Parity works to make the number of 1s even",
+        "Even Parity works to make the number of 1s odd",
+        "When Majority voting is being used each bit is only transmitted once",
+        "Checksums can correct errors",
+        "With lossy compression file size can be reduced without impacting the quality of the file",
+        "An XOR is not used in a Vernam Cipher",
+        "No extra data needs to be added with dictionary-based compression",
+        "Encrypted information is known as plaintext",
+        "Unencrypted information is known as ciphertext",
+        "The Vernam cipher uses a non-random key"
+        ]
+        letters = ["A","B","C","D"]
+        correctLetter = random.choice(letters)
+        letters.remove(correctLetter)
+        output = [None,None,None,None]
+        if correctLetter == "A":
+            output[0] = "[A]"+" "+random.choice(correct)
+        elif correctLetter == "B":
+            output[1] = "[B]"+" "+random.choice(correct)
+        elif correctLetter == "C":
+            output[2] = "[C]"+" "+random.choice(correct)
+        elif correctLetter == "D":
+            output[3] = "[D]"+" "+random.choice(correct)
+        for item in range(len(output)):
+            if output[item] is None:
+                incorrectans = random.choice(incorrect)
+                if item == 0:
+                    output[item] = "[A]"+" "+incorrectans
+                elif item == 1:
+                    output[item] = "[B]"+" "+incorrectans
+                elif item == 2:
+                    output[item] = "[C]"+" "+incorrectans
+                elif item == 3:
+                    output[item] = "[D]"+" "+incorrectans
+                incorrect.remove(incorrectans)
+        print("Input the letter of the true answer")
+        for item in output:
+            print(item)
+        answer = input(">>> ")
+        if answer.upper() == correctLetter:
+            print("Correct")
+            return True
+        else:
+            print("Incorrect")
+            print("The correct answer was",correctLetter)
+            return False
