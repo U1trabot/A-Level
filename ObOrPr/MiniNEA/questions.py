@@ -1,4 +1,14 @@
-import random
+import random, sys, time
+
+def type(string):
+    for char in string:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.02)
+    sys.stdout.write("\n")
+    sys.stdout.flush()
+
+
 class Question:
     def __init__(self):
         pass
@@ -28,7 +38,7 @@ class Question:
             else:
                 binary2.append(0)
 
-        print("Add the binary numbers","".join(map(str,binary1)),"and","".join(map(str,binary2)))
+        type("Add the binary numbers "+"".join(map(str,binary1))+" and "+"".join(map(str,binary2))+". Input your answer as a 9 bit number")
         answer = input(">>> ")
         numOut = num1 + num2
         num = numOut
@@ -49,15 +59,15 @@ class Question:
         if len(answerList) == 8:
             answerList.insert(0, 0)
         if answerList == binaryOut:
-            print("Correct")
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The answer was","".join(map(str,binaryOut)))
+            type("Incorrect")
+            type("The answer was "+"".join(map(str,binaryOut)))
             return False
     def decToBinConv(self):
         dec = random.randint(0,255)
-        print("Conver",dec,"to binary")
+        type("Conver "+str(dec)+" to binary")
         num = dec
         binary = []
 
@@ -71,11 +81,11 @@ class Question:
         binaryStr = "".join(map(str,binary))
         answer = input(">>> ")
         if binaryStr == answer:
-            print("Correct")
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The answer was",binaryStr)
+            type("Incorrect")
+            type("The answer was "+binaryStr)
             return False
     def binToDecConv(self):
         dec  = random.randint(0,255)
@@ -90,18 +100,18 @@ class Question:
             else:
                 binary.append(0)
         binaryStr = "".join(map(str,binary))
-        print("Convert",binaryStr,"to decimal")
+        type("Convert "+binaryStr+" to decimal")
         answer = input(">>> ")
         try:
             intAnswer = int(answer)
         except:
             intAnswer = (-1)
         if dec == intAnswer:
-            print("Correct")
-            return
+            type("Correct")
+            return True
         else:
-            print("Incorrect")
-            print("The answer was",dec)
+            type("Incorrect")
+            type("The answer was "+str(dec))
             return False
     def decToHexConv(self):
         dec = random.randint(0,255)
@@ -131,15 +141,15 @@ class Question:
             second ="E"
         elif second == (15):
             second = "F"
-        print("Convert",dec,"to hexadecimal")
+        type("Convert "+str(dec)+" to hexadecimal")
         answer = input(">>> ")
         hex = str(first)+str(second)
-        if answer == hex:
-            print("Correct")
+        if answer.upper() == hex:
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The answer was",hex)
+            type("Incorrect")
+            type("The answer was "+hex)
             return False
     def binToHexConv(self):
         dec = random.randint(0,255)
@@ -154,7 +164,7 @@ class Question:
             else:
                 binary.append(0)
         binaryStr = "".join(map(str,binary))
-        print("Convert",binaryStr,"to hexadecimal")
+        type("Convert "+binaryStr+" to hexadecimal")
         answer = input(">>> ")
         first = dec//16
         second = dec - (16*first)
@@ -183,12 +193,12 @@ class Question:
         elif second == (15):
             second = "F"
         hex = str(first)+str(second)
-        if answer == hex:
-            print("Correct")
+        if answer.upper() == hex:
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The answer was",hex)
+            type("Incorrect")
+            type("The answer was "+hex)
             return False
     def hexToBinConv(self):
             dec = random.randint(0,255)
@@ -219,7 +229,7 @@ class Question:
             elif second == (15):
                 second = "F"
             hex = str(first)+str(second)
-            print("Convert",hex,"to binary")
+            type("Convert "+hex+" (Hex) to binary")
             num = dec
             binary = []
             for x in range(8):
@@ -232,11 +242,11 @@ class Question:
             binaryStr = "".join(map(str,binary))
             answer = input(">>> ")
             if answer == binaryStr:
-                print("Correct")
+                type("Correct")
                 return True
             else:
-                print("Incorrect")
-                print("The answer was",binaryStr)
+                type("Incorrect")
+                type("The answer was "+binaryStr)
                 return False
     def hexToDecConv(self):
         dec = random.randint(0,255)
@@ -267,14 +277,14 @@ class Question:
         elif second == (15):
             second = "F"
         hex = str(first)+str(second)
-        print("Convert",hex,"to decimal")
+        type("Convert "+hex+" (Hex) to decimal")
         answer = input(">>> ")
         if answer == str(dec):
-            print("Correct")
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The answer was",dec)
+            type("Incorrect")
+            type("The answer was "+str(dec))
             return False
     def subtraction(self):
         num1 = random.randint(0,255)
@@ -300,7 +310,7 @@ class Question:
                 binary2.append(0)
         binaryStr1 = "".join(map(str,binary1))
         binaryStr2 = "".join(map(str,binary2))
-        print("Subtract",binaryStr1,"from",binaryStr2)
+        type("Subtract "+binaryStr1+" from ",binaryStr2)
         calc = num2 - num1
         num = calc
         binaryOut = []
@@ -316,14 +326,14 @@ class Question:
         answer = input(">>> ")
         binaryStrOut = "".join(map(str,binaryOut))
         if answer == binaryStrOut:
-            print("Correct")
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The answer was",binaryStrOut)
+            type("Incorrect")
+            type("The answer was "+binaryStrOut)
     def negToBin(self):
         num = random.randint(-256,0)
-        print("Convert",num,"to a signed binary number")
+        type("Convert "+str(num)+"to a signed binary number")
         binaryOut = []
         for x in range (9):
             power = 2**(8-x)
@@ -337,11 +347,11 @@ class Question:
         answer = input(">>> ")
         binaryStr = "".join(map(str,binaryOut))
         if answer == binaryStr:
-            print("Correct")
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The answer was",binaryStr)
+            type("Incorrect")
+            type("The answer was "+binaryStr)
             return False
     def binToNeg(self):
         number = random.randint(-256,0)
@@ -357,14 +367,14 @@ class Question:
             else:
                 binaryOut.append(0)
         binaryStr = "".join(map(str,binaryOut))
-        print("Convert",binaryStr,"to a negative decimal")
+        type("Convert "+binaryStr+" to a negative decimal")
         answer = input(">>> ")
         if answer == str(number):
-            print("Correct")
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The answer was",number)
+            type("Incorrect")
+            type("The answer was "+str(number))
             return False
     def fixToBin(self):
         number = round(random.uniform(0, 15.9375),4)
@@ -394,14 +404,14 @@ class Question:
                 binaryDec.append(0)
         binaryDecStr = "".join(map(str,binaryDec))
         binary = binaryIntStr+binaryDecStr
-        print("Convert",number,"to a fixed point, 8 bit, binary number (4bits.4bits)")
+        type("Convert "+str(number)+" to a fixed point, 8 bit, binary number (4bits.4bits)")
         answer = input(">>> ")
         if answer == binary:
-            print("Correct")
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The answer was",binary)
+            type("Incorrect")
+            type("The answer was "+binary)
             return False
     def binToFixed(self):
         number = 0.625*round(random.uniform(0, 15.9375)/0.0625)
@@ -432,14 +442,14 @@ class Question:
                 binaryDec.append(0)
         binaryDecStr = "".join(map(str,binaryDec))
         binary = binaryIntStr+binaryDecStr
-        print("Convert the fixed point binary number:",binary,"to a decimal number")
+        type("Convert the fixed point binary number: "+binary+"to a decimal number")
         answer = input(">>> ")
         if answer == str(number):
-            print("Correct")
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The answer was",number)
+            type("Incorrect")
+            type("The answer was "+str(number))
             return False
     def floatToBin(self):
         number = 0.625*round(random.uniform(0,128)/0.625)
@@ -488,14 +498,14 @@ class Question:
                 binaryExp.append(0)
         binaryExpStr = "".join(map(str,binaryExp))
         solution = binaryIntStr+binaryDecStr+" "+binaryExpStr
-        print("Convert the number",number,"to an 8 bit floating point binary number, with a 3 bit exponent. E.g. 45 = 10110100 101")
+        type("Convert the number "+str(number)+" to an 8 bit floating point binary number, with a 3 bit exponent. E.g. 45 = 10110100 101")
         answer = input(">>> ")
         if answer == solution:
-            print("Correct")
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The Answer was",solution)
+            type("Incorrect")
+            type("The Answer was "+solution)
             return False
     def binToFloat(self):
         number = 0.625*round(random.uniform(0,128)/0.625)
@@ -544,14 +554,14 @@ class Question:
                 binaryExp.append(0)
         binaryExpStr = "".join(map(str,binaryExp))
         solution = binaryIntStr+binaryDecStr+" "+binaryExpStr
-        print("Convert the number",solution,"decimal number E.g. 10110100 101 = 45 ")
+        type("Convert the number "+solution+" decimal number E.g. 10110100 101 = 45 ")
         answer = input(">>> ")
         if int(answer) == (number):
-            print("Correct")
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The Answer was",number)
+            type("Incorrect")
+            type("The Answer was "+str(number))
             return False
     def multipleChoice(self):
         correct = [
@@ -631,14 +641,14 @@ class Question:
                 elif item == 3:
                     output[item] = "[D]"+" "+incorrectans
                 incorrect.remove(incorrectans)
-        print("Input the letter of the true answer")
+        type("Input the letter of the true answer")
         for item in output:
             print(item)
         answer = input(">>> ")
         if answer.upper() == correctLetter:
-            print("Correct")
+            type("Correct")
             return True
         else:
-            print("Incorrect")
-            print("The correct answer was",correctLetter)
+            type("Incorrect")
+            type("The correct answer was "+correctLetter)
             return False
