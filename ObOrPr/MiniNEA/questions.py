@@ -333,7 +333,7 @@ class Question:
             type("The answer was "+binaryStrOut)
     def negToBin(self):
         num = random.randint(-256,0)
-        type("Convert "+str(num)+"to a signed binary number")
+        type("Convert "+str(num)+" to a signed binary number")
         binaryOut = []
         for x in range (9):
             power = 2**(8-x)
