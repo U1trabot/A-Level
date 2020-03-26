@@ -1,4 +1,4 @@
-import gps, items, npcs, sys, time, random
+import gps, items, npcs, sys, time, random, getpass
 
 def type(string):
     for char in string:
@@ -15,6 +15,48 @@ def type2(string):
     sys.stdout.write("\n")
     sys.stdout.flush()
 
+
+file = open("data.txt","a+")
+file.close()
+
+type("Welcome to the text adventure what is your username?")
+username = input("> ")
+found= False
+x = 0
+file = open("data.txt","r")
+database = []
+for line in file:
+    line = line.split("kyuip")
+    if line[0].lower() == username.lower():
+        found = True
+        location = x
+    database.append([line[0],line[1]])
+    x += 1
+file.close()
+if found:
+    type("What is your password?")
+    password = getpass.getpass("> ")
+    if password == database[location][1].rstrip():
+        type("Welcome To The Text adventure")
+    else:
+        type("Invalid Login")
+        exit()
+else:
+    type("Username not in database, do you want to create an account? (Y/N)")
+    answer = input("> ")
+    if answer.lower() == "y":
+        type("What do you want your password to be?")
+        password = getpass.getpass("> ")
+        type("Please Confirm Password")
+        password2 = getpass.getpass("> ")
+        if password == password2:
+            file = open("data.txt","a")
+            file.write(username+"kyuip"+password+"\n")
+        else:
+            type("Passwords Do Not Match")
+            exit()
+    else:
+        exit()
 class Player:
     def __init__(self):
         self.health = 100
@@ -287,7 +329,7 @@ def play():
         type("drink : drink a potion to restore health")
         type("health : view your current health")
     print()
-type("Use help to view commands")
+type("Use help to view commands, By default answers are 8 bit")
 print()
 while not player.dead and not player.victorious:
     player.location.info()
@@ -325,8 +367,7 @@ while not player.dead and not player.victorious:
     except:
         pass
     play()
-type("What is your name?")
-name = input("> ")
+name = username
 try:
     file = open('scoreboard.csv','x')
     file.close()
