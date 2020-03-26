@@ -56,4 +56,5 @@ class Location:
             type("There is a "+npc.title()+" here!")
         for item in self.connectedItems:
             type("You can see a "+item.title())
+
         print()

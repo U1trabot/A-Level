@@ -148,3 +148,9 @@ class Weapon(Item):
         type("Damage Type: "+self.damageType.title())
         type("Number Of Hands: "+str(self.hands))
         type("Max Damage: "+str(random.randint(round(self.damage/2),self.damage)))
+class Potion(Item):
+    def __init__(self,name,value,description,health):
+        super().__init__(name,value,description,"Health Potion")
+        self.health = health
+    def use(self):
+        return random.randint(round(self.health/2),self.health)

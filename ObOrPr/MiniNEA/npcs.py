@@ -43,10 +43,12 @@ class NPC:
         for line in self.conversation:
             type("["+self.name+"]: "+line)
 class Enemy(NPC):
-    def __init__(self,name,description,health,damage):
+    def __init__(self,name,description,health,damage,ambush=False,boss=False):
         super().__init__(name,description)
         self.health = health
         self.damage = damage
+        self.ambush = ambush
+        self.boss = boss
     def set_health(self,health):
         self.health = health
     def set_damage(self, damage):
@@ -59,3 +61,14 @@ class Enemy(NPC):
         self.health -= damage
     def attack(self):
         return random.randint(round(self.damage/2),self.damage)
+class Merchant(NPC):
+    def __init__(self,name,description):
+        super().__init__(name,description)
+        self.name += " the merchant"
+    def sell(self,item):
+        type("You sell your "+item.get_name()+" to "+self.name)
+        print()
+        return item.get_value()
+    def steal(self,item):
+        type("You cannot steal from merchants")
+        return None
