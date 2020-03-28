@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module npcs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>npcs</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cultra%5Cdocuments%5Cgithub%5Ca-level%5Coborpr%5Cmininea%5Ctextadventure%5Cnpcs.py">c:\users\ultra\documents\github\a-level\oborpr\mininea\textadventure\npcs.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="random.html">random</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="npcs.html#NPC">NPC</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="npcs.html#Enemy">Enemy</a>
+</font></dt><dt><font face="helvetica, arial"><a href="npcs.html#Merchant">Merchant</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Enemy">class <strong>Enemy</strong></a>(<a href="npcs.html#NPC">NPC</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Enemy">Enemy</a>(name,&nbsp;description,&nbsp;health,&nbsp;damage,&nbsp;ambush=False,&nbsp;boss=False)<br>
+&nbsp;<br>
+<a href="#NPC">NPC</a>&nbsp;Sub-class&nbsp;Used&nbsp;For&nbsp;People&nbsp;That&nbsp;Fight&nbsp;The&nbsp;Player<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="npcs.html#Enemy">Enemy</a></dd>
+<dd><a href="npcs.html#NPC">NPC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Enemy-__init__"><strong>__init__</strong></a>(self, name, description, health, damage, ambush=False, boss=False)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(<a href="#-type">type</a>(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Enemy-attack"><strong>attack</strong></a>(self)</dt><dd><tt>Returns&nbsp;A&nbsp;Half-Random&nbsp;Damage&nbsp;Value&nbsp;Based&nbsp;On&nbsp;The&nbsp;Damage&nbsp;Attribute</tt></dd></dl>
+
+<dl><dt><a name="Enemy-get_damage"><strong>get_damage</strong></a>(self)</dt><dd><tt>Returns&nbsp;Damage&nbsp;Attribute&nbsp;Of&nbsp;<a href="#Enemy">Enemy</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Enemy-get_health"><strong>get_health</strong></a>(self)</dt><dd><tt>Returns&nbsp;Health&nbsp;Attribute&nbsp;Of&nbsp;<a href="#Enemy">Enemy</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Enemy-hurt"><strong>hurt</strong></a>(self, damage)</dt><dd><tt>Reduces&nbsp;The&nbsp;<a href="#Enemy">Enemy</a>'s&nbsp;Health&nbsp;By&nbsp;A&nbsp;Given&nbsp;Amount</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_damage"><strong>set_damage</strong></a>(self, damage)</dt><dd><tt>Sets&nbsp;Damage&nbsp;Attribute&nbsp;Of&nbsp;<a href="#Enemy">Enemy</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_health"><strong>set_health</strong></a>(self, health)</dt><dd><tt>Sets&nbsp;Health&nbsp;Attribute&nbsp;Of&nbsp;<a href="#Enemy">Enemy</a>&nbsp;Object</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="npcs.html#NPC">NPC</a>:<br>
+<dl><dt><a name="Enemy-additem"><strong>additem</strong></a>(self, item)</dt><dd><tt>Adds&nbsp;An&nbsp;Item&nbsp;Object&nbsp;To&nbsp;The&nbsp;Inventory&nbsp;Dictionary</tt></dd></dl>
+
+<dl><dt><a name="Enemy-addline"><strong>addline</strong></a>(self, line)</dt><dd><tt>Adds&nbsp;A&nbsp;Conversation&nbsp;Line&nbsp;To&nbsp;The&nbsp;Array</tt></dd></dl>
+
+<dl><dt><a name="Enemy-get_description"><strong>get_description</strong></a>(self)</dt><dd><tt>Returns&nbsp;Description&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Enemy-get_name"><strong>get_name</strong></a>(self)</dt><dd><tt>Returns&nbsp;Name&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Enemy-outputInv"><strong>outputInv</strong></a>(self)</dt><dd><tt>Outputs&nbsp;The&nbsp;<a href="#NPC">NPC</a>'s&nbsp;Inventory</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_description"><strong>set_description</strong></a>(self, description)</dt><dd><tt>Sets&nbsp;Description&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Enemy-set_name"><strong>set_name</strong></a>(self, name)</dt><dd><tt>Sets&nbsp;Name&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Enemy-speak"><strong>speak</strong></a>(self)</dt><dd><tt>Outputs&nbsp;The&nbsp;Conversation&nbsp;Array</tt></dd></dl>
+
+<dl><dt><a name="Enemy-steal"><strong>steal</strong></a>(self, item)</dt><dd><tt>Returns&nbsp;And&nbsp;Pops&nbsp;A&nbsp;Stolen&nbsp;Item&nbsp;Object</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="npcs.html#NPC">NPC</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Merchant">class <strong>Merchant</strong></a>(<a href="npcs.html#NPC">NPC</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Merchant">Merchant</a>(name,&nbsp;description)<br>
+&nbsp;<br>
+<a href="#NPC">NPC</a>&nbsp;Sub-class&nbsp;Used&nbsp;For&nbsp;People&nbsp;Who&nbsp;Can&nbsp;Be&nbsp;Traded&nbsp;With<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="npcs.html#Merchant">Merchant</a></dd>
+<dd><a href="npcs.html#NPC">NPC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Merchant-__init__"><strong>__init__</strong></a>(self, name, description)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(<a href="#-type">type</a>(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Merchant-sell"><strong>sell</strong></a>(self, item)</dt><dd><tt>Outputs&nbsp;A&nbsp;Confirmation&nbsp;Of&nbsp;An&nbsp;Item&nbsp;Being&nbsp;Sold,&nbsp;And&nbsp;Returns&nbsp;Item&nbsp;Value</tt></dd></dl>
+
+<dl><dt><a name="Merchant-steal"><strong>steal</strong></a>(self, item)</dt><dd><tt>Overrides&nbsp;The&nbsp;<a href="#NPC">NPC</a>&nbsp;Steal&nbsp;Method&nbsp;So&nbsp;That&nbsp;Merchants&nbsp;Cannot&nbsp;Be&nbsp;Stolen&nbsp;From</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="npcs.html#NPC">NPC</a>:<br>
+<dl><dt><a name="Merchant-additem"><strong>additem</strong></a>(self, item)</dt><dd><tt>Adds&nbsp;An&nbsp;Item&nbsp;Object&nbsp;To&nbsp;The&nbsp;Inventory&nbsp;Dictionary</tt></dd></dl>
+
+<dl><dt><a name="Merchant-addline"><strong>addline</strong></a>(self, line)</dt><dd><tt>Adds&nbsp;A&nbsp;Conversation&nbsp;Line&nbsp;To&nbsp;The&nbsp;Array</tt></dd></dl>
+
+<dl><dt><a name="Merchant-get_description"><strong>get_description</strong></a>(self)</dt><dd><tt>Returns&nbsp;Description&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Merchant-get_name"><strong>get_name</strong></a>(self)</dt><dd><tt>Returns&nbsp;Name&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Merchant-outputInv"><strong>outputInv</strong></a>(self)</dt><dd><tt>Outputs&nbsp;The&nbsp;<a href="#NPC">NPC</a>'s&nbsp;Inventory</tt></dd></dl>
+
+<dl><dt><a name="Merchant-set_description"><strong>set_description</strong></a>(self, description)</dt><dd><tt>Sets&nbsp;Description&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Merchant-set_name"><strong>set_name</strong></a>(self, name)</dt><dd><tt>Sets&nbsp;Name&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Merchant-speak"><strong>speak</strong></a>(self)</dt><dd><tt>Outputs&nbsp;The&nbsp;Conversation&nbsp;Array</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="npcs.html#NPC">NPC</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NPC">class <strong>NPC</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#NPC">NPC</a>(name,&nbsp;description)<br>
+&nbsp;<br>
+Parent&nbsp;Class&nbsp;For&nbsp;All&nbsp;Non-Player&nbsp;Characters<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="NPC-__init__"><strong>__init__</strong></a>(self, name, description)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(<a href="#-type">type</a>(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="NPC-additem"><strong>additem</strong></a>(self, item)</dt><dd><tt>Adds&nbsp;An&nbsp;Item&nbsp;Object&nbsp;To&nbsp;The&nbsp;Inventory&nbsp;Dictionary</tt></dd></dl>
+
+<dl><dt><a name="NPC-addline"><strong>addline</strong></a>(self, line)</dt><dd><tt>Adds&nbsp;A&nbsp;Conversation&nbsp;Line&nbsp;To&nbsp;The&nbsp;Array</tt></dd></dl>
+
+<dl><dt><a name="NPC-get_description"><strong>get_description</strong></a>(self)</dt><dd><tt>Returns&nbsp;Description&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="NPC-get_name"><strong>get_name</strong></a>(self)</dt><dd><tt>Returns&nbsp;Name&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="NPC-outputInv"><strong>outputInv</strong></a>(self)</dt><dd><tt>Outputs&nbsp;The&nbsp;<a href="#NPC">NPC</a>'s&nbsp;Inventory</tt></dd></dl>
+
+<dl><dt><a name="NPC-set_description"><strong>set_description</strong></a>(self, description)</dt><dd><tt>Sets&nbsp;Description&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="NPC-set_name"><strong>set_name</strong></a>(self, name)</dt><dd><tt>Sets&nbsp;Name&nbsp;Attribute&nbsp;Of&nbsp;<a href="#NPC">NPC</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="NPC-speak"><strong>speak</strong></a>(self)</dt><dd><tt>Outputs&nbsp;The&nbsp;Conversation&nbsp;Array</tt></dd></dl>
+
+<dl><dt><a name="NPC-steal"><strong>steal</strong></a>(self, item)</dt><dd><tt>Returns&nbsp;And&nbsp;Pops&nbsp;A&nbsp;Stolen&nbsp;Item&nbsp;Object</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-type"><strong>type</strong></a>(string)</dt></dl>
+</td></tr></table>
+</body></html>

@@ -1,5 +1,5 @@
 import sys, time, random
-from .questions import Question
+from textadventure.questions import Question
 
 def type(string):
     for char in string:

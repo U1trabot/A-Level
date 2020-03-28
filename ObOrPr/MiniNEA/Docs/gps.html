@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gps</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>gps</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cultra%5Cdocuments%5Cgithub%5Ca-level%5Coborpr%5Cmininea%5Ctextadventure%5Cgps.py">c:\users\ultra\documents\github\a-level\oborpr\mininea\textadventure\gps.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gps.html#Location">Location</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Location">class <strong>Location</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Location">Location</a>(name,&nbsp;description)<br>
+&nbsp;<br>
+Main&nbsp;<a href="#Location">Location</a>&nbsp;Object<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Location-__init__"><strong>__init__</strong></a>(self, name, description)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(<a href="#-type">type</a>(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Location-get_connectedItems"><strong>get_connectedItems</strong></a>(self)</dt><dd><tt>Returns&nbsp;The&nbsp;Dictionary&nbsp;Of&nbsp;Connected&nbsp;Items&nbsp;For&nbsp;The&nbsp;<a href="#Location">Location</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Location-get_connectedLocations"><strong>get_connectedLocations</strong></a>(self)</dt><dd><tt>Returns&nbsp;The&nbsp;Dictionary&nbsp;Of&nbsp;Connected&nbsp;Locations&nbsp;For&nbsp;The&nbsp;<a href="#Location">Location</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Location-get_connectedNPCs"><strong>get_connectedNPCs</strong></a>(self)</dt><dd><tt>Returns&nbsp;The&nbsp;Dictionary&nbsp;Of&nbsp;Connected&nbsp;NPCs&nbsp;For&nbsp;The&nbsp;<a href="#Location">Location</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Location-get_description"><strong>get_description</strong></a>(self)</dt><dd><tt>Returns&nbsp;Description&nbsp;For&nbsp;<a href="#Location">Location</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Location-get_name"><strong>get_name</strong></a>(self)</dt><dd><tt>Returns&nbsp;Name&nbsp;For&nbsp;<a href="#Location">Location</a>&nbsp;Object</tt></dd></dl>
+
+<dl><dt><a name="Location-goto"><strong>goto</strong></a>(self, place)</dt><dd><tt>Returns&nbsp;A&nbsp;Valid&nbsp;<a href="#Location">Location</a>&nbsp;From&nbsp;The&nbsp;Connected&nbsp;Locations&nbsp;Dictionary&nbsp;Based&nbsp;On&nbsp;Input</tt></dd></dl>
+
+<dl><dt><a name="Location-info"><strong>info</strong></a>(self)</dt><dd><tt>Outputs&nbsp;Infomartion&nbsp;About&nbsp;Itself</tt></dd></dl>
+
+<dl><dt><a name="Location-link_item"><strong>link_item</strong></a>(self, item, type)</dt><dd><tt>Adds&nbsp;An&nbsp;Item&nbsp;To&nbsp;The&nbsp;Dictionary&nbsp;Of&nbsp;Connected&nbsp;Items</tt></dd></dl>
+
+<dl><dt><a name="Location-link_location"><strong>link_location</strong></a>(self, location, type, type2)</dt><dd><tt>Adds&nbsp;A&nbsp;<a href="#Location">Location</a>&nbsp;To&nbsp;The&nbsp;Dictionary&nbsp;Of&nbsp;Connected&nbsp;Locations</tt></dd></dl>
+
+<dl><dt><a name="Location-link_npc"><strong>link_npc</strong></a>(self, npc, ShortDescription)</dt><dd><tt>Adds&nbsp;A&nbsp;NPC&nbsp;To&nbsp;The&nbsp;Dictionary&nbsp;Of&nbsp;Connected&nbsp;NPCs</tt></dd></dl>
+
+<dl><dt><a name="Location-set_description"><strong>set_description</strong></a>(self, description)</dt><dd><tt>Sets&nbsp;The&nbsp;Description&nbsp;Attribute</tt></dd></dl>
+
+<dl><dt><a name="Location-set_name"><strong>set_name</strong></a>(self, name)</dt><dd><tt>Sets&nbsp;The&nbsp;Name&nbsp;Attribute</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-type"><strong>type</strong></a>(string)</dt></dl>
+</td></tr></table>
+</body></html>
