@@ -10,9 +10,11 @@ def type(string):
 
 
 class Question:
+    """Class For Housing Question Generation"""
     def __init__(self):
-        pass
+        pass #Has No Attributes
     def addition(self):
+        """Generates An Addition Question"""
         num1 = random.randint(0,255)
         num2 = random.randint(0,255)
 
@@ -66,6 +68,7 @@ class Question:
             type("The answer was "+"".join(map(str,binaryOut)))
             return False
     def decToBinConv(self):
+        """Generates A Decimal To Binary Conversion Question"""
         dec = random.randint(0,255)
         type("Conver "+str(dec)+" to binary")
         num = dec
@@ -88,6 +91,7 @@ class Question:
             type("The answer was "+binaryStr)
             return False
     def binToDecConv(self):
+        """Generates A Binary To Decimal Conversion Question"""
         dec  = random.randint(0,255)
         num = dec
         binary = []
@@ -114,6 +118,7 @@ class Question:
             type("The answer was "+str(dec))
             return False
     def decToHexConv(self):
+        """Generates A Decimal To Hexadecimal Conversion Question"""
         dec = random.randint(0,255)
         first = dec//16
         second = dec - (16*first)
@@ -152,6 +157,7 @@ class Question:
             type("The answer was "+hex)
             return False
     def binToHexConv(self):
+        """Generates A Binary To Hexadecimal Conversion Question"""
         dec = random.randint(0,255)
         num = dec
         binary = []
@@ -201,54 +207,56 @@ class Question:
             type("The answer was "+hex)
             return False
     def hexToBinConv(self):
-            dec = random.randint(0,255)
-            first = dec//16
-            second = dec - (16*first)
-            if first == (10):
-                first = "A"
-            elif first == (11):
-                first = "B"
-            elif first == (12):
-                first = "C"
-            elif first == (13):
-                first = "D"
-            elif first == (14):
-                first ="E"
-            elif first == (15):
-                first = "F"
-            if second == (10):
-                second = "A"
-            elif second == (11):
-                second = "B"
-            elif second == (12):
-                second = "C"
-            elif second == (13):
-                second = "D"
-            elif second == (14):
-                second ="E"
-            elif second == (15):
-                second = "F"
-            hex = str(first)+str(second)
-            type("Convert "+hex+" (Hex) to binary")
-            num = dec
-            binary = []
-            for x in range(8):
-                power  = 2**(7-x)
-                if num - power >= 0:
-                    num -= power
-                    binary.append(1)
-                else:
-                    binary.append(0)
-            binaryStr = "".join(map(str,binary))
-            answer = input(">>> ")
-            if answer == binaryStr:
-                type("Correct")
-                return True
+        """Generates A Hexadecimal To Binary Conversion Question"""
+        dec = random.randint(0,255)
+        first = dec//16
+        second = dec - (16*first)
+        if first == (10):
+            first = "A"
+        elif first == (11):
+            first = "B"
+        elif first == (12):
+            first = "C"
+        elif first == (13):
+            first = "D"
+        elif first == (14):
+            first ="E"
+        elif first == (15):
+            first = "F"
+        if second == (10):
+            second = "A"
+        elif second == (11):
+            second = "B"
+        elif second == (12):
+            second = "C"
+        elif second == (13):
+            second = "D"
+        elif second == (14):
+            second ="E"
+        elif second == (15):
+            second = "F"
+        hex = str(first)+str(second)
+        type("Convert "+hex+" (Hex) to binary")
+        num = dec
+        binary = []
+        for x in range(8):
+            power  = 2**(7-x)
+            if num - power >= 0:
+                num -= power
+                binary.append(1)
             else:
-                type("Incorrect")
-                type("The answer was "+binaryStr)
-                return False
+                binary.append(0)
+        binaryStr = "".join(map(str,binary))
+        answer = input(">>> ")
+        if answer == binaryStr:
+            type("Correct")
+            return True
+        else:
+            type("Incorrect")
+            type("The answer was "+binaryStr)
+            return False
     def hexToDecConv(self):
+        """Generates A Hexadecimal To Decimal Conversion Question"""
         dec = random.randint(0,255)
         first = dec//16
         second = dec - (16*first)
@@ -287,6 +295,7 @@ class Question:
             type("The answer was "+str(dec))
             return False
     def subtraction(self):
+        """Generates A Binary Subtraction Question"""
         num1 = random.randint(0,255)
         num2 = random.randint(0,255)
         num = num1
@@ -332,6 +341,7 @@ class Question:
             type("Incorrect")
             type("The answer was "+binaryStrOut)
     def negToBin(self):
+        """Generates A Negative Decimal To Signed Binary Conversion Question"""
         num = random.randint(-256,0)
         type("Convert "+str(num)+" to a signed binary number")
         binaryOut = []
@@ -354,6 +364,7 @@ class Question:
             type("The answer was "+binaryStr)
             return False
     def binToNeg(self):
+        """Generates A Signed Binary To Negative Decimal Conversion Question"""
         number = random.randint(-256,0)
         num = number
         binaryOut = []
@@ -377,6 +388,7 @@ class Question:
             type("The answer was "+str(number))
             return False
     def fixToBin(self):
+        """Generates A Fixed Point Decimal To Binary Conversion Question"""
         number = round(random.uniform(0, 15.9375),4)
         numberStr = str(number)
         numberList = numberStr.split(".")
@@ -414,6 +426,7 @@ class Question:
             type("The answer was "+binary)
             return False
     def binToFixed(self):
+        """Generates A Binary To Fixed Point Decimal Conversion Question"""
         number = 0.625*round(random.uniform(0, 15.9375)/0.0625)
         print(number)
         numberStr = str(number)
@@ -452,6 +465,7 @@ class Question:
             type("The answer was "+str(number))
             return False
     def floatToBin(self):
+        """Generates A Floating Point Decimal To Binary Conversion Question"""
         number = 0.625*round(random.uniform(0,128)/0.625)
         if number < 1:
             number = 0.625*round(number/0.0625)
@@ -508,6 +522,7 @@ class Question:
             type("The Answer was "+solution)
             return False
     def binToFloat(self):
+        """Generates A Binary To Floating Point Decimal Conversion Question"""
         number = 0.625*round(random.uniform(0,128)/0.625)
         if number < 1:
             number = 0.625*round(number/0.0625)
@@ -564,6 +579,7 @@ class Question:
             type("The Answer was "+str(number))
             return False
     def multipleChoice(self):
+        """Generates A Multiple Choice Question"""
         correct = [
         "ASCII Uses 7 Bits",
         "Unicode Uses Up To 48 Bits",

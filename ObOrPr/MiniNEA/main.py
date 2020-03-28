@@ -1,13 +1,14 @@
-import gps, items, npcs, sys, time, random, getpass
+import textadventure as t #Imports Text Adventure Modules
+import sys,time,getpass,random #Imports Other Required Modules
 
-def type(string):
+def type(string): #Creates Function For Outputting Letter By Letter
     for char in string:
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(0.02)
     sys.stdout.write("\n")
     sys.stdout.flush()
-def type2(string):
+def type2(string): #Same As Above Function Just Slower
     for char in string:
         sys.stdout.write(char)
         sys.stdout.flush()
@@ -16,10 +17,10 @@ def type2(string):
     sys.stdout.flush()
 
 
-file = open("data.txt","a+")
+file = open("data.txt","a+") #Creates Data.txt If It Doesn't Already Exist
 file.close()
 
-type("Welcome to the text adventure what is your username?")
+type("Welcome to the text adventure what is your username?") #Runs Login/Account Creation
 username = input("> ")
 found= False
 x = 0
@@ -57,32 +58,32 @@ else:
             exit()
     else:
         exit()
-class Player:
+class Player: #Creates Class To House Player Attriubtes
     def __init__(self):
-        self.health = 100
-        self.inventory = {}
-        self.equipedWeapon = None
-        self.dead = False
-        self.victorious = False
-        self.location = None
-        self.score = 0
-        self.cash = 0
-    def move(self,location):
+        self.health = 100 #The Health Of The Player, Max 100
+        self.inventory = {} #The Dictionary Of The Player's Items
+        self.equipedWeapon = None #The Currently Equipped Weapon
+        self.dead = False #Whether Or Not The Player Is Dead
+        self.victorious = False #Whether Or Not The Player Has Defeated The Final Boss
+        self.location = None #The Player's Current Locations
+        self.score = 0 #The Player's Score
+        self.cash = 0 #The Player's Money
+    def move(self,location): #Method For Chaning Location Attribute
         self.location = location
 
 #========================================Object Creation Goes Below This Line============================================
 
-#Make Objects Here
+test = t.Location("TestRoom","Test Room So That Program Can Be Run")
 
 #========================================================================================================================
 
-player  = Player()
-player.move('STARTING_ROOM')
-fists = items.Weapon("Bare Knuckles",0,"Your fists","Unarmed","conversion",2,4)
-player.equipedWeapon = fists
+player  = Player() #Creates Player Object
+player.move(test) #Puts Player In First Location
+fists = t.Weapon("Bare Knuckles",0,"Your fists","Unarmed","conversion",2,4) #Creates The Starting Weapon "Fists"
+player.equipedWeapon = fists #Sets Fists As The Equipped Weapon
 
-def play():
-    if player.health <= 0:
+def play(): #Creates Function So That Recursion Can Occur
+    if player.health <= 0: #Checks If The Player Is Dead
         player.dead = True
     command = input("> ")
     commands = command.split(' ')
@@ -96,7 +97,7 @@ def play():
             player.move(player.location.goto(commands[1]))
         else:
             type("Goto where?")
-            play()
+            play() #Commands For Moving To A New Location
     elif commands[0].lower() == "talkto":
         if len(commands) > 1:
             argument = []
@@ -110,7 +111,7 @@ def play():
                 type("Wait who is the "+commands[1]+"?")
         else:
             type("Talk to who?")
-            play()
+            play() #Command For Talking To A NPC
     elif commands[0].lower() == "inv":
         if len(commands) == 1:
             type("=-----Player's Inventory -----=")
@@ -121,7 +122,7 @@ def play():
             type("=-----------------------------=")
         else:
             type("Too Many Arguments For Inv, None Expected")
-            play()
+            play() #Command For Outputting Inventory
     elif commands[0].lower() == "stealfrom":
         if len(commands) >1:
             argument = []
@@ -143,7 +144,7 @@ def play():
                 type("Wait who is the "+commands[1]+"?")
         else:
             type("Steal from who? ")
-            play()
+            play() #Command For Stealing From A NPC
     elif commands[0].lower() == "take":
         if len(commands) > 1:
             argument = []
@@ -158,7 +159,7 @@ def play():
             else:
                 type("There is no "+argument.title()+" here")
         else:
-            type("Take what?")
+            type("Take what?") #Commands For Taking An Item From A Location
     elif commands[0].lower() == "fight":
         if len(commands) > 1:
             argument = []
@@ -168,7 +169,7 @@ def play():
             commands[1] = " ".join(map(str,argument))
             if commands[1] in player.location.connectedNPCs:
                 enemy = player.location.connectedNPCs[commands[1]]
-                if isinstance(enemy, npcs.Enemy):
+                if isinstance(enemy, t.Enemy):
                     StartingHealth = enemy.health
                     while player.health > 0 and enemy.health > 0:
                         type("Your Health ["+str(player.health)+"]")
@@ -206,9 +207,9 @@ def play():
             play()
         else:
             type("Fight who?")
-            play()
+            play() #Command For Fighting A Non-Ambush Enemy
     elif commands[0].lower() == "equiped":
-        type(player.equipedWeapon.get_name()+" is the currently equiped weapon.")
+        type(player.equipedWeapon.get_name()+" is the currently equiped weapon.") #Command For Outputting Currently Equipped Weapon
     elif commands[0].lower() == "equip":
         if len(commands) > 1:
             argument = []
@@ -224,7 +225,7 @@ def play():
                 play()
         else:
             type("Equip what?")
-            play()
+            play() #Command For Equipping A Weapon
     elif commands[0].lower() == "sellto":
         if len(commands) > 1:
             argument = []
@@ -234,7 +235,7 @@ def play():
             commands[1] = " ".join(map(str,argument)).title()
             if commands[1].lower() in player.location.connectedNPCs:
                 npc = player.location.connectedNPCs[commands[1].lower()]
-                if isinstance(npc, npcs.Merchant):
+                if isinstance(npc, t.Merchant):
                     type("=-----Player's Inventory -----=")
                     print()
                     for item in player.inventory:
@@ -255,9 +256,9 @@ def play():
                 type("I don't see a "+commands[1].title())
         else:
             type("Sell to who?")
-            play()
+            play() #Command For Selling To A Merchant
     elif commands[0].lower() == "bal":
-        type("You have "+str(player.cash)+"₿")
+        type("You have "+str(player.cash)+"₿") #Command For Outputing The Player's Balance
     elif commands[0].lower() == "buyfrom":
         if len(commands) > 1:
             argument = []
@@ -267,7 +268,7 @@ def play():
             commands[1] = " ".join(map(str,argument)).title()
             if commands[1].lower() in player.location.connectedNPCs:
                 npc = player.location.connectedNPCs[commands[1].lower()]
-                if isinstance(npc, npcs.Merchant):
+                if isinstance(npc, t.Merchant):
                     npc.outputInv()
                     type("[Balance]: "+str(player.cash)+"₿")
                     type("What would you like to buy? ")
@@ -288,7 +289,7 @@ def play():
                 type("I don't see a "+commands[1].title())
         else:
             type("Buy from who?")
-            play()
+            play() #Command For Buying Items From A Merchant
     elif commands[0].lower() == "drink":
         if len(commands) > 1:
             argument = []
@@ -298,7 +299,7 @@ def play():
             argument = " ".join(map(str,argument)).title()
             if argument in player.inventory:
                 item = player.inventory.pop(argument)
-                if isinstance(item, items.Potion):
+                if isinstance(item, t.Potion):
                     regen = item.use()
                     type("You heal "+str(regen)+" health")
                     player.health += regen
@@ -310,9 +311,9 @@ def play():
             else:
                 type("You don't have a "+argument.title())
         else:
-            type("Drink what?")
+            type("Drink what?") #Command For Drinking A Potion
     elif commands[0].lower() == "health":
-        type("You have "+str(player.health)+" health")
+        type("You have "+str(player.health)+" health") #Command For Outputing Current Health
     elif commands[0].lower() == "help":
         type("Commands:")
         type("goto : move to a location")
@@ -327,17 +328,20 @@ def play():
         type("bal : view your current balance")
         type("buyfrom : buy items from a merchant")
         type("drink : drink a potion to restore health")
-        type("health : view your current health")
+        type("health : view your current health") #Command For Outputting What Each Command Does
+    else:
+        type("I Don't Know How To Do That!")
+        play()
     print()
 type("Use help to view commands, By default answers are 8 bit")
 print()
-while not player.dead and not player.victorious:
+while not player.dead and not player.victorious: #Main Loop That Stops When The Player Is Dead Or Has Won
     player.location.info()
-    try:
+    try: #Catches Any Errors Thrown By Enemy Ambushes (Dictionary Changed During Iteration)
         for npc in player.location.connectedNPCs:
-            if isinstance(player.location.connectedNPCs[npc], npcs.Enemy):
+            if isinstance(player.location.connectedNPCs[npc], t.Enemy):
                 if player.location.connectedNPCs[npc].ambush:
-                    type("You are attacked by "+player.location.connectedNPCs[npc].get_name()+" the "+npc)
+                    type("You are attacked by "+player.location.connectedNPCs[npc].get_name()+" the "+npc) #Starts Fight If Ambushing Enemy Is In Location
                     print()
                     enemy = player.location.connectedNPCs[npc]
                     while player.health > 0 and enemy.health > 0:
@@ -366,23 +370,23 @@ while not player.dead and not player.victorious:
                         type("Your score is now "+str(player.score))
     except:
         pass
-    play()
+    play() #Calls The Ability To Type Commands
 name = username
 try:
-    file = open('scoreboard.csv','x')
+    file = open('scoreboard.csv','x') #Will create Scoreboard.csv if it doesn't already exist
     file.close()
 except:
     pass
 finally:
     scoreboard = []
-    file = open('scoreboard.csv','r')
+    file = open('scoreboard.csv','r') #Reads The Scoreboard, Adds The Player's Score, Sorts It, And Outputs The Scores
     for line in file:
         line = line.split(',')
         line[1] = line[1].rstrip()
         scoreboard.append(line)
 sorted = []
 scoreboard.append([name,str(player.score)])
-while len(scoreboard) > 0:
+while len(scoreboard) > 0: #Sorts The scoreboard By The Score Values
     for item in scoreboard:
         count = 0
         for item2 in scoreboard:
@@ -394,7 +398,7 @@ while len(scoreboard) > 0:
 for score in sorted:
     type(score[0]+": "+score[1])
 file.close()
-file = open('scoreboard.csv','w')
+file = open('scoreboard.csv','w') #ReWrites The Scoreboard With The New Scores
 for score in sorted:
     file.write(score[0]+","+score[1]+"\n")
 file.close()
