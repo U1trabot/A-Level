@@ -5,7 +5,7 @@ def type(string):
     for char in string:
         sys.stdout.write(char)
         sys.stdout.flush()
-        time.sleep(0.02)
+        time.sleep(0.015)
     sys.stdout.write("\n")
     sys.stdout.flush()
 
@@ -61,10 +61,10 @@ class Location:
         line = ["-" for char in range(len(self.name)-2)]
         type("="+"".join(map(str,line))+"=")
         type(self.description.title())
-        line = ["-" for char in range(len(self.description)-2)]
+        line = ["-" for char in range(118)]
         type("="+"".join(map(str,line))+"=")
         for place in self.connectedLocations:
-            type("There is an enterance to "+self.connectedLocations[place].get_description())
+            type("There is an enterance to "+place.title())
         for npc in self.connectedNPCs:
             type("There is a "+npc.title()+" here!")
         for item in self.connectedItems:
