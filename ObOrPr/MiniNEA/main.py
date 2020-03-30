@@ -84,7 +84,7 @@ WildPlains.link_npc(Bandit,"bandit")
 WildPlains.link_item(LostChange,"collection of coins")
 
 #Flower Plains
-FlowerPlains = Location("Flower Plains", "	A fabulous area of green coated with wonderful flowers of all different colours. Owned by the city of kymar, this area of fields has been gardened to perfection. There is not a spot on the ground where you can’t see a beautiful flower has been grown.")
+FlowerPlains = Location("Flower Plains", "A fabulous area of green coated with wonderful flowers of all different colours. Owned by the city of kymar, this area of fields has been gardened to perfection. There is not a spot on the ground where you can’t see a beautiful flower has been grown.")
 KymarGuard1 = NPC("Kymar Gaurd","Just a normal guard of Kymar City")
 KymarGuard1.addline("Move Along")
 GuardBadge = Item("Guard Badge", 10, "A Badge Used To Show The Employment As A Guard", "Badge")
