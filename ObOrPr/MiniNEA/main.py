@@ -294,7 +294,7 @@ GreatFoyer.link_location(ElongatedCorridor,"the elongated corridor","the great f
 ElongatedCorridor.link_location(DarkSideRoom,"the dark sideroom","the elongated corridor")
 ElongatedCorridor.link_location(RuinedTower,"the ruined tower","the elongated corridor")
 ElongatedCorridor.link_location(DarkArena,"the dark arena","the elongated corridor")
-ElongatedCorridor.link_location(ElvenPassageway,"the elven passage way","the elongated corridor")
+ElongatedCorridor.link_location(ElvenPassageway,"the elven passageway","the elongated corridor")
 ElvenPassageway.link_location(SouthernLootRoom,"the southern loot room","the elven passageway")
 #========================================================================================================================
 
