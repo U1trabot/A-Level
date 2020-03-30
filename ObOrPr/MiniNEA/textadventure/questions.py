@@ -569,9 +569,9 @@ class Question:
                 binaryExp.append(0)
         binaryExpStr = "".join(map(str,binaryExp))
         solution = binaryIntStr+binaryDecStr+" "+binaryExpStr
-        type("Convert the number "+solution+" decimal number E.g. 10110100 101 = 45 ")
+        type("Convert the number "+solution+" to a decimal number E.g. 10110100 101 = 45 ")
         answer = input(">>> ")
-        if int(answer) == (number):
+        if float(answer) == (number):
             type("Correct")
             return True
         else:
