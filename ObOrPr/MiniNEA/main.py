@@ -584,6 +584,7 @@ while not player.dead and not player.victorious: #Main Loop That Stops When The 
                 if player.health <= 0:
                     player.dead = True
                     type2("You died, Game Over")
+                    break
                 elif enemy.health <= 0:
                     type2("The enemy has been defeated!")
                     player.score += round((enemy.health+enemy.damage)/2)
