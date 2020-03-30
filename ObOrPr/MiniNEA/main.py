@@ -271,7 +271,7 @@ SouthKymar.link_npc(FactoryWorker,"factory worker")
 SouthKymar.link_item(MachinePart,"piece of scrap")
 
 WildPlains.link_location(LowerDistrict,"jonak city","the wild plains")
-WildPlains.link_location(Corridor,"the dragon's claw dungeon","the wild plains")
+WildPlains.link_location(Corridor,"dragon claw dungeon","the wild plains")
 WildPlains.link_location(FlowerPlains,"the flower plains","the wild plains")
 LowerDistrict.link_location(CentreDistrict,"the center district","the lower district")
 CentreDistrict.link_location(UpperDistrict,"the upper district","the center district")
