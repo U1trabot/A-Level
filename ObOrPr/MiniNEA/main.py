@@ -565,6 +565,7 @@ while not player.dead and not player.victorious: #Main Loop That Stops When The 
                 type("You are attacked by "+player.location.connectedNPCs[npc].get_name()+" the "+npc) #Starts Fight If Ambushing Enemy Is In Location
                 print()
                 enemy = player.location.connectedNPCs[npc]
+                StartingHealth = enemy.health
                 while player.health > 0 and enemy.health > 0:
                     type("Your Health ["+str(player.health)+"]")
                     type("Their Health ["+str(enemy.health)+"]")
@@ -587,11 +588,13 @@ while not player.dead and not player.victorious: #Main Loop That Stops When The 
                     break
                 elif enemy.health <= 0:
                     type2("The enemy has been defeated!")
-                    player.score += round((enemy.health+enemy.damage)/2)
+                    player.score += round((StartingHealth+enemy.damage)/2)
                     defeated_ambushes.append(npc)
                     type("Your score is now "+str(player.score))
     for npc in defeated_ambushes:
         player.location.connectedNPCs.pop(npc)
+        if player.location.connectedNPCs[npc].boss:
+            type("Congratulations, You Have One")
     play() #Calls The Ability To Type Commands
 name = username
 try:

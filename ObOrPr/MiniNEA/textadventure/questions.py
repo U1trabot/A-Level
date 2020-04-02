@@ -593,9 +593,9 @@ class Question:
         "When a file is compressed with a dictionary-based method, a dictionary containing repeated data is appended to the file",
         "Encryption is the process of scrambling data so that it cannot be understood if intercepted",
         "Caesar ciphers encrypt information by replacing characters",
-        "The Vernam cipher is an example of a one-time pad cipher. "
-        "Ethical Issues Involve Problems Such As: What If AI Take Over The World, Is It Okay For An Algorithm To Know Everything About Me, ect."
-        "Moral Issues Involve Problems Such As: How Can A Computer Decide Which Human To Kill When A Self-Driving Car Crashes, Should Criminals Be Identified By Algorithms, ect."
+        "The Vernam cipher is an example of a one-time pad cipher. ",
+        "Ethical Issues Involve Problems Such As: What If AI Take Over The World, Is It Okay For An Algorithm To Know Everything About Me, ect.",
+        "Moral Issues Involve Problems Such As: How Can A Computer Decide Which Human To Kill When A Self-Driving Car Crashes, Should Criminals Be Identified By Algorithms, ect.",
         ]
         incorrect = [
         "ASCII Uses 6 Bits",
@@ -633,9 +633,9 @@ class Question:
         "No extra data needs to be added with dictionary-based compression",
         "Encrypted information is known as plaintext",
         "Unencrypted information is known as ciphertext",
-        "The Vernam cipher uses a non-random key"
-        "It is Okay to Hack Into Computers"
-        "AI can always make a perfect moral choice"
+        "The Vernam cipher uses a non-random key",
+        "It is Okay to Hack Into Computers",
+        "AI can always make a perfect moral choice",
         "There is no issue what so ever about companies having access to tonnes of personal data"
         ]
         letters = ["A","B","C","D"]
