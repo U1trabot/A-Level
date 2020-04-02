@@ -559,6 +559,7 @@ print()
 while not player.dead and not player.victorious: #Main Loop That Stops When The Player Is Dead Or Has Won
     player.location.info()
     defeated_ambushes = []
+    faught = False
     for npc in player.location.connectedNPCs:
         if isinstance(player.location.connectedNPCs[npc],Enemy):
             if player.location.connectedNPCs[npc].ambush:
