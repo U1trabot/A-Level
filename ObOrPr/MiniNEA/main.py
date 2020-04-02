@@ -591,10 +591,14 @@ while not player.dead and not player.victorious: #Main Loop That Stops When The 
                     player.score += round((StartingHealth+enemy.damage)/2)
                     defeated_ambushes.append(npc)
                     type("Your score is now "+str(player.score))
+                faught = True
     for npc in defeated_ambushes:
         player.location.connectedNPCs.pop(npc)
         if player.location.connectedNPCs[npc].boss:
-            type("Congratulations, You Have One")
+            type("Congratulations, You Have Won")
+            player.victorious = True
+    if fought:
+        player.location.info()
     play() #Calls The Ability To Type Commands
 name = username
 try:
