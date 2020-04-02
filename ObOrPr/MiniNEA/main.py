@@ -598,7 +598,7 @@ while not player.dead and not player.victorious: #Main Loop That Stops When The 
         if player.location.connectedNPCs[npc].boss:
             type("Congratulations, You Have Won")
             player.victorious = True
-    if fought:
+    if faught:
         player.location.info()
     play() #Calls The Ability To Type Commands
 name = username
