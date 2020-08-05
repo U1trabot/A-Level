@@ -42,11 +42,12 @@ class Instance():
         self.density = density
         self.mass = self.size*self.density
         self.xForce = 0
-        self.yForce = self.mass*-9.81
+        self.yForce = self.mass*9.81
         self.roughness = roughness
         self.colour = colour
         self.name = name
         self.visual = pygame.Rect((screenWidth/2)+self.xLocation, (screenHeight/2)-self.yLocation, self.xLength, self.yLength)
+        self.selected = False
     def recalibrate(self):
         #Method for resetting variables (unless frozen)
         for attribute in self.frozen:
@@ -57,20 +58,42 @@ class Instance():
                         if instances[instance] != self:
                             if self.visual.colliderect(instances[instance].visual):
                                 blocked = True
-                    if not blocked:
-                        self.xLocation += ((self.xVelocity+self.xVelocityDelayed)/2)/60
+                    if not self.selected:
+                        if not blocked:
+                            self.xLocation += ((self.xVelocity+self.xVelocityDelayed)/2)/6
+                    else:
+                        self.xLocation = pygame.mouse.get_pos()[0] - 50
                 elif attribute == "yLocation":
                     blocked = False
                     for instance in instances:
                         if instances[instance] != self:
                             if self.visual.colliderect(instances[instance].visual):
                                 blocked = True
-                    if not blocked:
-                        self.yLocation += ((self.yVelocity+self.yVelocityDelayed)/2)/60
+                    if not self.selected:
+                        if not blocked:
+                            self.yLocation += ((self.yVelocity+self.yVelocityDelayed)/2)/6
+                    else:
+                        self.yLocation = pygame.mouse.get_pos()[1] - 50
                 elif attribute == "xVelocity":
-                    self.xVelocity += self.xAcceleration/60
+                    blocked = False
+                    for instance in instances:
+                        if instances[instance] != self:
+                            if self.visual.colliderect(instances[instance].visual):
+                                blocked = True
+                    if not blocked:
+                        self.xVelocity += self.xAcceleration/60
+                    else:
+                        self.xVelocity = 0
                 elif attribute == "yVelocity":
-                    self.yVelocity += self.yAcceleration/60
+                    blocked = False
+                    for instance in instances:
+                        if instances[instance] != self:
+                            if self.visual.colliderect(instances[instance].visual):
+                                blocked = True
+                    if not blocked:
+                        self.yVelocity += self.yAcceleration/60
+                    else:
+                        self.yVelocity = 0
                 elif attribute == "xAcceleration":
                     self.xAcceleration = self.xForce/self.mass
                 elif attribute == "yAcceleration":
@@ -89,11 +112,11 @@ class Instance():
                     self.xVelocityDelayed = self.xVelocity
                 elif attribute == "yVelocityDelayed":
                     self.yVelocityDelayed = self.yVelocity
-        self.visual = pygame.Rect((screenWidth/2)+self.xLocation, (screenHeight/2)-self.yLocation, self.xLength, self.yLength)
+        self.visual = pygame.Rect(self.xLocation, self.yLocation, self.xLength, self.yLength)
         pygame.draw.rect(canvas, self.colour, self.visual)
 
 instances = {}
-floor = Instance("Floor",[40,40,40],5,-400,-280,10,"blank",1,1000,100)
+floor = Instance("Floor",[40,40,40],5,0,580,10,"blank",1,1000,100)
 floor.yForce = 0
 box = Instance("Box",[0,255,0],50,140,220,10,"blank",1,100,100)
 box2 = Instance("Box2",[255,0,0],50,100,100,10,"blank",1,100,100)
@@ -113,11 +136,25 @@ rateOfTime = 1
 run = True
 while run:
     time.tick(rateOfTime*60)
+    canvas.fill([255,255,255])
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-    canvas.fill([255,255,255])
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            clickbox = pygame.Rect(event.pos[0]-10, event.pos[1]-10, 20, 20)
+            pygame.draw.rect(canvas, [255,255,255], clickbox)
+            for instance in instances:
+                if clickbox.colliderect(instances[instance].visual):
+                    instances[instance].selected = True
+                    floor.selected = False
+        if event.type == pygame.MOUSEBUTTONUP:
+            for instance in instances:
+                if instances[instance].selected:
+                    instances[instance].selected = False
     for item in instances:
         instances[item].recalibrate()
     pygame.draw.rect(canvas, floor.colour, floor.visual)
     pygame.display.update()
+
+
+
