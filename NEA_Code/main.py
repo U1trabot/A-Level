@@ -1,4 +1,4 @@
-import pygame
+import pygame, random, math
 pygame.init()
 
 screenWidth = (800)
@@ -6,6 +6,8 @@ screenHeight = (600)
 
 class Instance():
     #Main class for all objects within the simulation
+    global xM
+    global yM
     def __init__(self,name="New Object",colour=[255,255,255],density=10,xpos=0,ypos=0,mass=10,shape="blank",size=1,xLength=1,yLength=1,thickness=1,youngs=1000,refractive=99999999,roughness=99999999):
         #Defines the attributes for the object
         self.frozen = {
@@ -42,62 +44,44 @@ class Instance():
         self.density = density
         self.mass = self.size*self.density
         self.xForce = 0
-        self.yForce = self.mass*9.81
+        self.yForce =  0
         self.roughness = roughness
         self.colour = colour
         self.name = name
-        self.visual = pygame.Rect((screenWidth/2)+self.xLocation, (screenHeight/2)-self.yLocation, self.xLength, self.yLength)
+        self.visual = pygame.Rect(self.xLocation, self.yLocation, self.xLength, self.yLength)
         self.selected = False
+        self.drag = 0.98
+        self.elasticity = 0.75
     def recalibrate(self):
         #Method for resetting variables (unless frozen)
         for attribute in self.frozen:
             if not self.frozen[attribute]:
                 if attribute == "xLocation":
-                    blocked = False
-                    for instance in instances:
-                        if instances[instance] != self:
-                            if self.visual.colliderect(instances[instance].visual):
-                                blocked = True
                     if not self.selected:
-                        if not blocked:
-                            self.xLocation += ((self.xVelocity+self.xVelocityDelayed)/2)/6
+                        self.xLocation += ((self.xVelocity+self.xVelocityDelayed)/2)/12
                     else:
-                        self.xLocation = pygame.mouse.get_pos()[0] - 50
+                        dx = event.pos[0] - self.xLocation
+                        self.xVelocity = xM*0.5
+                        self.xLocation += ((self.xVelocity+self.xVelocityDelayed)/2)/1.2
                 elif attribute == "yLocation":
-                    blocked = False
-                    for instance in instances:
-                        if instances[instance] != self:
-                            if self.visual.colliderect(instances[instance].visual):
-                                blocked = True
                     if not self.selected:
-                        if not blocked:
-                            self.yLocation += ((self.yVelocity+self.yVelocityDelayed)/2)/6
+                        self.yLocation += ((self.yVelocity+self.yVelocityDelayed)/2)/12
                     else:
-                        self.yLocation = pygame.mouse.get_pos()[1] - 50
+                        dy = event.pos[1] - self.yLocation
+                        self.yVelocity = yM*0.5
+                        self.yLocation += ((self.yVelocity+self.yVelocityDelayed)/2)/1.2
+                    if self.yLocation > screenHeight - self.yLength:
+                        self.yLocation = 2 * (screenHeight - self.yLength) - self.yLocation
+                        self.yVelocity *= self.elasticity
+                        self.xVelocity *= self.drag
                 elif attribute == "xVelocity":
-                    blocked = False
-                    for instance in instances:
-                        if instances[instance] != self:
-                            if self.visual.colliderect(instances[instance].visual):
-                                blocked = True
-                    if not blocked:
-                        self.xVelocity += self.xAcceleration/60
-                    else:
-                        self.xVelocity = 0
+                    self.xVelocity += self.xAcceleration/120
                 elif attribute == "yVelocity":
-                    blocked = False
-                    for instance in instances:
-                        if instances[instance] != self:
-                            if self.visual.colliderect(instances[instance].visual):
-                                blocked = True
-                    if not blocked:
-                        self.yVelocity += self.yAcceleration/60
-                    else:
-                        self.yVelocity = 0
+                    self.yVelocity += self.yAcceleration/120
                 elif attribute == "xAcceleration":
                     self.xAcceleration = self.xForce/self.mass
                 elif attribute == "yAcceleration":
-                    self.yAcceleration = self.yForce/self.mass
+                    self.yAcceleration = (self.yForce + self.mass*9.81)/self.mass
                 elif attribute == "mass":
                     self.mass = self.density*self.size
                 elif attribute == "shape":
@@ -116,17 +100,47 @@ class Instance():
         pygame.draw.rect(canvas, self.colour, self.visual)
 
 instances = {}
-floor = Instance("Floor",[40,40,40],5,0,580,10,"blank",1,1000,100)
-floor.yForce = 0
-box = Instance("Box",[0,255,0],50,140,220,10,"blank",1,100,100)
-box2 = Instance("Box2",[255,0,0],50,100,100,10,"blank",1,100,100)
-box3 = Instance("Box3",[0,0,255],50,60,-100,10,"blank",1,100,100)
-instances[box.name] = box
-instances[floor.name] = floor
-instances[box2.name] = box2
-instances[box3.name] = box3
+for n in range(random.randint(11,15)):
+    xsize = random.randint(10, 100)
+    ysize = random.randint(10, 100)
+    x = random.randint(0, screenWidth - xsize)
+    y = random.randint(0, screenHeight - ysize)
+    box = Instance("Box"+str(n),[random.randint(1,255),random.randint(1,255),random.randint(1,255)],10,x, y, 10,"blank", 1, xsize, ysize)
+    overlap = False
+    for item in instances:
+        if (instances[item].xLocation < (box.xLocation + box.xLength) and instances[item].xLocation > box.xLocation) or (instances[item].yLocation < (box.yLocation + box.yLength) and instances[item].yLocation > box.yLocation):
+            overlap = True
+    if not overlap:
+        instances[box.name] = box
+    else:
+        n -= 1
 
+def collide(i1,i2):
+    if i1.visual.colliderect(i2.visual):
+        try:
+            (i1.xVelocity,i2.xVelocity) = (i2.xVelocity,i1.xVelocity)
+            (i1.yVelocity,i2.yVelocity) = (0,0)
+            (i1.yVelocityDelayed,i2.yVelocityDelayed) = (0,0)
+            (i1.yForce,i2.yForce) = (-i1.mass*9.81,-i2.mass*9.81)
+            i1.xVelocity *= i1.drag
+            i2.xVelocity *= i2.drag
+            if i1.yVelocity < 0:
+                i1.yLocation += 1
+                i2.yLocation -= 1
+            else:
+                i1.yLocation -= 1
+                i2.yLocation += 1
+            if i1.xVelocity < 0:
+                i1.xLocation -= 1
+                i2.xLocation += 1
+            else:
+                i1.xLocation += 1
+                i2.xLocation -= 1
 
+        except:
+            pass
+    else:
+        (i1.yForce,i2.yForce) = (0,0)
 canvas = pygame.display.set_mode((screenWidth,screenHeight))
 pygame.display.set_caption("Simulation Space")
 canvas.fill([255,255,255])
@@ -135,7 +149,7 @@ time = pygame.time.Clock()
 rateOfTime = 1
 run = True
 while run:
-    time.tick(rateOfTime*60)
+    time.tick(rateOfTime*120)
     canvas.fill([255,255,255])
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -146,15 +160,19 @@ while run:
             for instance in instances:
                 if clickbox.colliderect(instances[instance].visual):
                     instances[instance].selected = True
-                    floor.selected = False
+                    break
         if event.type == pygame.MOUSEBUTTONUP:
             for instance in instances:
                 if instances[instance].selected:
                     instances[instance].selected = False
+        if event.type == pygame.MOUSEMOTION:
+            xM = event.rel[0]
+            yM = event.rel[1]
     for item in instances:
+        for item2 in instances:
+            if instances[item] != instances[item2]:
+                collide(instances[item],instances[item2])
         instances[item].recalibrate()
-    pygame.draw.rect(canvas, floor.colour, floor.visual)
     pygame.display.update()
-
 
 
