@@ -2,8 +2,8 @@
 import pygame, random, math, thorpy
 pygame.init()
 
-screenWidth = (800)
-screenHeight = (600)
+screenWidth = (1366)
+screenHeight = (768)
 mouseForce = 15
 scale = 10
 fonty = pygame.font.Font('freesansbold.ttf',20)
@@ -54,7 +54,7 @@ class Instance():
         self.roughness = roughness
         self.colour = colour
         self.name = name
-        self.visual = pygame.Rect(self.xLocation, self.yLocation, self.xLength, self.yLength)
+        self.visual = pygame.Rect(int(self.xLocation), int(self.yLocation), int(self.xLength), int(self.yLength))
         self.selected = False
         self.drag = 0.98
         self.elasticity = 0.75
@@ -68,7 +68,6 @@ class Instance():
                     if not self.selected:
                         self.xLocation += (((self.xVelocity+self.xVelocityDelayed)/2)/120)*scale
                     else:
-                        dx = event.pos[0] - self.xLocation
                         self.xVelocityDelayed = self.xVelocity
                         self.xVelocity = xM*0.5
                         self.xLocation += ((((self.xVelocity+self.xVelocityDelayed)/2)/120))*mouseForce
@@ -108,7 +107,7 @@ class Instance():
                     self.xVelocityDelayed = self.xVelocity
                 elif attribute == "yVelocityDelayed":
                     self.yVelocityDelayed = self.yVelocity
-        self.visual = pygame.Rect(self.xLocation, self.yLocation, self.xLength, self.yLength)
+        self.visual = pygame.Rect(int(self.xLocation), int(self.yLocation), int(self.xLength), int(self.yLength))
         pygame.draw.rect(canvas, self.colour, self.visual)
 
 instances = {}
@@ -153,31 +152,59 @@ def collide(i1,i2):
             pass
     else:
         (i1.yForce,i2.yForce) = (0,0)
+permaSelection = instances[random.choice(list(instances))]
 canvas = pygame.display.set_mode((screenWidth,screenHeight))
 pygame.display.set_caption("Simulation Space")
 canvas.fill([255,255,255])
 
-def peny(picker):
-    print(picker.get_color())
-
-
-
-
-my_colour = thorpy.ColorSetter("Choose a color", value=(255, 0, 0))
-my_button = thorpy.make_button("Output",peny,{"picker":my_colour}) #just a useless button
-base = thorpy.Background(elements=[my_button,my_colour])
-thorpy.store(base)
-menu = thorpy.Menu(base) #create a menu for auto events handling
+oName = thorpy.Inserter(name="",value="Object Name",size=(100,30))
+oColour = thorpy.ColorSetter("Object Colour",value=(128,128,128))
+oVHeading = thorpy.make_text("Object Attributes",15)
+attributes = [
+    ["Mass",permaSelection.mass,permaSelection.frozen["mass"]],
+    ["XAcceleration",permaSelection.xAcceleration,permaSelection.frozen["xAcceleration"]],
+    ["YAcceleration",permaSelection.yAcceleration,permaSelection.frozen["yAcceleration"]],
+    ["XVelocity",permaSelection.xVelocity,permaSelection.frozen["xVelocity"]],
+    ["YVelocity",permaSelection.yVelocity,permaSelection.frozen["yVelocity"]],
+    ["XLocation",permaSelection.xLocation,permaSelection.frozen["xLocation"]],
+    ["YLocation",permaSelection.yLocation,permaSelection.frozen["yLocation"]],
+    ["Shape",permaSelection.shape,permaSelection.frozen["shape"]],
+    ["Size",permaSelection.size,permaSelection.frozen["size"]],
+    ["XLength",permaSelection.xLength,permaSelection.frozen["xLength"]],
+    ["YLength",permaSelection.yLength,permaSelection.frozen["yLength"]]
+    ]
+base = thorpy.Background(elements=[oName,oColour,oVHeading],color=(255,255,255),image="object_panel.png",mode=None)
+for x in range(0,11):
+   aValue = thorpy.Inserter(name=(attributes[x])[0],value=str((attributes[x])[1]),size=(50,20))
+   aFrozen = thorpy.Checker(value=(attributes[x])[2])
+   aHost = thorpy.Box(elements=[aValue,aFrozen],size=(180,20))
+   thorpy.store(aHost,mode="h")
+   base.add_element(aHost)
+def show():
+    menu.set_elements(screenBack)
+    menu.blit_and_update()
+    menu.refresh()
+showButton = thorpy.make_button("Show",show)
+def hide():
+    menu.set_elements(showButton)
+    menu.blit_and_update()
+    menu.refresh()
+hideButton = thorpy.make_button("Hide",hide)
+base.add_element(hideButton)
+screenBack = thorpy.Background(elements=[base],color=[255,255,0,10],mode="scale to screen")
+thorpy.store(base,mode="v",align=("center"),y=0)
+thorpy.store(screenBack,mode="v",align="right",x=screenWidth,y=-5,)
+menu = thorpy.Menu(showButton,fps=120)
 
 time = pygame.time.Clock()
 rateOfTime = 1
 run = True
 selection = None
 totalforce = 0
+pygame.display.toggle_fullscreen()
 while run:
     time.tick(rateOfTime*120)
     canvas.fill([255,255,255])
-    base.blit()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -188,6 +215,10 @@ while run:
                 if clickbox.colliderect(instances[instance].visual):
                     instances[instance].selected = True
                     selection = instances[instance]
+                    permaSelection = instances[instance]
+                    menu.set_elements(screenBack)
+                    menu.blit_and_update()
+                    menu.refresh()
                     break
         if event.type == pygame.MOUSEBUTTONUP:
             for instance in instances:
@@ -211,4 +242,24 @@ while run:
             if instances[item] != instances[item2]:
                 collide(instances[item],instances[item2])
         instances[item].recalibrate()
+    pygame.draw.rect(canvas, [255,0,0,255], permaSelection.visual,3)
+    attributes = [
+        ["Mass",round(permaSelection.mass,2),permaSelection.frozen["mass"]],
+        ["XAcceleration",round(permaSelection.xAcceleration,2),permaSelection.frozen["xAcceleration"]],
+        ["YAcceleration",round(permaSelection.yAcceleration,2),permaSelection.frozen["yAcceleration"]],
+        ["XVelocity",round(permaSelection.xVelocity,2),permaSelection.frozen["xVelocity"]],
+        ["YVelocity",round(permaSelection.yVelocity,2),permaSelection.frozen["yVelocity"]],
+        ["XLocation",round(permaSelection.xLocation,2),permaSelection.frozen["xLocation"]],
+        ["YLocation",round(permaSelection.yLocation,2),permaSelection.frozen["yLocation"]],
+        ["Shape",permaSelection.shape,permaSelection.frozen["shape"]],
+        ["Size",round(permaSelection.size,2),permaSelection.frozen["size"]],
+        ["XLength",round(permaSelection.xLength,2),permaSelection.frozen["xLength"]],
+        ["YLength",round(permaSelection.yLength,2),permaSelection.frozen["yLength"]]
+        ]
+    for x in range(4,14):
+        base._elements[x]._elements[0].set_value(str(attributes[x-3][1]))
+        base._elements[x]._elements[1].set_value(attributes[x-3][2])
+    base._elements[0].set_value(permaSelection.name)
+    base._elements[1].set_value(permaSelection.colour)
+    menu.blit_and_update()
     pygame.display.update()
