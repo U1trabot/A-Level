@@ -284,10 +284,34 @@ def setAt(element,value):
             permaSelection.name = value
         except:
             pass
-
+def freeze(row):
+    if row == (0):
+        permaSelection.frozen["mass"] = not(permaSelection.frozen["mass"])
+    elif row == (1):
+        permaSelection.frozen["xAcceleration"] = not(permaSelection.frozen["xAcceleration"])
+    elif row == (2):
+        permaSelection.frozen["yAcceleration"] = not(permaSelection.frozen["yAcceleration"])
+    elif row == (3):
+        permaSelection.frozen["xVelocity"] = not(permaSelection.frozen["xVelocity"])
+    elif row == (4):
+        permaSelection.frozen["yVelocity"] = not(permaSelection.frozen["yVelocity"])
+    elif row == (5):
+        permaSelection.frozen["xLocation"] = not(permaSelection.frozen["xLocation"])
+    elif row == (6):
+        permaSelection.frozen["yLocation"] = not(permaSelection.frozen["yLocation"])
+    elif row == (7):
+        permaSelection.frozen["shape"] = not(permaSelection.frozen["shape"])
+    elif row == (8):
+        permaSelection.frozen["size"] = not(permaSelection.frozen["size"])
+    elif row == (9):
+        permaSelection.frozen["xLength"] = not(permaSelection.frozen["mxLength"])
+    elif row == (10):
+        permaSelection.frozen["yLength"] = not(permaSelection.frozen["yLength"])
 for x in range(0,14):
    aValue = thorpy.Inserter(name=(attributes[x])[0],value=str((attributes[x])[1]),size=(50,20))
    aFrozen = thorpy.Checker(value=(attributes[x])[2])
+   aFrozen.user_func = freeze
+   aFrozen.user_params = {'row':x}
    aHost = thorpy.Box(elements=[aValue,aFrozen],size=(180,20))
    thorpy.store(aHost,mode="h")
    base.add_element(aHost)
