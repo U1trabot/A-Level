@@ -1,29 +1,41 @@
 import thorpy, pygame
 pygame.init()
-canvas = pygame.display.set_mode((800,600))
-oName = thorpy.Inserter(name="",value="Object Name",size=(100,30))
-oColour = thorpy.ColorSetter("Object Colour",value=(128,128,128))
-oVHeading = thorpy.make_text("Object Attributes",15)
-attributes = [
-    ["Mass",10,False],
-    ["XAcceleration",10,False],
-    ["YAcceleration",10,False],
-    ["XVelocity",10,False],
-    ["YVelocity",10,False],
-    ["XLocation",10,False],
-    ["YLocation",10,False],
-    ["Shape",10,False],
-    ["Size",10,False],
-    ["XLength",10,False],
-    ["YLength",10,False],
-    ]
-base = thorpy.Background(elements=[oName,oColour,oVHeading],color=(100,100,100))
-for value in attributes:
-   aValue = thorpy.Inserter(name=value[0],value=str(value[1]),size=(50,20))
-   aFrozen = thorpy.Checker(value=value[2])
-   aHost = thorpy.Box(elements=[aValue,aFrozen],size=(180,20))
-   thorpy.store(aHost,mode="h")
-   base.add_element(aHost)
-thorpy.store(base,mode="v")
-menu = thorpy.Menu(base)
+screenWidth = (1366)
+screenHeight = (768)
+cursorMode = 'selection'
+canvas = pygame.display.set_mode((screenWidth,screenHeight))
+def selectionClick():
+    global cursorMode
+    cursorMode = 'selection'
+def creationClick():
+    global cursorMode
+    cursorMode = 'creation'
+def timerClick():
+    global cursorMode
+    cursorMode = 'timer'
+def measureClick():
+    global cursorMode
+    cursorMode = 'measure'
+def angleClick():
+    global cursorMode
+    cursorMode = 'angle'
+def deletionClick():
+    global cursorMode
+    cursorMode = 'deletion'
+def blankClick():
+    global cursorMode
+    cursorMode = 'blank'
+timeDisplay = thorpy.Inserter(value_type=float,size=(60,45),value="x1")
+selection, creation, timer, measure, angle_measure, deletion, blank = "selection.png", "creation.png", "timer.png", "measure.png", "angle_measure.png", "deletion.png", "blank.png"
+selectionH, creationH, timerH, measureH, angle_measureH, deletionH, blankH = "selection_hover.png", "creation_hover.png", "timer_hover.png", "measure_hover.png", "angle_measure_hover.png", "deletion_hover.png", "blank_hover.png"
+sTool, cTool, tTool, mTool, aTool, dTool, bTool = thorpy.make_image_button(selection,img_hover=selectionH),thorpy.make_image_button(creation,img_hover=creationH),thorpy.make_image_button(timer,img_hover=timerH),thorpy.make_image_button(measure,img_hover=measureH),thorpy.make_image_button(angle_measure,img_hover=angle_measureH),thorpy.make_image_button(deletion,img_hover=deletionH),thorpy.make_image_button(blank,img_hover=blankH)
+play, playH, pause, pauseH = "play.png","play_hover.png","pause.png","pause_hover.png"
+timePause = thorpy.make_image_button(pause,img_hover=pauseH)
+bar = thorpy.Box(elements=[sTool, cTool, tTool, mTool, aTool, dTool, bTool, timePause, timeDisplay],size=(screenWidth,50))
+bar.set_main_color(color=[100,100,100])
+thorpy.store(bar,mode="h",align="center",gap=50,margin=350,elements=[sTool, cTool, tTool, mTool, aTool, dTool, bTool])
+thorpy.store(bar,mode="h",align="center",margin=-600,elements=[timePause, timeDisplay])
+screenBack = thorpy.Background([0,255,255],elements=[bar])
+menu = thorpy.Menu(screenBack,fps=120)
+thorpy.store(screenBack,mode="v",x=screenWidth/2,y=(screenHeight-55),elements=[bar])
 menu.play()

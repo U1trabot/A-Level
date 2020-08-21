@@ -5,9 +5,19 @@ pygame.init()
 screenWidth = (1366)
 screenHeight = (768)
 mouseForce = 15
+cursorMode = 'selection'
 scale = 10
 fonty = pygame.font.Font('freesansbold.ttf',20)
+fonty2 = pygame.font.Font('freesansbold.ttf',48)
 hidden = True
+boxes = 0
+timers = []
+measureLines = []
+
+selectionCursor, creationCursor, timerCursor, measureCursor, angleCursor, deletionCursor = 'selection_cursor.png', 'creation_cursor.png', 'timer_cursor.png', 'measure_cursor.png', 'angle_cursor.png', 'deletion_cursor.png'
+
+
+
 class Instance():
     #Main class for all objects within the simulation
     global xM
@@ -66,28 +76,28 @@ class Instance():
             if not self.frozen[attribute]:
                 if attribute == "xLocation":
                     if not self.selected:
-                        self.xLocation += (((self.xVelocity+self.xVelocityDelayed)/2)/120)*scale
+                        self.xLocation += (((self.xVelocity+self.xVelocityDelayed)/2*rateOfTime)/120)*scale
                     else:
                         self.xVelocityDelayed = self.xVelocity
                         self.xVelocity = xM*0.5
-                        self.xLocation += ((((self.xVelocity+self.xVelocityDelayed)/2)/120))*mouseForce
+                        self.xLocation = pygame.mouse.get_pos()[0]-self.xLength/2
                         self.xforce = self.mass * self.xVelocityDelayed - self.xVelocity
                 elif attribute == "yLocation":
                     if not self.selected:
-                        self.yLocation += (((self.yVelocity+self.yVelocityDelayed)/2)/120)*scale
+                        self.yLocation += (((self.yVelocity+self.yVelocityDelayed)/2*rateOfTime)/120)*scale
                     else:
                         self.yVelocityDelayed = self.yVelocityDelayed
                         self.yVelocity = yM*0.5
-                        self.yLocation += ((((self.yVelocity+self.yVelocityDelayed)/2)/120))*mouseForce
+                        self.yLocation = pygame.mouse.get_pos()[1] -self.yLength/2
                         self.yforce = self.mass * self.yVelocityDelayed - self.yVelocity
-                    if self.yLocation > screenHeight - self.yLength:
-                        self.yLocation = 2 * (screenHeight - self.yLength) - self.yLocation
+                    if self.yLocation > screenHeight - self.yLength - 49:
+                        self.yLocation = 2 * (screenHeight - self.yLength -49) - self.yLocation
                         self.yVelocity *= self.elasticity
                         self.xVelocity *= self.drag
                 elif attribute == "xVelocity":
-                    self.xVelocity += self.xAcceleration/120
+                    self.xVelocity += self.xAcceleration*rateOfTime/120
                 elif attribute == "yVelocity":
-                    self.yVelocity += self.yAcceleration/120
+                    self.yVelocity += self.yAcceleration*rateOfTime/120
                 elif attribute == "xAcceleration":
                     self.xAcceleration = self.xForce/self.mass
                 elif attribute == "yAcceleration":
@@ -195,6 +205,7 @@ def disableChange(element):
     elif element.get_text() == "Drag":
         attributes[13][3] = True
 def setAt(element,value):
+    global rateOfTime
     if element.get_text() == "Mass":
         try:
             permaSelection.mass = float(value)
@@ -284,6 +295,11 @@ def setAt(element,value):
             permaSelection.name = value
         except:
             pass
+    elif element.get_text() == "Rate:":
+        try:
+            rateOfTime = float(value)
+        except:
+            pass
 def freeze(row):
     if row == (0):
         permaSelection.frozen["mass"] = not(permaSelection.frozen["mass"])
@@ -329,7 +345,7 @@ showButton.set_size((43,100))
 showButton.set_center_pos((screenWidth-22,screenHeight/2))
 def hide():
     global hidden
-    menu.set_elements(showButton)
+    menu.set_elements([showButton,bar])
     menu.blit_and_update()
     menu.refresh()
     hidden = True
@@ -337,25 +353,82 @@ hideButton = thorpy.make_image_button(hideTab,None,hideTabHover)
 hideButton.user_func = hide
 hideButton.set_size((43,100))
 base.add_element(hideButton)
-screenBack = thorpy.Background(elements=[base],color=[255,255,255,0],mode="scale to screen")
+def selectionClick():
+    global cursorMode, cursor_picture
+    cursorMode = 'selection'
+    cursor_picture = pygame.image.load(selectionCursor).convert_alpha()
+def creationClick():
+    global cursorMode, creating, cursor_picture
+    cursorMode = 'creation'
+    creating = False
+    cursor_picture = pygame.image.load(creationCursor).convert_alpha()
+def timerClick():
+    global cursorMode, cursor_picture
+    cursorMode = 'timer'
+    cursor_picture = pygame.image.load(timerCursor).convert_alpha()
+def measureClick():
+    global cursorMode, measuring, cursor_picture
+    cursorMode = 'measure'
+    measuring = False
+    cursor_picture = pygame.image.load(measureCursor).convert_alpha()
+def angleClick():
+    global cursorMode, cursor_picture
+    cursorMode = 'angle'
+    cursor_picture = pygame.image.load(angleCursor).convert_alpha()
+def deletionClick():
+    global cursorMode, cursor_picture
+    cursorMode = 'deletion'
+    cursor_picture = pygame.image.load(deletionCursor).convert_alpha()
+def blankClick():
+    global instances
+    instances = {}
+def playPause():
+    pass
+timeDisplay = thorpy.Inserter(name="Rate:",value_type=float,size=(60,45),value="1")
+selection, creation, timer, measure, angle_measure, deletion, blank = "selection.png", "creation.png", "timer.png", "measure.png", "angle_measure.png", "deletion.png", "blank.png"
+selectionH, creationH, timerH, measureH, angle_measureH, deletionH, blankH = "selection_hover.png", "creation_hover.png", "timer_hover.png", "measure_hover.png", "angle_measure_hover.png", "deletion_hover.png", "blank_hover.png"
+sTool, cTool, tTool, mTool, aTool, dTool, bTool = thorpy.make_image_button(selection,img_hover=selectionH),thorpy.make_image_button(creation,img_hover=creationH),thorpy.make_image_button(timer,img_hover=timerH),thorpy.make_image_button(measure,img_hover=measureH),thorpy.make_image_button(angle_measure,img_hover=angle_measureH),thorpy.make_image_button(deletion,img_hover=deletionH),thorpy.make_image_button(blank,img_hover=blankH)
+sTool.user_func = selectionClick
+cTool.user_func = creationClick
+tTool.user_func = timerClick
+mTool.user_func = measureClick
+aTool.user_func = angleClick
+dTool.user_func = deletionClick
+bTool.user_func = blankClick
+play, playH, pause, pauseH = "play.png","play_hover.png","pause.png","pause_hover.png"
+timePause = thorpy.make_image_button(pause,img_hover=pauseH)
+timePause.user_func = playPause
+settings,settingsH  = "settings.png", "settings_hover.png"
+settingsButton = thorpy.make_image_button(settings,img_hover=settingsH)
+bar = thorpy.Box(elements=[sTool, cTool, tTool, mTool, aTool, dTool, bTool, settingsButton, timePause, timeDisplay],size=(screenWidth,50))
+bar.set_main_color(color=[100,100,100])
+thorpy.store(bar,mode="h",align="center",gap=50,margin=350,elements=[sTool, cTool, tTool, mTool, aTool, dTool, bTool])
+thorpy.store(bar,mode="h",align="center",margin=-600,elements=[settingsButton, timePause, timeDisplay])
+screenBack = thorpy.Background(elements=[base,bar],color=[255,255,255,0],mode="scale to screen")
 thorpy.store(base,mode="v",align=("center"),y=0)
 hideButton.set_center_pos((-22,screenHeight/2))
-thorpy.store(screenBack,mode="v",align="right",x=screenWidth,y=-5,)
-menu = thorpy.Menu(showButton,fps=120)
+thorpy.store(screenBack,mode="v",x=screenWidth/2,y=(screenHeight-54),elements=[bar])
+thorpy.store(screenBack,mode="v",align="right",x=screenWidth,y=-5,elements=[base])
+menu = thorpy.Menu([showButton,bar],fps=120)
 
 time = pygame.time.Clock()
+stopwatch = 0.00
+stopwatch_pause = True
 rateOfTime = 1
 run = True
 selection = None
-totalforce = 0
-pygame.display.toggle_fullscreen()
+pygame.display.set_mode(flags=pygame.FULLSCREEN)
+pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
+cursor_picture = pygame.image.load(selectionCursor).convert_alpha()
 while run:
     time.tick(rateOfTime*120)
+    if not stopwatch_pause:
+        stopwatch += (rateOfTime*120)
     canvas.fill([255,255,255])
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and cursorMode == 'selection':
             clickbox = pygame.Rect(event.pos[0]-10, event.pos[1]-10, 20, 20)
             pygame.draw.rect(canvas, [255,255,255], clickbox)
             for instance in instances:
@@ -370,14 +443,67 @@ while run:
                         menu.blit_and_update()
                         menu.refresh()
                     break
-        if event.type == pygame.MOUSEBUTTONUP:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and cursorMode == 'creation':
+            creating = True
+            startPos = event.pos
+            moved = False
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and cursorMode == 'measure':
+            measuring = True
+            startPosM = event.pos
+            movedM = False
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and cursorMode == "timer":
+            newLine = pygame.Rect(pygame.mouse.get_pos()[0],0,4,screenHeight)
+            timers.append([newLine,None])
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_r and cursorMode == "timer":
+            stopwatch = 0.0
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_p and cursorMode == "timer":
+            stopwatch_pause = not(stopwatch_pause)
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_e and cursorMode == "timer":
+            timers = []
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_e and cursorMode == "measure":
+            measureLines = []
+        if event.type == pygame.MOUSEBUTTONUP and cursorMode == 'selection':
             for instance in instances:
                 if instances[instance].selected:
                     instances[instance].selected = False
                     selection = None
-        if event.type == pygame.MOUSEMOTION:
+        if event.type == pygame.MOUSEMOTION and cursorMode == 'selection':
             xM = event.rel[0]
             yM = event.rel[1]
+        if event.type == pygame.MOUSEMOTION and cursorMode == 'creation' and creating:
+            xDis = -(startPos[0] - event.pos[0])
+            yDis = -(startPos[1] - event.pos[1])
+            example = pygame.Rect(startPos[0],startPos[1],xDis,yDis)
+            moved = True
+        if event.type == pygame.MOUSEMOTION and cursorMode == 'measure' and measuring:
+            xDisM = -(startPosM[0] - event.pos[0])
+            yDisM = -(startPosM[1] - event.pos[1])
+            tDisM = math.hypot(xDisM,yDisM)/scale
+            measure_line = [startPosM,[event.pos[0],event.pos[1]]]
+            movedM = True
+        if event.type == pygame.MOUSEBUTTONUP and cursorMode == 'creation' and creating:
+            creating = False
+            if moved:
+                boxes += 1
+                spawn = Instance("New Box "+str(boxes),[random.randint(1,255),random.randint(1,255),random.randint(1,255)],10,startPos[0], startPos[1], 10,"Rect", 1, xDis, yDis)
+                instances[spawn.name] = spawn
+        if event.type == pygame.MOUSEBUTTONUP and cursorMode == 'measure' and measuring:
+            measuring = False
+            if movedM:
+                measure_line.append(tDisM)
+                measure_line.append(startPosM)
+                measure_line.append([xDisM,yDisM])
+                measureLines.append(measure_line)
+                measure_line = None
+        if event.type == pygame.MOUSEBUTTONDOWN and cursorMode == "deletion":
+            clickbox = pygame.Rect(event.pos[0]-10, event.pos[1]-10, 20, 20)
+            pygame.draw.rect(canvas, [255,255,255], clickbox)
+            toBeDeleted = []
+            for instance in instances:
+                if clickbox.colliderect(instances[instance].visual):
+                    toBeDeleted.append(instance)
+            for item in toBeDeleted:
+                del instances[item]
         if event.type == thorpy.constants.THORPY_EVENT and event.id == thorpy.constants.EVENT_PRESS:
             disableChange(event.el)
         if event.type == thorpy.constants.THORPY_EVENT and event.id == thorpy.constants.EVENT_INSERT:
@@ -385,14 +511,6 @@ while run:
         if event.type == thorpy.constants.THORPY_EVENT and event.id == thorpy.constants.EVENT_SLIDE:
             permaSelection.colour = oColour.get_color()
         menu.react(event)
-    try:
-        pygame.draw.aaline(canvas, [255,0,0], pygame.mouse.get_pos(), [selection.xLocation+(selection.xLength/2),selection.yLocation+(selection.yLength/2)])
-        totalforce = round(math.hypot(selection.xforce/scale,selection.yforce/scale),2)
-        text = fonty.render(str(totalforce)+"N",False,[0,0,0])
-        canvas.blit(text,(pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1]+10))
-    except:
-        text = fonty.render(str(totalforce)+"N",True,[0,0,0])
-        canvas.blit(text,(pygame.mouse.get_pos()[0]+5,pygame.mouse.get_pos()[1]+10))
     for item in instances:
         for item2 in instances:
             if instances[item] != instances[item2]:
@@ -422,6 +540,33 @@ while run:
         if not attributes[x-3][3]:
             base._elements[x]._elements[0].set_value(str(attributes[x-3][1]))
         base._elements[x]._elements[1].set_value(attributes[x-3][2])
+    if cursorMode == 'creation' and creating:
+        try:
+            pygame.draw.rect(canvas,[100,100,100], example)
+        except:
+            pass
+    for line in timers:
+        pygame.draw.rect(canvas,[0,0,0],line[0])
+    for line in measureLines:
+        pygame.draw.aaline(canvas,[15,15,15],line[0],line[1])
+        line_distance = fonty.render(str(round(line[2],2)),False,[15,15,15])
+        canvas.blit(line_distance,(int(line[4][0]/2+line[3][0]),int(line[4][1]/2+line[3][1])))
+
+    try:
+        pygame.draw.aaline(canvas,[15,15,15],measure_line[0],measure_line[1])
+        line_distance_fresh = fonty2.render(str(round(tDisM,2)),False,[15,15,15])
+        canvas.blit(line_distance_fresh,(int(screenWidth/2),int(screenHeight/2)))
+        #xDisM/2+startPosM[0] yDisM/2+startPos[1]
+    except:
+        pass
+    if cursorMode == 'selection':
+        pygame.draw.rect(canvas, [255,0,0,255], sTool.get_fus_rect(),3)
+    elif cursorMode == 'creation':
+        pygame.draw.rect(canvas, [255,0,0,255], cTool.get_fus_rect(),3)
+    stopwatch_text = fonty2.render(str(stopwatch/12000),False,[0,0,0])
+    canvas.blit(stopwatch_text,(int(screenWidth/2),0))
     menu.blit_and_update()
     menu.refresh()
+    pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
+    canvas.blit(cursor_picture, pygame.mouse.get_pos())
     pygame.display.update()
