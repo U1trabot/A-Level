@@ -4,7 +4,7 @@ pygame.init()
 
 screenWidth = (1366)
 screenHeight = (768)
-mouseForce = 15
+
 cursorMode = 'selection'
 scale = 10
 fonty = pygame.font.Font('freesansbold.ttf',20)
@@ -24,13 +24,19 @@ simPause = pygame.K_TAB
 bgColour = [255,255,255]
 selectionCursor, creationCursor, timerCursor, measureCursor, laserCursor, deletionCursor = 'selection_cursor.png', 'creation_cursor.png', 'timer_cursor.png', 'measure_cursor.png', 'laser_cursor.png', 'deletion_cursor.png'
 
+timerLineWait = False
+timerResetWait = False
+timerPauseWait = False
+timerEraseWait = False
+measureEraseWait = False
+simPauseWait = False
+
 run = True
 
 class Instance():
     #Main class for all objects within the simulation
     global xM
     global yM
-    global mouseForce
     global scale
     def __init__(self,name="New Object",colour=[255,255,255],density=10,xpos=0,ypos=0,mass=10,shape="blank",size=1,xLength=1,yLength=1,thickness=1,youngs=1000,refractive=99999999,roughness=99999999):
         #Defines the attributes for the object
@@ -213,7 +219,7 @@ def disableChange(element):
     elif element.get_text() == "Drag":
         attributes[13][3] = True
 def setAt(element,value):
-    global rateOfTime
+    global rateOfTime, scale, timerLine, timerReset, timerPause, timerErase, measureErase, simPause
     if element.get_text() == "Mass":
         try:
             permaSelection.mass = float(value)
@@ -306,6 +312,11 @@ def setAt(element,value):
     elif element.get_text() == "Rate:":
         try:
             rateOfTime = float(value)
+        except:
+            pass
+    elif element.get_text() == "Simulation Scale":
+        try:
+            scale = float(value)
         except:
             pass
 def freeze(row):
@@ -415,6 +426,24 @@ def showSetttings():
 def leave():
     global run
     run = False
+def timerLineChange():
+    global timerLineWait
+    timerLineWait = True
+def timerResetChange():
+    global timerResetWait
+    timerResetWait = True
+def timerPauseChange():
+    global timerPauseWait
+    timerPauseWait = True
+def timerEraseChange():
+    global timerEraseWait
+    timerEraseWait = True
+def measureEraseChange():
+    global measureEraseWait
+    measureEraseWait = True
+def simPauseChange():
+    global simPauseWait
+    simPauseWait = True
 timeDisplay = thorpy.Inserter(name="Rate:",value_type=float,size=(60,45),value="1")
 selection, creation, timer, measure, laser_measure, deletion, blank = "selection.png", "creation.png", "timer.png", "measure.png", "laser.png", "deletion.png", "blank.png"
 selectionH, creationH, timerH, measureH, laser_measureH, deletionH, blankH = "selection_hover.png", "creation_hover.png", "timer_hover.png", "measure_hover.png", "laser_hover.png", "deletion_hover.png", "blank_hover.png"
@@ -436,22 +465,28 @@ bar = thorpy.Box(elements=[sTool, cTool, tTool, mTool, aTool, dTool, bTool, sett
 bar.set_main_color(color=[100,100,100])
 thorpy.store(bar,mode="h",align="center",gap=50,margin=350,elements=[sTool, cTool, tTool, mTool, aTool, dTool, bTool])
 thorpy.store(bar,mode="h",align="center",margin=-600,elements=[settingsButton, timePause, timeDisplay])
-screenBack = thorpy.Background(elements=[base,bar],color=bgColour,mode="scale to screen")
+screenBack = thorpy.Background(elements=[base,bar],color=[0,0,0,0],mode="scale to screen")
 thorpy.store(base,mode="v",align=("center"),y=0)
 hideButton.set_center_pos((-22,screenHeight/2))
 thorpy.store(screenBack,mode="v",x=screenWidth/2,y=(screenHeight-54),elements=[bar])
 thorpy.store(screenBack,mode="v",align="right",x=screenWidth,y=-5,elements=[base])
-forceInserter = thorpy.Inserter("Cursor Force",value=str(mouseForce),size=(100,20))
 scaleInserter = thorpy.Inserter("Simulation Scale",value=str(scale),size=(100,20))
-timerLineInserter = thorpy.Inserter("Timer Line Keybind",value=str(pygame.key.name(timerLine)),size=(100,20))
-timerResetInserter = thorpy.Inserter("Timer Reset Keybind",value=str(pygame.key.name(timerReset)),size=(100,20))
-timerPauseInserter = thorpy.Inserter("Timer Pause Keybind",value=str(pygame.key.name(timerPause)),size=(100,20))
-timerEraseInserter = thorpy.Inserter("Timer Erase Keybind",value=str(pygame.key.name(timerErase)),size=(100,20))
-measureEraseInserter = thorpy.Inserter("Measure Erase Keybind",value=str(pygame.key.name(measureErase)),size=(100,20))
-simPauseInserter = thorpy.Inserter("Pause Simulation Keybind",value=str(pygame.key.name(simPause)),size=(100,20))
+timerLineText = thorpy.make_text("Timer Line Keybind")
+timerLineButton = thorpy.make_button(text=str(pygame.key.name(timerLine)),func=timerLineChange)
+timerResetText = thorpy.make_text("Timer Reset Keybind")
+timerResetButton = thorpy.make_button(text=str(pygame.key.name(timerReset)),func=timerResetChange)
+timerPauseText = thorpy.make_text("Timer Pause Keybind")
+timerPauseButton = thorpy.make_button(text=str(pygame.key.name(timerPause)),func=timerPauseChange)
+timerEraseText = thorpy.make_text("Timer Erase Keybind")
+timerEraseButton = thorpy.make_button(text=str(pygame.key.name(timerErase)),func=timerEraseChange)
+measureEraseText = thorpy.make_text("Measure Erase Keybind")
+measureEraseButton = thorpy.make_button(text=str(pygame.key.name(measureErase)),func=measureEraseChange)
+simPauseText = thorpy.make_text("Pause Simulation Keybind")
+simPauseButton = thorpy.make_button(text=str(pygame.key.name(simPause)),func=simPauseChange)
 bgColourSelector = thorpy.ColorSetter("Background Colour",value=[255,255,255])
+bgColourSelector._elements[1]._name_element = bgColourSelector._elements[1]._get_name_element('Red:', None)
 exitButton = thorpy.make_button("Exit Program",leave)
-container = thorpy.Box(elements=[forceInserter,scaleInserter,timerLineInserter,timerResetInserter,timerPauseInserter,timerEraseInserter,measureEraseInserter,simPauseInserter,bgColourSelector,exitButton],size=(1200,600))
+container = thorpy.Box(elements=[scaleInserter,timerLineText,timerLineButton,timerResetText,timerResetButton,timerPauseText,timerPauseButton,timerEraseText,timerEraseButton,measureEraseText,measureEraseButton,simPauseText,simPauseButton,bgColourSelector,exitButton],size=(1200,600))
 container.set_main_color([100,100,100])
 settingsBg = thorpy.Background(elements=[container],color=[0,0,0,0])
 thorpy.store(settingsBg,mode="v")
@@ -509,6 +544,30 @@ while run:
             measureLines = []
         if event.type == pygame.KEYDOWN and event.key == simPause:
             playPause()
+        if event.type == pygame.KEYDOWN and timerLineWait:
+            timerLineWait = False
+            timerLine = event.key
+            timerLineButton.set_text(str(pygame.key.name(event.key)))
+        if event.type == pygame.KEYDOWN and timerResetWait:
+            timerResetWait = False
+            timerReset = event.key
+            timerResetButton.set_text(str(pygame.key.name(event.key)))
+        if event.type == pygame.KEYDOWN and timerPauseWait:
+            timerPauseWait = False
+            timerPause = event.key
+            timerPauseButton.set_text(str(pygame.key.name(event.key)))
+        if event.type == pygame.KEYDOWN and timerEraseWait:
+            timerEraseWait = False
+            timerErase = event.key
+            timerEraseButton.set_text(str(pygame.key.name(event.key)))
+        if event.type == pygame.KEYDOWN and measureEraseWait:
+            measureEraseWait = False
+            measureErase = event.key
+            measureEraseButton.set_text(str(pygame.key.name(event.key)))
+        if event.type == pygame.KEYDOWN and simPauseWait:
+            simPauseWait = False
+            simPause = event.key
+            simPauseButton.set_text(str(pygame.key.name(event.key)))
         if event.type == pygame.MOUSEBUTTONUP and cursorMode == 'selection':
             for instance in instances:
                 if instances[instance].selected:
@@ -556,7 +615,10 @@ while run:
         if event.type == thorpy.constants.THORPY_EVENT and event.id == thorpy.constants.EVENT_INSERT:
             setAt(event.el,event.value)
         if event.type == thorpy.constants.THORPY_EVENT and event.id == thorpy.constants.EVENT_SLIDE:
-            permaSelection.colour = oColour.get_color()
+            if event.el == oColour._r_element or event.el == oColour._g_element or event.el == oColour._b_element:
+                permaSelection.colour = oColour.get_color()
+            else:
+                bgColour = bgColourSelector.get_color()
         menu.react(event)
     for item in instances:
         for item2 in instances:
