@@ -10,13 +10,21 @@ scale = 10
 fonty = pygame.font.Font('freesansbold.ttf',20)
 fonty2 = pygame.font.Font('freesansbold.ttf',48)
 hidden = True
+settingsShown = False
 boxes = 0
 timers = []
 measureLines = []
+currentRate = 0
+timerLine = pygame.K_SPACE
+timerReset = pygame.K_r
+timerPause = pygame.K_p
+timerErase = pygame.K_e
+measureErase = pygame.K_e
+simPause = pygame.K_TAB
+bgColour = [255,255,255]
+selectionCursor, creationCursor, timerCursor, measureCursor, laserCursor, deletionCursor = 'selection_cursor.png', 'creation_cursor.png', 'timer_cursor.png', 'measure_cursor.png', 'laser_cursor.png', 'deletion_cursor.png'
 
-selectionCursor, creationCursor, timerCursor, measureCursor, angleCursor, deletionCursor = 'selection_cursor.png', 'creation_cursor.png', 'timer_cursor.png', 'measure_cursor.png', 'angle_cursor.png', 'deletion_cursor.png'
-
-
+run = True
 
 class Instance():
     #Main class for all objects within the simulation
@@ -153,7 +161,7 @@ def collide(i1,i2):
 permaSelection = instances[random.choice(list(instances))]
 canvas = pygame.display.set_mode((screenWidth,screenHeight))
 pygame.display.set_caption("Simulation Space")
-canvas.fill([255,255,255])
+canvas.fill(bgColour)
 
 oName = thorpy.Inserter(name="Name:",value="Object Name",size=(100,30))
 oColour = thorpy.ColorSetter("Object Colour",value=(128,128,128))
@@ -371,10 +379,10 @@ def measureClick():
     cursorMode = 'measure'
     measuring = False
     cursor_picture = pygame.image.load(measureCursor).convert_alpha()
-def angleClick():
+def laserClick():
     global cursorMode, cursor_picture
-    cursorMode = 'angle'
-    cursor_picture = pygame.image.load(angleCursor).convert_alpha()
+    cursorMode = 'laser'
+    cursor_picture = pygame.image.load(laserCursor).convert_alpha()
 def deletionClick():
     global cursorMode, cursor_picture
     cursorMode = 'deletion'
@@ -383,39 +391,76 @@ def blankClick():
     global instances
     instances = {}
 def playPause():
-    pass
+    global rateOfTime, timePause, currentRate, timeDisplay
+    if rateOfTime > 0:
+        currentRate = rateOfTime
+        rateOfTime = 0
+        timeDisplay.set_value(str(0))
+        timePause._hovered = True
+    elif rateOfTime == 0:
+        rateOfTime = currentRate
+        timeDisplay.set_value(str(currentRate))
+def showSetttings():
+    global showButton,bar,settingsBg,menu,settingsShown
+    if not settingsShown:
+        menu.set_elements([showButton,bar,settingsBg])
+        menu.blit_and_update()
+        menu.refresh()
+        settingsShown = not(settingsShown)
+    elif settingsShown:
+        menu.set_elements([showButton,bar])
+        menu.blit_and_update()
+        menu.refresh()
+        settingsShown = not(settingsShown)
+def leave():
+    global run
+    run = False
 timeDisplay = thorpy.Inserter(name="Rate:",value_type=float,size=(60,45),value="1")
-selection, creation, timer, measure, angle_measure, deletion, blank = "selection.png", "creation.png", "timer.png", "measure.png", "angle_measure.png", "deletion.png", "blank.png"
-selectionH, creationH, timerH, measureH, angle_measureH, deletionH, blankH = "selection_hover.png", "creation_hover.png", "timer_hover.png", "measure_hover.png", "angle_measure_hover.png", "deletion_hover.png", "blank_hover.png"
-sTool, cTool, tTool, mTool, aTool, dTool, bTool = thorpy.make_image_button(selection,img_hover=selectionH),thorpy.make_image_button(creation,img_hover=creationH),thorpy.make_image_button(timer,img_hover=timerH),thorpy.make_image_button(measure,img_hover=measureH),thorpy.make_image_button(angle_measure,img_hover=angle_measureH),thorpy.make_image_button(deletion,img_hover=deletionH),thorpy.make_image_button(blank,img_hover=blankH)
+selection, creation, timer, measure, laser_measure, deletion, blank = "selection.png", "creation.png", "timer.png", "measure.png", "laser.png", "deletion.png", "blank.png"
+selectionH, creationH, timerH, measureH, laser_measureH, deletionH, blankH = "selection_hover.png", "creation_hover.png", "timer_hover.png", "measure_hover.png", "laser_hover.png", "deletion_hover.png", "blank_hover.png"
+sTool, cTool, tTool, mTool, aTool, dTool, bTool = thorpy.make_image_button(selection,img_hover=selectionH),thorpy.make_image_button(creation,img_hover=creationH),thorpy.make_image_button(timer,img_hover=timerH),thorpy.make_image_button(measure,img_hover=measureH),thorpy.make_image_button(laser_measure,img_hover=laser_measureH),thorpy.make_image_button(deletion,img_hover=deletionH),thorpy.make_image_button(blank,img_hover=blankH)
 sTool.user_func = selectionClick
 cTool.user_func = creationClick
 tTool.user_func = timerClick
 mTool.user_func = measureClick
-aTool.user_func = angleClick
+aTool.user_func = laserClick
 dTool.user_func = deletionClick
 bTool.user_func = blankClick
-play, playH, pause, pauseH = "play.png","play_hover.png","pause.png","pause_hover.png"
+pause, pauseH = "pause.png","pause_hover.png"
 timePause = thorpy.make_image_button(pause,img_hover=pauseH)
 timePause.user_func = playPause
 settings,settingsH  = "settings.png", "settings_hover.png"
 settingsButton = thorpy.make_image_button(settings,img_hover=settingsH)
+settingsButton.user_func = showSetttings
 bar = thorpy.Box(elements=[sTool, cTool, tTool, mTool, aTool, dTool, bTool, settingsButton, timePause, timeDisplay],size=(screenWidth,50))
 bar.set_main_color(color=[100,100,100])
 thorpy.store(bar,mode="h",align="center",gap=50,margin=350,elements=[sTool, cTool, tTool, mTool, aTool, dTool, bTool])
 thorpy.store(bar,mode="h",align="center",margin=-600,elements=[settingsButton, timePause, timeDisplay])
-screenBack = thorpy.Background(elements=[base,bar],color=[255,255,255,0],mode="scale to screen")
+screenBack = thorpy.Background(elements=[base,bar],color=bgColour,mode="scale to screen")
 thorpy.store(base,mode="v",align=("center"),y=0)
 hideButton.set_center_pos((-22,screenHeight/2))
 thorpy.store(screenBack,mode="v",x=screenWidth/2,y=(screenHeight-54),elements=[bar])
 thorpy.store(screenBack,mode="v",align="right",x=screenWidth,y=-5,elements=[base])
+forceInserter = thorpy.Inserter("Cursor Force",value=str(mouseForce),size=(100,20))
+scaleInserter = thorpy.Inserter("Simulation Scale",value=str(scale),size=(100,20))
+timerLineInserter = thorpy.Inserter("Timer Line Keybind",value=str(pygame.key.name(timerLine)),size=(100,20))
+timerResetInserter = thorpy.Inserter("Timer Reset Keybind",value=str(pygame.key.name(timerReset)),size=(100,20))
+timerPauseInserter = thorpy.Inserter("Timer Pause Keybind",value=str(pygame.key.name(timerPause)),size=(100,20))
+timerEraseInserter = thorpy.Inserter("Timer Erase Keybind",value=str(pygame.key.name(timerErase)),size=(100,20))
+measureEraseInserter = thorpy.Inserter("Measure Erase Keybind",value=str(pygame.key.name(measureErase)),size=(100,20))
+simPauseInserter = thorpy.Inserter("Pause Simulation Keybind",value=str(pygame.key.name(simPause)),size=(100,20))
+bgColourSelector = thorpy.ColorSetter("Background Colour",value=[255,255,255])
+exitButton = thorpy.make_button("Exit Program",leave)
+container = thorpy.Box(elements=[forceInserter,scaleInserter,timerLineInserter,timerResetInserter,timerPauseInserter,timerEraseInserter,measureEraseInserter,simPauseInserter,bgColourSelector,exitButton],size=(1200,600))
+container.set_main_color([100,100,100])
+settingsBg = thorpy.Background(elements=[container],color=[0,0,0,0])
+thorpy.store(settingsBg,mode="v")
 menu = thorpy.Menu([showButton,bar],fps=120)
 
 time = pygame.time.Clock()
 stopwatch = 0.00
 stopwatch_pause = True
 rateOfTime = 1
-run = True
 selection = None
 pygame.display.set_mode(flags=pygame.FULLSCREEN)
 pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
@@ -424,13 +469,13 @@ while run:
     time.tick(rateOfTime*120)
     if not stopwatch_pause:
         stopwatch += (rateOfTime*120)
-    canvas.fill([255,255,255])
+    canvas.fill(bgColour)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and cursorMode == 'selection':
             clickbox = pygame.Rect(event.pos[0]-10, event.pos[1]-10, 20, 20)
-            pygame.draw.rect(canvas, [255,255,255], clickbox)
+            pygame.draw.rect(canvas, bgColour, clickbox)
             for instance in instances:
                 if clickbox.colliderect(instances[instance].visual):
                     instances[instance].selected = True
@@ -451,17 +496,19 @@ while run:
             measuring = True
             startPosM = event.pos
             movedM = False
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and cursorMode == "timer":
+        if event.type == pygame.KEYDOWN and event.key == timerLine and cursorMode == "timer":
             newLine = pygame.Rect(pygame.mouse.get_pos()[0],0,4,screenHeight)
             timers.append([newLine,None])
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_r and cursorMode == "timer":
+        if event.type == pygame.KEYDOWN and event.key == timerReset and cursorMode == "timer":
             stopwatch = 0.0
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_p and cursorMode == "timer":
+        if event.type == pygame.KEYDOWN and event.key == timerPause and cursorMode == "timer":
             stopwatch_pause = not(stopwatch_pause)
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_e and cursorMode == "timer":
+        if event.type == pygame.KEYDOWN and event.key == timerErase and cursorMode == "timer":
             timers = []
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_e and cursorMode == "measure":
+        if event.type == pygame.KEYDOWN and event.key == measureErase and cursorMode == "measure":
             measureLines = []
+        if event.type == pygame.KEYDOWN and event.key == simPause:
+            playPause()
         if event.type == pygame.MOUSEBUTTONUP and cursorMode == 'selection':
             for instance in instances:
                 if instances[instance].selected:
