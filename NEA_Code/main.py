@@ -1,4 +1,5 @@
-#ThorPy hello world tutorial : full code
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame, random, math, thorpy
 pygame.init()
 
@@ -68,6 +69,8 @@ class Instance():
         self.size = size
         self.xLength = xLength
         self.yLength = yLength
+        self.xLengthDelayed = 0
+        self.yLengthDelayed = 0
         self.thickness = thickness
         self.reIndex = refractive
         self.YoModulus = youngs
@@ -130,6 +133,19 @@ class Instance():
                     self.xVelocityDelayed = self.xVelocity
                 elif attribute == "yVelocityDelayed":
                     self.yVelocityDelayed = self.yVelocity
+            else:
+                if attribute == "xLocation":
+                    try:
+                        self.xLengthDelayed = self.xLength
+                        self.xLength = ((self.xForce*self.xLengthDelayed)/(self.thickness*self.yLength*self.YoModulus*10**6))*rateOfTime + self.xLengthDelayed
+                    except:
+                        pass
+                elif attribute == "yLocation":
+                    try:
+                        self.yLengthDelayed = self.yLength
+                        self.yLength = ((self.yForce*self.yLengthDelayed)/(self.thickness*self.xLength*self.YoModulus*10**6))*rateOfTime + self.yLengthDelayed
+                    except:
+                        pass
         self.size = 1
         self.visual = pygame.Rect(int(self.xLocation), int(self.yLocation), int(self.xLength), int(self.yLength))
         pygame.draw.rect(canvas, self.colour, self.visual)
@@ -186,7 +202,8 @@ attributes = [
     ["YLength",permaSelection.yLength,permaSelection.frozen["yLength"],False],
     ["XForce",permaSelection.xForce,True,False],
     ["YForce",permaSelection.yForce,True,False],
-    ["Drag",permaSelection.drag,True,False]
+    ["Drag",permaSelection.drag,True,False],
+    ["Y.Mod (10^6)",permaSelection.YoModulus,True,False]
     ]
 base = thorpy.Background(elements=[oName,oColour,oVHeading],color=(255,255,255),image="object_panel.png",mode=None)
 def disableChange(element):
@@ -218,6 +235,8 @@ def disableChange(element):
         attributes[12][3] = True
     elif element.get_text() == "Drag":
         attributes[13][3] = True
+    elif element.get_text() == "Y.Mod (10^6)":
+        attributes[14][3] = True
 def setAt(element,value):
     global rateOfTime, scale, timerLine, timerReset, timerPause, timerErase, measureErase, simPause
     if element.get_text() == "Mass":
@@ -304,6 +323,12 @@ def setAt(element,value):
         except:
             pass
         attributes[13][3] = False
+    elif element.get_text() == "Y.Mod (10^6)":
+        try:
+            permaSelection.YoModulus = float(value)
+        except:
+            pass
+        attributes[14][3] = False
     elif element.get_text() == "Name:":
         try:
             permaSelection.name = value
@@ -342,7 +367,7 @@ def freeze(row):
         permaSelection.frozen["xLength"] = not(permaSelection.frozen["mxLength"])
     elif row == (10):
         permaSelection.frozen["yLength"] = not(permaSelection.frozen["yLength"])
-for x in range(0,14):
+for x in range(0,15):
    aValue = thorpy.Inserter(name=(attributes[x])[0],value=str((attributes[x])[1]),size=(50,20))
    aFrozen = thorpy.Checker(value=(attributes[x])[2])
    aFrozen.user_func = freeze
@@ -643,9 +668,10 @@ while run:
         ["YLength",round(permaSelection.yLength,2),permaSelection.frozen["yLength"],clicked[10]],
         ["XForce",permaSelection.xForce,True,clicked[11]],
         ["YForce",permaSelection.yForce,True,clicked[12]],
-        ["Drag",permaSelection.drag,True,clicked[13]]
+        ["Drag",permaSelection.drag,True,clicked[13]],
+        ["Y.Mod (10^6)",permaSelection.YoModulus,True,clicked[14]],
         ]
-    for x in range(4,16):
+    for x in range(4,17):
         if not attributes[x-3][3]:
             base._elements[x]._elements[0].set_value(str(attributes[x-3][1]))
         base._elements[x]._elements[1].set_value(attributes[x-3][2])
