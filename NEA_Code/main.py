@@ -31,6 +31,7 @@ timerPauseWait = False
 timerEraseWait = False
 measureEraseWait = False
 simPauseWait = False
+laserExists = False
 
 run = True
 
@@ -149,8 +150,95 @@ class Instance():
         self.size = 1
         self.visual = pygame.Rect(int(self.xLocation), int(self.yLocation), int(self.xLength), int(self.yLength))
         pygame.draw.rect(canvas, self.colour, self.visual)
-
+class Ray():
+    def __init__(self,wavelength,startPos,gradient):
+        self.wavelength = wavelength
+        self.startPos = startPos
+        self.endPos = [(),()]
+        self.gradient = gradient
+        self.intersect = (screenHeight-startPos[1])-(self.gradient*startPos[0])
+        self.rayCollider = None
+        try:
+            r = round(-((self.wavelength-750)/10.95892509)**2+255)
+        except:
+            r = 0
+        try:
+            g = round(-((self.wavelength-575)/10.95892509)**2+255)
+        except:
+            g = 0
+        try:
+            b = round(-((self.wavelength-400)/10.95892509)**2+255)
+        except:
+            b = 0
+        self.colour = [r,g,b]
+    def plot(self):
+        try:
+            r = round(-((self.wavelength-750)/10.95892509)**2+255)
+            if r < 0:
+                raise ValueError
+        except:
+            r = 0
+        try:
+            g = round(-((self.wavelength-575)/10.95892509)**2+255)
+            if g < 0:
+                raise ValueError
+        except:
+            g = 0
+        try:
+            b = round(-((self.wavelength-400)/10.95892509)**2+255)
+            if b < 0:
+                raise ValueError
+        except:
+            b = 0
+        self.colour = [r,g,b]
+        plotting = True
+        x = 0
+        startPositions = []
+        endPositions = []
+        gradients = []
+        startPositions.append(self.startPos)
+        gradients.append(self.gradient)
+        count = 0
+        face = "tb"
+        while plotting and count < 10000:
+            y = screenHeight - (gradients[-1]*x + self.intersect)
+            self.endPos = [x,y]
+            if x > screenWidth:
+                endPositions.append(self.endPos)
+                plotting = False
+            if y > screenHeight:
+                endPositions.append(self.endPos)
+                plotting = False
+            self.rayCollider = pygame.Rect(self.endPos[0], int(self.endPos[1]), 1, 1)
+            hit = False
+            for object in instances:
+                if self.rayCollider.colliderect(instances[object].visual):
+                    hit = True
+                    hitObject = instances[object]
+            if face == "lr":
+                x -= 1
+            else:
+                x += 1
+            if hit:
+                if laserAngle != 0:
+                    endPositions.append(self.endPos)
+                    startPositions.append(endPositions[-1])
+                    if (hitObject.xLocation+1) > self.endPos[0]:
+                        face = "lr"
+                    else:
+                        face = "tb"
+                    gradients.append(math.tan(math.radians(-laserAngle)))
+                    x = 0
+                    count = 0
+            count += 1
+        for value in range(len(startPositions)):
+            try:
+                pygame.draw.aaline(canvas, self.colour, startPositions[value-1], endPositions[value-1])
+            except:
+                pygame.draw.aaline(canvas,self.colour,self.startPos,(screenWidth,self.startPos[1]))
 instances = {}
+
+
 box = Instance("Box",[random.randint(1,255),random.randint(1,255),random.randint(1,255)],10,screenWidth/2, screenHeight/2, 10,"Rect", 1, 100, 100)
 instances[box.name] = box
 
@@ -517,6 +605,7 @@ settingsBg = thorpy.Background(elements=[container],color=[0,0,0,0])
 thorpy.store(settingsBg,mode="v")
 menu = thorpy.Menu([showButton,bar],fps=120)
 
+laserAngle = 0
 time = pygame.time.Clock()
 stopwatch = 0.00
 stopwatch_pause = True
@@ -565,6 +654,28 @@ while run:
             stopwatch_pause = not(stopwatch_pause)
         if event.type == pygame.KEYDOWN and event.key == timerErase and cursorMode == "timer":
             timers = []
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and cursorMode == 'laser':
+            laserExists = True
+            laserStartPos = pygame.mouse.get_pos()
+            laserRay = Ray(random.randint(400,750),laserStartPos,math.tan(math.radians(laserAngle)))
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_UP and cursorMode == 'laser':
+            laserAngle += 1
+            if laserAngle > 360:
+                laserAngle = 1
+            if laserAngle > 90 and laserAngle < 270:
+                laserRay.gradient = -math.tan(math.radians(laserAngle))
+            else:
+                laserRay.gradient = math.tan(math.radians(laserAngle))
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN and cursorMode == 'laser':
+            laserAngle -= 1
+            if laserAngle < 0:
+                laserAngle  = 359
+            if laserAngle > 90 and laserAngle < 270:
+                laserRay.gradient = -math.tan(math.radians(laserAngle))
+            else:
+                laserRay.gradient = math.tan(math.radians(laserAngle))
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_e and cursorMode == 'laser':
+            laserExists = False
         if event.type == pygame.KEYDOWN and event.key == measureErase and cursorMode == "measure":
             measureLines = []
         if event.type == pygame.KEYDOWN and event.key == simPause:
@@ -700,6 +811,8 @@ while run:
         pygame.draw.rect(canvas, [255,0,0,255], cTool.get_fus_rect(),3)
     stopwatch_text = fonty2.render(str(stopwatch/12000),False,[0,0,0])
     canvas.blit(stopwatch_text,(int(screenWidth/2),0))
+    if laserExists:
+        laserRay.plot()
     menu.blit_and_update()
     menu.refresh()
     pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
