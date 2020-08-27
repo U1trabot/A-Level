@@ -40,7 +40,7 @@ class Instance():
     global xM #Takes in variables for mouse velocity
     global yM
     global scale #Takes in variable for the simulation scale
-    def __init__(self,name="New Object",colour=[255,255,255],density=10,xpos=0,ypos=0,mass=10,shape="blank",size=1,xLength=1,yLength=1,thickness=1,youngs=1000,refractive=99999999,roughness=99999999):
+    def __init__(self,name="New Object",colour=[255,255,255],density=10,xpos=0,ypos=0,mass=10,shape="blank",size=1,xLength=1,yLength=1,thickness=1,youngs=1000):
         #Defines the attributes for the object
         self.frozen = { #List of which variables are frozen
             "mass":False,
@@ -73,13 +73,11 @@ class Instance():
         self.xLengthDelayed = 0 #Delayed X and Y lengths used for Young's Modulus Calcuations
         self.yLengthDelayed = 0
         self.thickness = thickness #Thickness of object, usually set to 1
-        self.reIndex = refractive #Refractive index of the object, not yet used
         self.YoModulus = youngs #Young's Modulus value x10^6
-        self.density = density #Objects density, used to calculate mass 
+        self.density = density #Objects density, used to calculate mass
         self.mass = self.size*self.density #Objects mas, used to calcuate acceleration
         self.xForce = 0 #Object X and Y resultant forces
         self.yForce =  0
-        self.roughness = roughness #Object roughness, not yet used
         self.colour = colour #Object colour used when rendering the object
         self.name = name #Object name used for identifing the object in the dictionary and for the user
         self.visual = pygame.Rect(int(self.xLocation), int(self.yLocation), int(self.xLength), int(self.yLength)) #The pygame Rectangle which is used for rendering
@@ -235,13 +233,13 @@ class Ray():
                     else:
                         face = "tb"
                     gradients.append(math.tan(math.radians(-laserAngle)))
-                    x = 0 #Resets x to 0 
+                    x = 0 #Resets x to 0
             count += 1 #Adds one to the loop limiter
         for value in range(len(startPositions)): #For every start position
             try:
                 pygame.draw.aaline(canvas, self.colour, startPositions[value-1], endPositions[value-1]) #Render the corresponding line
             except:
-                pygame.draw.aaline(canvas,self.colour,self.startPos,(screenWidth,self.startPos[1]))#If that errors then render the original line
+                pygame.draw.aaline(canvas, self.colour, self.startPos, (screenWidth,self.startPos[1]))#If that errors then render the original line
 instances = {} #Empty dict used to store the existing objects
 
 
@@ -724,7 +722,7 @@ while run: #Main loop
             moved = True #Set the variable to tell the simulation that the cursour has moved
         if event.type == pygame.MOUSEMOTION and cursorMode == 'measure' and measuring: #If the mouse moves in measure mode and it is currently measuring
             xDisM = -(startPosM[0] - event.pos[0])#Work out the distances between the cursor start and current posistion
-            yDisM = -(startPosM[1] - event.pos[1]) 
+            yDisM = -(startPosM[1] - event.pos[1])
             tDisM = math.hypot(xDisM,yDisM)/scale #Work out the actual distance between the points
             measure_line = [startPosM,[event.pos[0],event.pos[1]]] #Create the line between the two points
             movedM = True #Set the variable to tell the simulation that the cursour has moved
