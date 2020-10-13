@@ -2,6 +2,9 @@ import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide" #Hides the default pygame welcome promt
 import pygame, random, math, thorpy #Imports the required python modules. pygame for rendering the simulation, thorpy for the GUI, math for the calculations and random for random number generation
 pygame.init() #Initialises pygame
+import threading #Imports the threading module used to speed up the program
+
+
 
 screenWidth = (1366) #Sets variables for the screen size
 screenHeight = (768)
@@ -618,6 +621,10 @@ selection = None #Creates the selection variable used to store when an object is
 pygame.display.set_mode(flags=pygame.FULLSCREEN) #Makes the window fullscreen
 pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0)) #Makes the windows cursour invisable so custom cursors can be used
 cursor_picture = pygame.image.load(selectionCursor).convert_alpha() #Sets the custom cursour to the selection cursor
+
+t = threading.Thread(target= Instance) #Sets the threading for objects of the Instance class
+t.start() #Starts the threading
+
 while run: #Main loop
     time.tick(rateOfTime*120) #Ticks based on the rate of time * 120 for 120 fps at rate = 1
     if not stopwatch_pause: #Updates the stopwatch if it is not paused
