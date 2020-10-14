@@ -290,8 +290,8 @@ attributes = [ #2D array used to generate the editable attribute list (so that a
     ["YAcceleration",permaSelection.yAcceleration,permaSelection.frozen["yAcceleration"],False],
     ["XVelocity",permaSelection.xVelocity,permaSelection.frozen["xVelocity"],False],
     ["YVelocity",permaSelection.yVelocity,permaSelection.frozen["yVelocity"],False],
-    ["XLocation",permaSelection.xLocation,permaSelection.frozen["xLocation"],False],
-    ["YLocation",permaSelection.yLocation,permaSelection.frozen["yLocation"],False],
+    ["XLocation",permaSelection.xLocation/scale,permaSelection.frozen["xLocation"],False],
+    ["YLocation",permaSelection.yLocation/scale,permaSelection.frozen["yLocation"],False],
     ["Shape",permaSelection.shape,permaSelection.frozen["shape"],False],
     ["Size",permaSelection.size,permaSelection.frozen["size"],False],
     ["XLength",permaSelection.xLength,permaSelection.frozen["xLength"],False],
@@ -367,13 +367,13 @@ def setAt(element,value): #Function for setting and object's attributes to the i
         attributes[4][3] = False
     elif element.get_text() == "XLocation":
         try:
-            permaSelection.xLocation = float(value)
+            permaSelection.xLocation = float(value)*scale
         except:
             pass
         attributes[5][3] = False
     elif element.get_text() == "YLocation":
         try:
-            permaSelection.yLocation = float(value)
+            permaSelection.yLocation = float(value)*scale
         except:
             pass
         attributes[6][3] = False
@@ -523,7 +523,7 @@ def blankClick():
     global instances
     instances = {} #Makes the simulation blank
 def playPause(): #Function for pausing and playing the simulation
-    global rateOfTime, timePause, currentRate, timeDisplay #Imports the needed variables
+    global rateOfTime, timePause, currentRate, timeDisplay, permaSelection, scale #Imports the needed variables
     if rateOfTime > 0: #If not paused
         currentRate = rateOfTime #Set the current rate variable to the main rate variable
         rateOfTime = 0 #Set the main rate to 0
@@ -776,16 +776,16 @@ while run: #Main loop
         clicked.append(row[3]) #Set the clicked list to the values for which inserters are paused
     attributes = [ #Define the new attribute 2D array using the clicked list
         ["Mass",round(permaSelection.mass,2),permaSelection.frozen["mass"],clicked[0]],
-        ["XAcceleration",round(permaSelection.xAcceleration,2),permaSelection.frozen["xAcceleration"],clicked[1]],
-        ["YAcceleration",round(permaSelection.yAcceleration,2),permaSelection.frozen["yAcceleration"],clicked[2]],
-        ["XVelocity",round(permaSelection.xVelocity,2),permaSelection.frozen["xVelocity"],clicked[3]],
-        ["YVelocity",round(permaSelection.yVelocity,2),permaSelection.frozen["yVelocity"],clicked[4]],
-        ["XLocation",round(permaSelection.xLocation,2),permaSelection.frozen["xLocation"],clicked[5]],
-        ["YLocation",round(permaSelection.yLocation,2),permaSelection.frozen["yLocation"],clicked[6]],
+        ["XAcceleration",round(permaSelection.xAcceleration,4),permaSelection.frozen["xAcceleration"],clicked[1]],
+        ["YAcceleration",round(permaSelection.yAcceleration,4),permaSelection.frozen["yAcceleration"],clicked[2]],
+        ["XVelocity",round(permaSelection.xVelocity,4),permaSelection.frozen["xVelocity"],clicked[3]],
+        ["YVelocity",round(permaSelection.yVelocity,4),permaSelection.frozen["yVelocity"],clicked[4]],
+        ["XLocation",round(permaSelection.xLocation/scale,4),permaSelection.frozen["xLocation"],clicked[5]],
+        ["YLocation",round(permaSelection.yLocation/scale,4),permaSelection.frozen["yLocation"],clicked[6]],
         ["Shape",permaSelection.shape,permaSelection.frozen["shape"],clicked[7]],
-        ["Size",round(permaSelection.size,2),permaSelection.frozen["size"],clicked[8]],
-        ["XLength",round(permaSelection.xLength,2),permaSelection.frozen["xLength"],clicked[9]],
-        ["YLength",round(permaSelection.yLength,2),permaSelection.frozen["yLength"],clicked[10]],
+        ["Size",round(permaSelection.size,4),permaSelection.frozen["size"],clicked[8]],
+        ["XLength",round(permaSelection.xLength,4),permaSelection.frozen["xLength"],clicked[9]],
+        ["YLength",round(permaSelection.yLength,4),permaSelection.frozen["yLength"],clicked[10]],
         ["XForce",permaSelection.xForce,True,clicked[11]],
         ["YForce",permaSelection.yForce,True,clicked[12]],
         ["Drag",permaSelection.drag,True,clicked[13]],
